@@ -19,4 +19,5 @@ public final class Constants {
 
 public static final int leftSparkID = 0;
 public static final int rightSparkID = 0;
+public static final double clawMotorspeed = 0;
 }
