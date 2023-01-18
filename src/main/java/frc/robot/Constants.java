@@ -37,5 +37,7 @@ public final class Constants {
     //We need some flight stick constants I guess
     //Also some motor id constant for the intake
     //public static final int deviceIdIntake = 80;
+    //public static final int intakeMotorSpeed = 80;
+    //public static final int ampSpike= 80;
   }
 }
