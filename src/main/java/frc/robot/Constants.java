@@ -15,5 +15,56 @@ package frc.robot;
 public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
+    public static final int FrontRightID = 0;
+    public static final int FrontLeftID = 3;
+    public static final int BackRightID = 5;
+    public static final int BackLeftID = 2;
+
+    //Controller Stick Constants
+    public static final int XBOX_R_XAXIS = 4;
+    public static final int XBOX_R_YAXIS = 5;
+    public static final int XBOX_L_XAXIS = 0;
+    public static final int XBOX_L_YAXIS = 1;
+    public static final int XBOX_pin = 0;
+    public static final int Xbox_LT = 2;
+    public static final int Xbox_RT = 3;
+
+
+    //Controller Button IDs
+    public static final int Xbox_Button_A = 1;
+    public static final int Xbox_Button_B = 2;
+    public static final int Xbox_Button_X = 3;
+    public static final int Xbox_Button_Y = 4;
+    public static final int Xbox_Button_LB = 5;
+    public static final int Xbox_Button_RB = 6;
+    public static final int Xbox_Button_LS = 9;
+    public static final int Xbox_Button_RS = 10;
+
+    // auton drive PID constants
+    //public static final int kTimeoutMs = 20;
+    public static final double driveAdjustment = 0.85;
+    public static final int kPIDLoopIdx = 0;//run primary loop
+    public static final double kF = 0;
+    public static final double kP = 0.00005;
+    public static final double kI = 0.0;
+    public static final double kD = 0;
+
+    // Index Constants
+    public static final double indexMotorSpeedBottom = 0.3;
+    public static final double indexMotorSpeedTop = 0.5;
+
+
   }
+
+  public void setRightSpeed(double speed){
+    FrontRight.set(ControlMode.PercentOutput, speed*Constants.driveAdjustment);
+    BackRight.set(ControlMode.PercentOutput, speed*Constants.driveAdjustment);
+  }
+
+  //pass in a double input for setting the left side speed.
+  public void setLeftSpeed(double speed){
+    FrontLeft.set(ControlMode.PercentOutput, speed);
+    BackLeft.set(ControlMode.PercentOutput, speed);
+  }
+  
 }
