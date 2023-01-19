@@ -21,17 +21,39 @@ import com.ctre.phoenix.motorcontrol.IMotorControllerEnhanced;
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 import com.ctre.phoenix.motorcontrol.can.BaseTalon;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 public class ArmSubsystem extends SubsystemBase {
   /** Creates a new ArmSubsystem. */
-  private  final TalonFX FrontRight = new TalonFX(Constants.talonArmPivot);
+  private  final TalonFX armPivotMotor = new TalonFX(Constants.talonArmPivot);
   private final TalonFX elevatorLiftMotor1 = new TalonFX(Constants.talonLift1);
   private final TalonFX elevatorLiftMotor2 = new TalonFX(Constants.talonLift2);
+  private final CANSparkMax extensionMotor = new CANSparkMax(Constants.extensionMotorID, MotorType.kBrushless);
 
   public ArmSubsystem() 
   {
-    FrontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    // armPivotMotor.configSelectedFeedbackSensor();
   }
 
+  //setters
+  public void elevatorMove(double speed){
+    elevatorLiftMotor1.set(speed);
+    elevatorLiftMotor2.set(speed);
+  }
+
+  public void armPivotMotor(double speed){
+    armPivotMotor.set(speed);
+  }
+
+  public void extensionMotor (double speed){
+    extensionMotor.set(speed);
+  }
+
+  //getters
+  public double getElevatorPosition(){
+
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
