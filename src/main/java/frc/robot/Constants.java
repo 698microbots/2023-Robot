@@ -36,8 +36,8 @@ public final class Constants {
     public static final int Xbox_Button_RS = 10;
     //We need some flight stick constants I guess
     //Also some motor id constant for the intake
-    //public static final int deviceIdIntake = 80;
-    //public static final int intakeMotorSpeed = 80;
-    //public static final int ampSpike= 80;
+    public static final int deviceIdIntake = 8;
+    public static final int intakeMotorSpeed = 8;
+    public static final int ampSpike= 8;
   }
 }

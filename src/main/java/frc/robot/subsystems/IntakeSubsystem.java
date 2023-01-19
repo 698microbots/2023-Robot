@@ -32,7 +32,6 @@ public class IntakeSubsystem extends SubsystemBase {
   
     public void outputBall()
     {
-      
       intakeMotor.set(-Constants.intakeMotorSpeed);
     }
   
