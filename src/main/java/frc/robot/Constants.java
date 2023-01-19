@@ -21,4 +21,5 @@ public final class Constants {
   public static final int talonArmPivot = 1;
   public static final int talonLift1 = 2;
   public static final int talonLift2 = 3;
+  public static final int extensionMotorID = 0;
 }
