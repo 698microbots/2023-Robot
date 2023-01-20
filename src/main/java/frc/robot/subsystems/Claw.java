@@ -17,13 +17,15 @@ public class Claw extends SubsystemBase {
   private final CANSparkMax leftSpark;
   private final CANSparkMax rightSpark;
 
-  private final DoubleSolenoid clawExtension; 
+  private final DoubleSolenoid clawExtension;
+
+  // 
   public Claw() {
     leftSpark = new CANSparkMax(Constants.leftSparkID, MotorType.kBrushless);
     rightSpark = new CANSparkMax(Constants.rightSparkID, MotorType.kBrushless);
     leftSpark.setInverted(true);
 
-    clawExtension = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
+    clawExtension = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.clawSolenoidForwardID, Constants.clawSolenoidReverseID);
   }
 
   public void setSpeed(double speed) {
