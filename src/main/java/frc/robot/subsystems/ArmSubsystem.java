@@ -6,20 +6,9 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenixpro.configs.TalonFXConfiguration;
 import frc.robot.Constants;
-import com.ctre.phoenixpro.hardware.TalonFX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import edu.wpi.first.wpilibj.motorcontrol.*;
-import com.ctre.phoenix.motorcontrol.IMotorController;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import frc.robot.Constants;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.IMotorControllerEnhanced;
-import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
-import com.ctre.phoenix.motorcontrol.can.BaseTalon;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -33,17 +22,20 @@ public class ArmSubsystem extends SubsystemBase {
 
   public ArmSubsystem() 
   {
-    // armPivotMotor.configSelectedFeedbackSensor();
+     armPivotMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+     elevatorLiftMotor1.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+     elevatorLiftMotor2.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+     extensionMotor.
   }
 
   //setters
   public void elevatorMove(double speed){
-    elevatorLiftMotor1.set(speed);
-    elevatorLiftMotor2.set(speed);
+    elevatorLiftMotor1.set(ControlMode.PercentOutput, speed);
+    elevatorLiftMotor2.set(ControlMode.PercentOutput, speed);
   }
 
   public void armPivotMotor(double speed){
-    armPivotMotor.set(speed);
+    armPivotMotor.set(ControlMode.PercentOutput, speed);
   }
 
   public void extensionMotor (double speed){
@@ -51,8 +43,14 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   //getters
-  public double getElevatorPosition(){
-
+  public double getElevatorPosition(){//one revolution is 2048 encoder units.
+    double position1 = elevatorLiftMotor1.getSelectedSensorPosition();
+    double position2 = elevatorLiftMotor2.getSelectedSensorPosition();
+    if(Math.abs(position1 - position2) < 100){
+      return (position1 + position2)/2;
+    }else{
+      return -1;//return '-1' if the two sensor positions vary too much.
+    }
   }
   @Override
   public void periodic() {
