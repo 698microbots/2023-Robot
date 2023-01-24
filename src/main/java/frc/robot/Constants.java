@@ -22,4 +22,10 @@ public final class Constants {
   public static final int talonLift1 = 2;
   public static final int talonLift2 = 3;
   public static final int extensionMotorID = 0;
+public static final int elevatorBottomLimitID = 0;
+public static final double armExtensionHighBound = 0;
+public static final double armExtensionSpeed = 0;
+public static final double armExtensionLowBound = 0;
+public static final double armElevatorSpeed = 0;
+public static final double armElevatorHighBound = 0;
 }
