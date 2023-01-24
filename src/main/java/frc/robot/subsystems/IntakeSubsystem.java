@@ -34,6 +34,11 @@ public class IntakeSubsystem extends SubsystemBase {
       
     }
   
+    public void outputBall()
+    {
+      intakeMotor.set(-Constants.intakeMotorSpeed);
+    }
+  
     public double getElectricCurrent()
     {
       return intakeMotor.getOutputCurrent();
