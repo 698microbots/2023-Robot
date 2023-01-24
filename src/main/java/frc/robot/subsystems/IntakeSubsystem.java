@@ -8,16 +8,20 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-
+/*
+ * We need to sort out the constants for this subsystem, everything else looks pretty decent rn
+ */
 public class IntakeSubsystem extends SubsystemBase {
-    /** Creates a new Intake. */
+    /** Creates a new Intake Motor. */
     private final CANSparkMax intakeMotor;  
-  
+  /*
+   * Instansiates intakeMotor to allow us to control the motor of the intake
+   */
     public IntakeSubsystem() {
       intakeMotor = new CANSparkMax(Constants.deviceIdIntake, CANSparkMax.MotorType.kBrushless);
     }
   
-    public void inputBall()
+    public void inputCone()
     {
       intakeMotor.set(Constants.intakeMotorSpeed);
     }
