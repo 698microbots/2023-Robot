@@ -13,7 +13,10 @@ import frc.robot.Constants;
  */
 public class IntakeSubsystem extends SubsystemBase {
     /** Creates a new Intake Motor. */
-    private final CANSparkMax intakeMotor;  
+    //IntakeMoterL is the lower intake motor
+    //IntakeMoterh is the Higher intake motor -  goes opposite direction of lower intake motor
+    private final CANSparkMax intakeMotorL;
+    private final CANSparkMax intakeMotorH;  
   /*
    * Instansiates intakeMotor to allow us to control the motor of the intake
    */
@@ -23,25 +26,31 @@ public class IntakeSubsystem extends SubsystemBase {
   
     public void inputCone()
     {
-      intakeMotor.set(Constants.intakeMotorSpeed);
+      intakeMotorL.set(Constants.intakeMotorSpeed);
+      intakeMotorH.set(-Constants.intakeMotorSpeed);
     }
   
   
     public void stopMotor()
     {
-      if(getElectricCurrent() >= Constants.ampSpike)
-        intakeMotor.set(0);
-      
+      if(getElectricCurrent() >= Constants.ampSpike){
+        intakeMotorL.set(0);
+        intakeMotorH.set(0)
+      }
     }
-  
+
+    //This method is kinda useless since we don't really take anything out throught the intake but its here
+    // incase we need to 
     public void outputBall()
     {
-      intakeMotor.set(-Constants.intakeMotorSpeed);
+      intakeMotorL.set(-Constants.intakeMotorSpeed);
+      intakeMotorH.set(-Constants.intakeMotorSpeed);
     }
   
+  //The current should be the same between motors since they are moving at the same speed. 
     public double getElectricCurrent()
     {
-      return intakeMotor.getOutputCurrent();
+      return intakeMotorL.getOutputCurrent();
     }
   
     
