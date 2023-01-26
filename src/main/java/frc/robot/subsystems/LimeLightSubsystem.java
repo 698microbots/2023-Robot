@@ -17,14 +17,26 @@ public class LimeLightSubsystem extends SubsystemBase {
   private NetworkTable limeLight;
   private NetworkTableEntry aprilTagID;
   private NetworkTableEntry aprilTagCoords;
+  private NetworkTableEntry targets;
+  
   public LimeLightSubsystem() {
     limeLight = NetworkTableInstance.getDefault().getTable("limelight");
     aprilTagID = limeLight.getEntry("tid");
     aprilTagCoords = limeLight.getEntry("camtran");
+    targets = limeLight.getEntry("tv");
+
   }
   public double getAprilId(){
-    return aprilTagID.getDouble(0.0);
+    return aprilTagID.getDouble(0);
   }
+
+  public double getAprilCoords(){
+    return aprilTagCoords.getDouble(0);
+  }
+
+  public double getTargets(){
+    return targets.getDouble(0);
+  } 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

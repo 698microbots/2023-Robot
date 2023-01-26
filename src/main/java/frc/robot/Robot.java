@@ -86,6 +86,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     SmartDashboard.putNumber("April Tag ID", m_robotContainer.LimeLightSubsystem.getAprilId());
+    SmartDashboard.putNumber("April Tag ID", m_robotContainer.LimeLightSubsystem.getAprilCoords());
+
   }
 
   @Override
