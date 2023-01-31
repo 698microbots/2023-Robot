@@ -25,7 +25,6 @@ public class ArmSubsystem extends SubsystemBase {
      armPivotMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
      elevatorLiftMotor1.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
      elevatorLiftMotor2.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-     extensionMotor.
   }
 
   //setters
