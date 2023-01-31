@@ -16,8 +16,8 @@ public final class Constants {
   public static class OperatorConstants {
    
   }
-  public static final int kDriverControllerPort = 0;
-  public static final int flightStickPortID = 1;
+  public static final int kDriverControllerPort = 1;
+  public static final int flightStickPortID = 0;
   public static final int FrontRightID = 0;
   public static final int FrontLeftID = 3;
   public static final int BackRightID = 5;
@@ -42,6 +42,7 @@ public final class Constants {
   public static final int Xbox_Button_RB = 6;
   public static final int Xbox_Button_LS = 9;
   public static final int Xbox_Button_RS = 10;
+  public static final int kxboxID = 0;
 
   // auton drive PID constants
   //public static final int kTimeoutMs = 20;
@@ -55,6 +56,13 @@ public final class Constants {
   // Index Constants
   public static final double indexMotorSpeedBottom = 0.3;
   public static final double indexMotorSpeedTop = 0.5;
+
+  public static final double turnkP = 0.02;
+  public static final double turnkI = 0.00;
+  public static final double turnkD = 0;
+
+  public static final double IactZone = 0;
+
 
 
 }
