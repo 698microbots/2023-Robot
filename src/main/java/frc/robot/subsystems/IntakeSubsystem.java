@@ -21,7 +21,8 @@ public class IntakeSubsystem extends SubsystemBase {
    * Instansiates intakeMotor to allow us to control the motor of the intake
    */
     public IntakeSubsystem() {
-      intakeMotor = new CANSparkMax(Constants.deviceIdIntake, CANSparkMax.MotorType.kBrushless);
+      intakeMotorL = new CANSparkMax(Constants.deviceIdIntakeL, CANSparkMax.MotorType.kBrushless);
+      intakeMotorH = new CANSparkMax(Constants.deviceIdIntakeH, CANSparkMax.MotorType.kBrushless);
     }
   
     public void inputCone()
@@ -35,7 +36,7 @@ public class IntakeSubsystem extends SubsystemBase {
     {
       if(getElectricCurrent() >= Constants.ampSpike){
         intakeMotorL.set(0);
-        intakeMotorH.set(0)
+        intakeMotorH.set(0);
       }
     }
 
