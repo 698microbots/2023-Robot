@@ -7,11 +7,11 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
-public class DriveTrain extends SubsystemBase{
-    private final TalonFX FrontRight = new TalonFX(Constants.FrontRightID);
-    private final TalonFX FrontLeft = new TalonFX(Constants.FrontRightID);
-    private final TalonFX BackRight = new TalonFX(Constants.BackRightID);
-    private final TalonFX BackLeft = new TalonFX(Constants.BackLeftID);
+public class driveTrain extends SubsystemBase{
+  private final TalonFX FrontRight = new TalonFX(Constants.FrontRightID);
+  private final TalonFX FrontLeft = new TalonFX(Constants.FrontRightID);
+  private final TalonFX BackRight = new TalonFX(Constants.BackRightID);
+  private final TalonFX BackLeft = new TalonFX(Constants.BackLeftID);
 
      //PIDturn variables
   private double turnTarget;
@@ -34,7 +34,7 @@ public class DriveTrain extends SubsystemBase{
   private double potDriveOutput;
   private double prevDriveOutput;
 
-  public DriveTrain(){
+  public driveTrain(){
     FrontRight.setInverted(false);
     FrontLeft.setInverted(true);
     BackRight.setInverted(false);

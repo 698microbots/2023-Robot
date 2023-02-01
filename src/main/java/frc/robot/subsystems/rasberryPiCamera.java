@@ -19,11 +19,22 @@ public class rasberryPiCamera extends SubsystemBase {
   
   public rasberryPiCamera() {
     piCam = NetworkTableInstance.getDefault().getTable("photonvision");
-    hasEntry = piCam.getEntry("tid");
+    hasEntry = piCam.getEntry("hasTarget");
     aprilTagCoords = piCam.getEntry("camtran");
     targets = piCam.getEntry("tv");
   }
 
+  
+  public boolean getHasEntry(){
+    return hasEntry.getBoolean(getHasEntry());
+  }
+  
+  public double getAprilCoords(){
+    return aprilTagCoords.getDouble(getAprilCoords());
+  }
+
+   
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
