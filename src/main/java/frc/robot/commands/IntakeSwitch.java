@@ -21,7 +21,7 @@ public class IntakeSwitch extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    intakeSubsystem.inputBall();
+    intakeSubsystem.inputCone();
     // Put xbox input here
   }
 
@@ -35,7 +35,7 @@ public class IntakeSwitch extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     intakeSubsystem.stopMotor();
-    RobotContainer.Xbox.
+    //Put container stuff RobotContainer.Xbox.
   }
 
   // Returns true when the command should end.
