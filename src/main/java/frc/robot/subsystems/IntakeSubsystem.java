@@ -34,10 +34,8 @@ public class IntakeSubsystem extends SubsystemBase {
   
     public void stopMotor()
     {
-      if(getElectricCurrent() >= Constants.ampSpike){
-        intakeMotorL.set(0);
-        intakeMotorH.set(0);
-      }
+      intakeMotorL.set(0);
+      intakeMotorH.set(0);
     }
 
     //This method is kinda useless since we don't really take anything out throught the intake but its here
@@ -58,5 +56,6 @@ public class IntakeSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
       // This method will be called once per scheduler run
+      
     }
 }
