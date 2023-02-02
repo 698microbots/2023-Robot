@@ -4,24 +4,30 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.IntakeSubsystem;
 
 public class IntakeSwitch extends CommandBase {
   /** Creates a new IntakeSwitch. */
   private final IntakeSubsystem intakeSubsystem;
-
-  public IntakeSwitch(IntakeSubsystem intakeSubsystem) {
+  private final XboxController xboxController;
+  public IntakeSwitch(IntakeSubsystem intakeSubsystem, XboxController xboxController) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.intakeSubsystem = intakeSubsystem;
+    this.xboxController = xboxController;
 
     addRequirements(intakeSubsystem);
+
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     intakeSubsystem.inputCone();
+    xboxController.setRumble(RumbleType.kBothRumble, 1.0);
     // Put xbox input here
   }
 
@@ -35,6 +41,7 @@ public class IntakeSwitch extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     intakeSubsystem.stopMotor();
+    xboxController.setRumble(RumbleType.kBothRumble, 0);
     //Put container stuff RobotContainer.Xbox.
   }
 
