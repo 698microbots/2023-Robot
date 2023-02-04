@@ -34,8 +34,8 @@ public final class Constants {
   public static final double powerAdjustment = 0.5;
   //Controller ID's
   public static final int xBoxControllerid = 0;
-  public static final int xRightid = 2;
-  public static final int yRightid = 3;
+  public static final int xRightid = 4;
+  public static final int yRightid = 5;
   public static final int xLeftid = 0;
   public static final int yLeftid = 1;
 

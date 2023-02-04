@@ -17,7 +17,10 @@ public class DriveTrain extends SubsystemBase {
   private final TalonFX FL = new TalonFX(Constants.FLid);
   private final TalonFX BL = new TalonFX(Constants.BLid);
   public DriveTrain() {
-    
+    FR.setInverted(false);
+    BR.setInverted(false);
+    FL.setInverted(true);
+    BL.setInverted(true);
   }
 
   public void setRightSpeed(double speed){

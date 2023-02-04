@@ -29,8 +29,10 @@ public class XboxDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.setRightSpeed((-y_Supplier.get() - x_Supplier.get()*Constants.turnAdjustment)*Constants.powerAdjustment);
-    driveTrain.setLeftSpeed((-y_Supplier.get() + x_Supplier.get()*Constants.turnAdjustment)*Constants.powerAdjustment);
+    double L = y_Supplier.get();
+    double R = x_Supplier.get();
+    driveTrain.setRightSpeed(Constants.powerAdjustment*(L+R*Constants.turnAdjustment));
+    driveTrain.setLeftSpeed(Constants.powerAdjustment*(L-R*Constants.turnAdjustment));
   }
 
   // Called once the command ends or is interrupted.
