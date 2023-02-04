@@ -7,7 +7,7 @@ import com.revrobotics.CANSparkMax;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.*;
 /*
  * We need to sort out the constants for this subsystem, everything else looks pretty decent rn
  */
@@ -15,44 +15,44 @@ public class IntakeSubsystem extends SubsystemBase {
     /** Creates a new Intake Motor. */
     //IntakeMoterL is the lower intake motor
     //IntakeMoterh is the Higher intake motor -  goes opposite direction of lower intake motor
-    private final CANSparkMax intakeMotorL;
-    private final CANSparkMax intakeMotorH;  
+    private final CANSparkMax intakeMotorM1;
+    private final CANSparkMax intakeMotorM2;  
   /*
    * Instansiates intakeMotor to allow us to control the motor of the intake
    */
     public IntakeSubsystem() {
-      intakeMotorL = new CANSparkMax(Constants.deviceIdIntake, CANSparkMax.MotorType.kBrushless);
-      intakeMotorH = new CANSparkMax(Constants.deviceIdIntake, CANSparkMax.MotorType.kBrushless);
+      intakeMotorM1 = new CANSparkMax(Constants.deviceIdIntakeM1, CANSparkMax.MotorType.kBrushless);
+      intakeMotorM2 = new CANSparkMax(Constants.deviceIdIntakeM2, CANSparkMax.MotorType.kBrushless);
     }
   
-    public void inputCone()
+    public void intakeGP()
     {
-      intakeMotorL.set(Constants.intakeMotorSpeed);
-      intakeMotorH.set(-Constants.intakeMotorSpeed);
+      intakeMotorM1.set(Constants.intakeMotorSpeed);
+      intakeMotorM2.set(Constants.intakeMotorSpeed);
     }
   
   
     public void stopMotor()
     {
-      if(getElectricCurrent() >= Constants.ampSpike){
-        intakeMotorL.set(0);
-        intakeMotorH.set(0);
-      }
+      intakeMotorM1.set(0);
+      intakeMotorM2.set(0);
     }
 
     //This method is kinda useless since we don't really take anything out throught the intake but its here
     // incase we need to 
-    public void outputBall()
+    public void outputGP()
     {
-      intakeMotorL.set(-Constants.intakeMotorSpeed);
-      intakeMotorH.set(-Constants.intakeMotorSpeed);
+      intakeMotorM1.set(-Constants.intakeMotorSpeed);
+      intakeMotorM2.set(-Constants.intakeMotorSpeed);
     }
   
   //The current should be the same between motors since they are moving at the same speed. 
-    public double getElectricCurrent()
+    public double getElectricCurrentM1()
     {
-      return intakeMotorL.getOutputCurrent();
+      return intakeMotorM1.getOutputCurrent();
     }
+
+    
   
     
     @Override
