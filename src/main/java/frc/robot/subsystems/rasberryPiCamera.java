@@ -13,27 +13,29 @@ import edu.wpi.first.networktables.NetworkTable.*;
 public class rasberryPiCamera extends SubsystemBase {
   /** Creates a new rasber  ryPiCamera. */
   private NetworkTable piCam;
-  private NetworkTableEntry hasEntry;
-  private NetworkTableEntry aprilTagCoords;
-  private NetworkTableEntry targets;
+  private NetworkTableEntry hasTarget;
+  private NetworkTableEntry targetArea;
+  private NetworkTableEntry targetPose;
   
   public rasberryPiCamera() {
     piCam = NetworkTableInstance.getDefault().getTable("photonvision");
-    hasEntry = piCam.getEntry("hasTarget");
-    aprilTagCoords = piCam.getEntry("camtran");
-    targets = piCam.getEntry("tv");
+    hasTarget = piCam.getEntry("hasTarget");
+    targetArea = piCam.getEntry("targetArea");
+    targetPose = piCam.getEntry("targetPose");
   }
 
   
-  public boolean getHasEntry(){
-    return hasEntry.getBoolean(getHasEntry());
+  public boolean getHasTarget(){
+    return hasTarget.getBoolean(false);
   }
   
-  public double getAprilCoords(){
-    return aprilTagCoords.getDouble(getAprilCoords());
+  public double getTargetArea(){
+    return targetArea.getDouble(0);
   }
 
-   
+  public double getTargetPose(){
+    return targetPose.getDouble(0);
+  }
   
   @Override
   public void periodic() {

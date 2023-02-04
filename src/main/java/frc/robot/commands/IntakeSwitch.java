@@ -12,12 +12,12 @@ import frc.robot.subsystems.IntakeSubsystem;
 public class IntakeSwitch extends CommandBase {
   /** Creates a new IntakeSwitch. */
   private final IntakeSubsystem intakeSubsystem;
-  private final boolean reverse = false;
+  private final boolean reverse;
 
   public IntakeSwitch(IntakeSubsystem intakeSubsystem, boolean reverse) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.intakeSubsystem = intakeSubsystem;
-
+    this.reverse = reverse;
     addRequirements(intakeSubsystem);
   }
 

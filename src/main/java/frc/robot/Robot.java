@@ -86,7 +86,12 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     SmartDashboard.putNumber("April Tag ID", m_robotContainer.LimeLightSubsystem.getAprilId());
-    SmartDashboard.putNumber("April Tag ID", m_robotContainer.LimeLightSubsystem.getAprilCoords());
+    SmartDashboard.putNumber("April Tag Coords", m_robotContainer.LimeLightSubsystem.getAprilCoords());
+    SmartDashboard.putBoolean("Has Target", m_robotContainer.rasberryPiCamera.getHasTarget());
+    SmartDashboard.putNumber("Target Area", m_robotContainer.rasberryPiCamera.getTargetArea());
+    SmartDashboard.putNumber("Target Pose", m_robotContainer.rasberryPiCamera.getTargetPose());
+
+
 
   }
 
