@@ -21,7 +21,7 @@ public class IntakeSwitch extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    intakeSubsystem.inputCone();
+    intakeSubsystem.intakeGP();
     // Put xbox input here
   }
 
