@@ -25,10 +25,10 @@ public class IntakeSubsystem extends SubsystemBase {
       intakeMotorH = new CANSparkMax(Constants.deviceIdIntakeH, CANSparkMax.MotorType.kBrushless);
     }
   
-    public void inputCone()
+    public void intakeGP()
     {
       intakeMotorL.set(Constants.intakeMotorSpeed);
-      intakeMotorH.set(-Constants.intakeMotorSpeed);
+      intakeMotorH.set(Constants.intakeMotorSpeed);
     }
   
   
@@ -42,7 +42,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
     //This method is kinda useless since we don't really take anything out throught the intake but its here
     // incase we need to 
-    public void outputBall()
+    public void outputGP()
     {
       intakeMotorL.set(-Constants.intakeMotorSpeed);
       intakeMotorH.set(-Constants.intakeMotorSpeed);
