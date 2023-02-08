@@ -3,15 +3,15 @@ package frc.robot.subsystems;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.SPI;
+// import edu.wpi.first.wpilibj.SPI;//SPI is a smaller connection.
+import edu.wpi.first.wpilibj.I2C;
 
 
 public class navXSubsystem extends SubsystemBase{
     /* Create a new navX subsystem */
     
     //Sets up new AHRS navX with the serial communication as SPI/USB
-    private final AHRS navX = new AHRS(SPI.Port.kMXP); //Uses MXP port (the large port in the middle of the RoboRIO)
+    private final AHRS navX = new AHRS(I2C.Port.kMXP); //Uses MXP port (the large port in the middle of the RoboRIO), use I2C, not SPI
     //  private final AHRS navX = new AHRS(SerialPort.Port.kUSB); //Uses USB 
 
     //Constructors
@@ -58,5 +58,9 @@ public class navXSubsystem extends SubsystemBase{
 
     public float getDisplacementZ() {
         return navX.getDisplacementZ();
+    }
+
+    public double getCompass(){
+        return navX.getCompassHeading();
     }
 }
