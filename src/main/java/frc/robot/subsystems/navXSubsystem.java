@@ -20,8 +20,6 @@ public class navXSubsystem extends SubsystemBase{
         navX.resetDisplacement();
     }
 
-
-
     //Getters
     public boolean isConnected() {
         return navX.isConnected();
