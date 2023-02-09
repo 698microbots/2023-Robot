@@ -15,5 +15,28 @@ package frc.robot;
 public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
+
   }
+
+  public static final int talonArmPivot = 1;
+  public static final int talonLift1 = 2;
+  public static final int talonLift2 = 3;
+  public static final int extensionMotorID = 0;
+
+  //DriveTrain Motor ID's
+  public static final int FRid = 0;
+  public static final int BLid = 1;
+  public static final int FLid = 3;
+  public static final int BRid = 6;
+
+  //DriveTrain Constants
+  public static final double turnAdjustment = 0.5;
+  public static final double powerAdjustment = 0.5;
+  //Controller ID's
+  public static final int xBoxControllerid = 0;
+  public static final int xRightid = 4;
+  public static final int yRightid = 5;
+  public static final int xLeftid = 0;
+  public static final int yLeftid = 1;
+
 }
