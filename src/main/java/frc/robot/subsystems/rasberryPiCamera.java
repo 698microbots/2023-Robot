@@ -23,35 +23,50 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class rasberryPiCamera extends SubsystemBase {
   /** Creates a new rasber  ryPiCamera. */
-  private PhotonCamera photonCamera = new PhotonCamera("photonvision");
+  private PhotonCamera photonCamera = new PhotonCamera("OV5647");
   private NetworkTable piCam;
   private NetworkTableEntry hasTarget;
   private NetworkTableEntry targetArea;
   private NetworkTableEntry targetPose;
   private PhotonPipelineResult result;
+  private PhotonTrackedTarget target;
+  private List<PhotonTrackedTarget> targets;
 
 
   
   public rasberryPiCamera() {
     
-    piCam = NetworkTableInstance.getDefault().getTable("photonvision");
-    hasTarget = piCam.getEntry("hasTarget");
-    targetArea = piCam.getEntry("targetArea");
-    targetPose = piCam.getEntry("targetPose");
-    this.result = photonCamera.getLatestResult();
     
+    // piCam = NetworkTableInstance.getDefault().getTable("photonvision");
+    // hasTarget = piCam.getEntry("hasTarget");
+    // targetArea = piCam.getEntry("targetArea");
+    // targetPose = piCam.getEntry("targetPose");
+    this.result = photonCamera.getLatestResult();
   }
 
+
+  public double aprilTagID(){
+    return target.getFiducialId();
+  }
+
+
   public boolean getHasTarget(){
-    return hasTarget.getBoolean(false);
+    return result.hasTargets();
   }
   
   public double getTargetArea(){
-    return targetArea.getDouble(-0);
+    if (result.hasTargets() == true){
+      target = result.getBestTarget();
+      return target.getArea();
+    }else {
+      return 0;
+    }
   }
 
   public double getTargetPose(){
-    return targetPose.getDouble(-0);
+    // target = result.getBestTarget();
+
+    return 0;
   }
   
 
@@ -59,8 +74,7 @@ public class rasberryPiCamera extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putBoolean("Has Target", getHasTarget());
-    SmartDashboard.putNumber("Target Area", getTargetArea());
-    SmartDashboard.putNumber("Target Pose", getTargetPose());
+    result = photonCamera.getLatestResult();
+    target = photonCamera.getLatestResult().getBestTarget();
   }
 }

@@ -30,7 +30,7 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public LimeLightSubsystem LimeLightSubsystem = new LimeLightSubsystem();
   public XboxController Xbox = new XboxController(0);
-  public static rasberryPiCamera rasberryPiCamera = new rasberryPiCamera();
+  public rasberryPiCamera rasberryPiCamera = new rasberryPiCamera();
   //Intake
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public final JoystickButton Xbutton = new JoystickButton(Xbox, Constants.Xbox_Button_X);
