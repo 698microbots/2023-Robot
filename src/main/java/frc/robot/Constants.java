@@ -32,6 +32,7 @@ public final class Constants {
   //DriveTrain Constants
   public static final double turnAdjustment = 0.5;
   public static final double powerAdjustment = 0.5;
+
   //Controller ID's
   public static final int xBoxControllerid = 0;
   public static final int xRightid = 4;
@@ -40,14 +41,14 @@ public final class Constants {
   public static final int yLeftid = 1;
 
   // turn PID constants
-  public static final double turnkP = 0.02;
+  public static final double turnkP = 0.1;
   public static final double turnkI = 0.00;
   public static final double turnkD = 0;
 
   // balance PID constants
-  public static final double balancekP = 1;
-  public static final double balancekI = 2;
-  public static final double balancekD = 3;
+  public static final double balancekP = 0.007;
+  public static final double balancekI = 0;
+  public static final double balancekD = 0;
 
   // auton drive PID constants
   //public static final int kTimeoutMs = 20;

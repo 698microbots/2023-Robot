@@ -24,6 +24,7 @@ public class AutoBalancing extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    navX.resetYaw();
     driveTrain.setLeftSpeed(0);
     driveTrain.setRightSpeed(0);
   }
@@ -31,10 +32,10 @@ public class AutoBalancing extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.PIDBalance(0);
-    driveTrain.PIDturn(0);
-    driveTrain.setLeftSpeed(driveTrain.getBalanceOutput() + driveTrain.getTurnOutput());
-    driveTrain.setRightSpeed(driveTrain.getBalanceOutput() - driveTrain.getTurnOutput());
+    driveTrain.PIDBalance(navX.getPitch());
+    driveTrain.PIDturn(navX.getYawRate());
+    driveTrain.setLeftSpeed(driveTrain.getBalanceOutput() - driveTrain.getTurnOutput());
+    driveTrain.setRightSpeed(driveTrain.getBalanceOutput() + driveTrain.getTurnOutput());
   }
 
   // Called once the command ends or is interrupted.
