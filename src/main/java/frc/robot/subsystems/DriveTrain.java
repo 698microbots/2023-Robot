@@ -157,8 +157,13 @@ public class DriveTrain extends SubsystemBase {
 
     }  
 
+  public double getTurnOutput()
+  {
+    return turnOutput;
+  }
+
   //Balance PIDs
-  public void balancePID(double sensorInput)
+  public void PIDBalance(double sensorInput)
   {
     balanceError = balanceTarget - sensorInput;
     balanceP = balanceError;

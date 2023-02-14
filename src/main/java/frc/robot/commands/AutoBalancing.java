@@ -31,8 +31,10 @@ public class AutoBalancing extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.setLeftSpeed(driveTrain.getBalanceOutput());
-    driveTrain.setRightSpeed(driveTrain.getBalanceOutput());
+    driveTrain.PIDBalance(0);
+    driveTrain.PIDturn(0);
+    driveTrain.setLeftSpeed(driveTrain.getBalanceOutput() + driveTrain.getTurnOutput());
+    driveTrain.setRightSpeed(driveTrain.getBalanceOutput() - driveTrain.getTurnOutput());
   }
 
   // Called once the command ends or is interrupted.
