@@ -52,7 +52,7 @@ public class DriveTrainSubSystem extends SubsystemBase
 
 //Constructors
 
-  public DriveTrainSubsystem() {
+  public DriveTrainSubSystem() {
     //initialize all neccessary variables and sensors.
     FrontRight.setInverted(false);
     FrontLeft.setInverted(true);
