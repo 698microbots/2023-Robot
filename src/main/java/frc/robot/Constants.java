@@ -44,6 +44,11 @@ public final class Constants {
   public static final double turnkI = 0.00;
   public static final double turnkD = 0;
 
+  // balance PID constants
+  public static final double balancekP = 1;
+  public static final double balancekI = 2;
+  public static final double balancekD = 3;
+
   // auton drive PID constants
   //public static final int kTimeoutMs = 20;
   public static final double driveAdjustment = 0.85;

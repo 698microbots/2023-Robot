@@ -16,31 +16,7 @@ public class DriveTrain extends SubsystemBase {
   private final TalonFX BR = new TalonFX(Constants.BRid);
   private final TalonFX FL = new TalonFX(Constants.FLid);
   private final TalonFX BL = new TalonFX(Constants.BLid);
-  public DriveTrain() {
-    FR.setInverted(false);
-    BR.setInverted(false);
-    FL.setInverted(true);
-    BL.setInverted(true);
-        //turn variables
-        turnTarget = 0;
-        turnError = 0;
-        turnPrevError = 0;
-        turnP = 0;
-        turnI = 0;
-        turnD = 0;
-        turnOutput = 0;
-        //drive variables
-        driveTarget = 0;
-        driveError = 0;
-        drivePrevError = 0;
-        driveP = 0;
-        driveI = 0;
-        driveD = 0;
-        driveOutput = 0;
-        potDriveOutput = 0;
-        prevDriveOutput = 0;
-  }
-
+  
   //PIDturn variables
   private double turnTarget;
   private double turnError;
@@ -70,6 +46,39 @@ public class DriveTrain extends SubsystemBase {
   private double balanceI;
   private double balanceD;
   private double balanceOutput;
+
+  public DriveTrain() {
+    FR.setInverted(false);
+    BR.setInverted(false);
+    FL.setInverted(true);
+    BL.setInverted(true);
+        //turn variables
+        turnTarget = 0;
+        turnError = 0;
+        turnPrevError = 0;
+        turnP = 0;
+        turnI = 0;
+        turnD = 0;
+        turnOutput = 0;
+        //drive variables
+        driveTarget = 0;
+        driveError = 0;
+        drivePrevError = 0;
+        driveP = 0;
+        driveI = 0;
+        driveD = 0;
+        driveOutput = 0;
+        potDriveOutput = 0;
+        prevDriveOutput = 0;
+        //BalancePID variables
+        balanceTarget = 0;
+        balanceError = 0;
+        balancePrevError = 0;
+        balanceP = 0;
+        balanceI = 0;
+        balanceD = 0;
+        balanceOutput = 0;
+  }
 
   public void setRightSpeed(double speed){
     FR.set(ControlMode.PercentOutput, speed);
@@ -154,6 +163,14 @@ public class DriveTrain extends SubsystemBase {
     balanceError = balanceTarget - sensorInput;
     balanceP = balanceError;
     balanceI += balanceError;
+    balanceD = balanceError - balancePrevError;
+    balanceOutput = Constants.balancekP*balanceP + Constants.balancekI*balanceI + Constants.balancekD*balanceD;
+    balancePrevError = balanceError;
+  }
+
+  public double getBalanceOutput()
+  {
+    return balanceOutput;
   }
   
   @Override
