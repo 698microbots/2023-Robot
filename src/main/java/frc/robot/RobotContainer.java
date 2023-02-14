@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.XboxController;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain driveTrain = new DriveTrain();
-  public static navXSubsystem navX = new navXSubsystem();
+  public navXSubsystem navX = new navXSubsystem();
   
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final XboxController xboxCon = new XboxController(Constants.xBoxControllerid);
