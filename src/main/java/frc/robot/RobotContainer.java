@@ -31,9 +31,8 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-    m_DriveTrain.setDefaultCommand(new JoyStickCommand(m_DriveTrain,() -> flightStick.getX(), () -> flightStick.getY()));
-    
-    configureBindings();
+    m_DriveTrain.setDefaultCommand(new JoyStickCommand(m_DriveTrain,() -> flightStick.getX(), () -> flightStick.getY()));configureBindings();
+
 
   }
 
@@ -46,10 +45,23 @@ public class RobotContainer {
    * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
    * joysticks}.
    */
+
+   public final IntakeSubsytem intake = new IntakeSubsytem();
+   public final JoystickButton buttonA = new JoystickButton( Constants.Xbox_Button_A);
+   public final JoystickButton buttonB = new JoystickButton(Constants.Xbox_Button_B);
+   public final JoystickButton buttonX = new JoystickButton( Constants.Xbox_Button_X);
+   public final JoystickButton buttonY = new JoystickButton( Constants.Xbox_Button_Y);
+   private final JoystickButton buttonLB = new JoystickButton( Constants.Xbox_Button_LB);
+   private final JoystickButton buttonRB = new JoystickButton( Constants.Xbox_Button_RB);
+   private final JoystickButton buttonLS = new JoystickButton( Constants.Xbox_Button_LS);
+   private final JoystickButton buttonRS = new JoystickButton( Constants.Xbox_Button_RS);
+   
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     new Trigger(m_exampleSubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_exampleSubsystem));
+
+
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.

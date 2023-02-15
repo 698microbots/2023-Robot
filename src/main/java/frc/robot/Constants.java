@@ -18,6 +18,7 @@ public final class Constants {
   }
   public static final int kDriverControllerPort = 1;
   public static final int flightStickPortID = 0;
+  public static final int flightStickPortID1 = 0;
   public static final int FrontRightID = 0;
   public static final int FrontLeftID = 3;
   public static final int BackRightID = 5;
