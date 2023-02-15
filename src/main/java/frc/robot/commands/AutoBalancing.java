@@ -33,7 +33,7 @@ public class AutoBalancing extends CommandBase {
   @Override
   public void execute() {
     driveTrain.PIDBalance(navX.getPitch());
-    driveTrain.PIDturn(navX.getYawRate());
+    driveTrain.PIDturn(navX.getYaw());
     driveTrain.setLeftSpeed(driveTrain.getBalanceOutput() - driveTrain.getTurnOutput());
     driveTrain.setRightSpeed(driveTrain.getBalanceOutput() + driveTrain.getTurnOutput());
   }
