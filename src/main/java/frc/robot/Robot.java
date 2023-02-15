@@ -46,9 +46,9 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    SmartDashboard.putBoolean("Has Target", m_robotContainer.rasberryPiCamera.getHasTarget());
-    SmartDashboard.putNumber("Target Area", m_robotContainer.rasberryPiCamera.getTargetArea());
-    SmartDashboard.putNumber("Target Pose", m_robotContainer.rasberryPiCamera.getTargetPose());
+    // SmartDashboard.putBoolean("Has Target", m_robotContainer.rasberryPiCamera.getHasTarget());
+    // SmartDashboard.putNumber("Target Area", m_robotContainer.rasberryPiCamera.getTargetArea());
+    // SmartDashboard.putNumber("Target Pose", m_robotContainer.rasberryPiCamera.getTargetPose());
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -90,10 +90,9 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putNumber("April Tag ID", m_robotContainer.LimeLightSubsystem.getAprilId());
     // SmartDashboard.putNumber("April Tag Coords", m_robotContainer.LimeLightSubsystem.getAprilCoords());
     SmartDashboard.putBoolean("Has Target", m_robotContainer.rasberryPiCamera.getHasTarget());
-    SmartDashboard.putNumber("Target Area", m_robotContainer.rasberryPiCamera.getTargetArea());
-    SmartDashboard.putNumber("Target Pose", m_robotContainer.rasberryPiCamera.getTargetPose());
-    SmartDashboard.putNumber("April Tag ID", m_robotContainer.rasberryPiCamera.aprilTagID());
-
+    // SmartDashboard.putNumber("Target Area", m_robotContainer.rasberryPiCamera.getTargetArea());
+    // SmartDashboard.putNumber("Target Pose", m_robotContainer.rasberryPiCamera.getTargetPose());
+    SmartDashboard.putNumber("Fiducial ID", m_robotContainer.rasberryPiCamera.aprilTagID());
 
 
 
