@@ -25,8 +25,6 @@ public class rasberryPiCamera extends SubsystemBase {
   private PhotonTrackedTarget target;
   private List<PhotonTrackedTarget> targets;
   private int aprilID;
-
-  
   public rasberryPiCamera() {
     
     
@@ -35,6 +33,7 @@ public class rasberryPiCamera extends SubsystemBase {
     // targetArea = piCam.getEntry("targetArea");
     // targetPose = piCam.getEntry("targetPose");
     this.result = photonCamera.getLatestResult();
+    targets = result.getTargets();
 
   }
 
@@ -54,11 +53,10 @@ public class rasberryPiCamera extends SubsystemBase {
       return target.getArea();
   }
 
-  // public double getTargetPose(){
-  //   // target = result.getBestTarget();
-
-  //   return 0;
-  // }
+  public double getTargetPose(){
+      target = result.getBestTarget();
+      return target.getPoseAmbiguity();
+  }
   
 
 
@@ -66,8 +64,6 @@ public class rasberryPiCamera extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     result = photonCamera.getLatestResult();
-    targets = result.getTargets();
-    System.out.println(aprilID);
-    SmartDashboard.putNumber("april ID", aprilID);
+    target = result.getBestTarget();
   }
 }
