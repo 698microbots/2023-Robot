@@ -68,7 +68,17 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    SmartDashboard.putNumber("NavX Pitch:", (double) m_robotContainer.navX.getPitch());
+    SmartDashboard.putNumber("NavX Roll:", (double)m_robotContainer.navX.getRoll());
+    SmartDashboard.putNumber("NavX Yaw:", (double)m_robotContainer.navX.getYaw());
+    SmartDashboard.putNumber("NavX Compass Heading:", (double)m_robotContainer.navX.getCompass());
+    SmartDashboard.putNumber("X-Displacement:", (double)m_robotContainer.navX.getDisplacementX());
+    SmartDashboard.putNumber("Y-Displacement:", (double)m_robotContainer.navX.getDisplacementY());
+    SmartDashboard.putNumber("X Position:", m_robotContainer.navX.getXPosition());
+    SmartDashboard.putNumber("Y Position:", m_robotContainer.navX.getYPosition());
+
+  }
 
   @Override
   public void teleopInit() {
@@ -88,6 +98,10 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("NavX Roll:", (double)m_robotContainer.navX.getRoll());
     SmartDashboard.putNumber("NavX Yaw:", (double)m_robotContainer.navX.getYaw());
     SmartDashboard.putNumber("NavX Compass Heading:", (double)m_robotContainer.navX.getCompass());
+    SmartDashboard.putNumber("X-Displacement:", (double)m_robotContainer.navX.getDisplacementX());
+    SmartDashboard.putNumber("Y-Displacement:", (double)m_robotContainer.navX.getDisplacementY());
+    SmartDashboard.putNumber("X Position:", m_robotContainer.navX.getXPosition());
+    SmartDashboard.putNumber("Y Position:", m_robotContainer.navX.getYPosition());
   }
 
   @Override
