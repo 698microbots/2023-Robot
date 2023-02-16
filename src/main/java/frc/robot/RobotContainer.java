@@ -36,6 +36,9 @@ public class RobotContainer {
   public final JoystickButton Xbutton = new JoystickButton(Xbox, Constants.Xbox_Button_X);
   public final JoystickButton Ybutton = new JoystickButton(Xbox, Constants.Xbox_Button_Y);
 
+  public final JoystickButton Abutton = new JoystickButton(Xbox, Constants.Xbox_Button_A);
+  public final JoystickButton Bbutton = new JoystickButton(Xbox, Constants.Xbox_Button_B);
+
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(Constants.kDriverControllerPort);
