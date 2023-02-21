@@ -14,39 +14,6 @@ package frc.robot;
  */
 public final class Constants {
   public static class OperatorConstants {
-<<<<<<< HEAD
-    
-  }
-  public static final int kDriverControllerPort = 0;
-  public static final int FrontRightID = 0;
-  public static final int FrontLeftID = 3;
-  public static final int BackRightID = 5;
-  public static final int BackLeftID = 2;
-
-
-
-  //Controller Stick Constants
-  public static final int XBOX_R_XAXIS = 4;
-  public static final int XBOX_R_YAXIS = 5;
-  public static final int XBOX_L_XAXIS = 0;
-  public static final int XBOX_L_YAXIS = 1;
-  public static final int XBOX_pin = 0;
-  public static final int Xbox_LT = 2;
-  public static final int Xbox_RT = 3;
-
-
-  //Controller Button IDs
-  public static final int Xbox_Button_A = 1;
-  public static final int Xbox_Button_B = 2;
-  public static final int Xbox_Button_X = 3;
-  public static final int Xbox_Button_Y = 4;
-  public static final int Xbox_Button_LB = 5;
-  public static final int Xbox_Button_RB = 6;
-  public static final int Xbox_Button_LS = 9;
-  public static final int Xbox_Button_RS = 10;
-
-  
-=======
     public static final int kDriverControllerPort = 0;
 
   }
@@ -72,5 +39,4 @@ public final class Constants {
   public static final int xLeftid = 0;
   public static final int yLeftid = 1;
 
->>>>>>> 722c4dac48aedbdb0b594e6783175eec5354ffb5
 }
