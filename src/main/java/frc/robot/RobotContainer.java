@@ -45,12 +45,7 @@ public class RobotContainer {
   public navXSubsystem navX = new navXSubsystem();
   
   // Replace with CommandPS4Controller or CommandJoystick if needed
-<<<<<<< HEAD
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(Constants.kDriverControllerPort);
-=======
   private final XboxController xboxCon = new XboxController(Constants.xBoxControllerid);
->>>>>>> 722c4dac48aedbdb0b594e6783175eec5354ffb5
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */

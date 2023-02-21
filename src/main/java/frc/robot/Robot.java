@@ -8,12 +8,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-<<<<<<< HEAD
-import frc.robot.subsystems.DriveTrainSubSystem;
-=======
 import frc.robot.subsystems.navXSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
->>>>>>> 722c4dac48aedbdb0b594e6783175eec5354ffb5
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
