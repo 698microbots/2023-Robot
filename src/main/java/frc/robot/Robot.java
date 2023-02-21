@@ -1,10 +1,11 @@
-// Copyright (c) FIRST and other WPILib contributors.
+ // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 <<<<<<< HEAD
@@ -35,6 +36,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    m_robotContainer.LimeLightSubsystem.getAprilId();
   }
 
   /**
@@ -51,6 +53,11 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    SmartDashboard.putBoolean("Has Target", m_robotContainer.rasberryPiCamera.getHasTarget());
+    SmartDashboard.putNumber("Fiducial ID", m_robotContainer.rasberryPiCamera.aprilTagID());
+
+    SmartDashboard.putNumber("Target Area", m_robotContainer.rasberryPiCamera.getTargetArea());
+    SmartDashboard.putNumber("Target Pose", m_robotContainer.rasberryPiCamera.getTargetPose());
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -73,7 +80,17 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    SmartDashboard.putNumber("NavX Pitch:", (double) m_robotContainer.navX.getPitch());
+    SmartDashboard.putNumber("NavX Roll:", (double)m_robotContainer.navX.getRoll());
+    SmartDashboard.putNumber("NavX Yaw:", (double)m_robotContainer.navX.getYaw());
+    SmartDashboard.putNumber("NavX Compass Heading:", (double)m_robotContainer.navX.getCompass());
+    SmartDashboard.putNumber("X-Displacement:", (double)m_robotContainer.navX.getDisplacementX());
+    SmartDashboard.putNumber("Y-Displacement:", (double)m_robotContainer.navX.getDisplacementY());
+    SmartDashboard.putNumber("X Position:", m_robotContainer.navX.getXPosition());
+    SmartDashboard.putNumber("Y Position:", m_robotContainer.navX.getYPosition());
+
+  }
 
   @Override
   public void teleopInit() {
@@ -93,6 +110,10 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("NavX Roll:", (double)m_robotContainer.navX.getRoll());
     SmartDashboard.putNumber("NavX Yaw:", (double)m_robotContainer.navX.getYaw());
     SmartDashboard.putNumber("NavX Compass Heading:", (double)m_robotContainer.navX.getCompass());
+    SmartDashboard.putNumber("X-Displacement:", (double)m_robotContainer.navX.getDisplacementX());
+    SmartDashboard.putNumber("Y-Displacement:", (double)m_robotContainer.navX.getDisplacementY());
+    SmartDashboard.putNumber("X Position:", m_robotContainer.navX.getXPosition());
+    SmartDashboard.putNumber("Y Position:", m_robotContainer.navX.getYPosition());
   }
 
   @Override

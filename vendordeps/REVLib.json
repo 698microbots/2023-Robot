@@ -2,10 +2,14 @@
     "fileName": "REVLib.json",
     "name": "REVLib",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "version": "2023.1.2",
 =======
     "version": "2023.1.1",
 >>>>>>> 722c4dac48aedbdb0b594e6783175eec5354ffb5
+=======
+    "version": "2023.1.2",
+>>>>>>> 591a4ccb4e8727147ba6e14278743220c43f8d0d
     "uuid": "3f48eb8c-50fe-43a6-9cb7-44c86353c4cb",
     "mavenUrls": [
         "https://maven.revrobotics.com/"
@@ -20,10 +24,14 @@
             "groupId": "com.revrobotics.frc",
             "artifactId": "REVLib-java",
 <<<<<<< HEAD
+<<<<<<< HEAD
             "version": "2023.1.2"
 =======
             "version": "2023.1.1"
 >>>>>>> 722c4dac48aedbdb0b594e6783175eec5354ffb5
+=======
+            "version": "2023.1.2"
+>>>>>>> 591a4ccb4e8727147ba6e14278743220c43f8d0d
         }
     ],
     "jniDependencies": [
@@ -31,10 +39,14 @@
             "groupId": "com.revrobotics.frc",
             "artifactId": "REVLib-driver",
 <<<<<<< HEAD
+<<<<<<< HEAD
             "version": "2023.1.2",
 =======
             "version": "2023.1.1",
 >>>>>>> 722c4dac48aedbdb0b594e6783175eec5354ffb5
+=======
+            "version": "2023.1.2",
+>>>>>>> 591a4ccb4e8727147ba6e14278743220c43f8d0d
             "skipInvalidPlatforms": true,
             "isJar": false,
             "validPlatforms": [
@@ -53,10 +65,14 @@
             "groupId": "com.revrobotics.frc",
             "artifactId": "REVLib-cpp",
 <<<<<<< HEAD
+<<<<<<< HEAD
             "version": "2023.1.2",
 =======
             "version": "2023.1.1",
 >>>>>>> 722c4dac48aedbdb0b594e6783175eec5354ffb5
+=======
+            "version": "2023.1.2",
+>>>>>>> 591a4ccb4e8727147ba6e14278743220c43f8d0d
             "libName": "REVLib",
             "headerClassifier": "headers",
             "sharedLibrary": false,
@@ -75,10 +91,14 @@
             "groupId": "com.revrobotics.frc",
             "artifactId": "REVLib-driver",
 <<<<<<< HEAD
+<<<<<<< HEAD
             "version": "2023.1.2",
 =======
             "version": "2023.1.1",
 >>>>>>> 722c4dac48aedbdb0b594e6783175eec5354ffb5
+=======
+            "version": "2023.1.2",
+>>>>>>> 591a4ccb4e8727147ba6e14278743220c43f8d0d
             "libName": "REVLibDriver",
             "headerClassifier": "headers",
             "sharedLibrary": false,
