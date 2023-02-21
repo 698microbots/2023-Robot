@@ -14,36 +14,41 @@ package frc.robot;
  */
 public final class Constants {
   public static class OperatorConstants {
-   
+    public static final int kDriverControllerPort = 0;
+
   }
-  public static final int kDriverControllerPort = 1;
-  public static final int flightStickPortID = 0;
-  public static final int flightStickPortID1 = 0;
-  public static final int FrontRightID = 0;
-  public static final int FrontLeftID = 3;
-  public static final int BackRightID = 5;
-  public static final int BackLeftID = 2;
 
-  //Controller Stick Constants
-  public static final int XBOX_R_XAXIS = 4;
-  public static final int XBOX_R_YAXIS = 5;
-  public static final int XBOX_L_XAXIS = 0;
-  public static final int XBOX_L_YAXIS = 1;
-  public static final int XBOX_pin = 0;
-  public static final int Xbox_LT = 2;
-  public static final int Xbox_RT = 3;
+  public static final int talonArmPivot = 1;
+  public static final int talonLift1 = 2;
+  public static final int talonLift2 = 3;
+  public static final int extensionMotorID = 0;
 
+  //DriveTrain Motor ID's
+  public static final int FRid = 0;
+  public static final int BLid = 1;
+  public static final int FLid = 3;
+  public static final int BRid = 6;
 
-  //Controller Button IDs
-  public static final int Xbox_Button_A = 1;
-  public static final int Xbox_Button_B = 2;
-  public static final int Xbox_Button_X = 3;
-  public static final int Xbox_Button_Y = 4;
-  public static final int Xbox_Button_LB = 5;
-  public static final int Xbox_Button_RB = 6;
-  public static final int Xbox_Button_LS = 9;
-  public static final int Xbox_Button_RS = 10;
-  public static final int kxboxID = 0;
+  //DriveTrain Constants
+  public static final double turnAdjustment = 0.5;
+  public static final double powerAdjustment = 0.5;
+
+  //Controller ID's
+  public static final int xBoxControllerid = 0;
+  public static final int xRightid = 4;
+  public static final int yRightid = 5;
+  public static final int xLeftid = 0;
+  public static final int yLeftid = 1;
+
+  // turn PID constants
+  public static final double turnkP = 0.1;
+  public static final double turnkI = 0.00;
+  public static final double turnkD = 0;
+
+  // balance PID constants
+  public static final double balancekP = 0.007;
+  public static final double balancekI = 0;
+  public static final double balancekD = 0;
 
   // auton drive PID constants
   //public static final int kTimeoutMs = 20;
@@ -54,16 +59,5 @@ public final class Constants {
   public static final double kI = 0.0;
   public static final double kD = 0;
 
-  // Index Constants
-  public static final double indexMotorSpeedBottom = 0.3;
-  public static final double indexMotorSpeedTop = 0.5;
-
-  public static final double turnkP = 0.02;
-  public static final double turnkI = 0.00;
-  public static final double turnkD = 0;
-
   public static final double IactZone = 0;
-
-
-
 }

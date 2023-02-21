@@ -5,13 +5,11 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.*;
+import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.*;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 
 /**
@@ -22,18 +20,17 @@ import edu.wpi.first.wpilibj.XboxController;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final DriveTrain m_DriveTrain = new DriveTrain();
-  private static final Joystick flightStick = new Joystick(Constants.flightStickPortID);
-  private final XboxController xbox = new XboxController(Constants.kxboxID);
+  private final DriveTrain driveTrain = new DriveTrain();
+  public navXSubsystem navX = new navXSubsystem();
+  
   // Replace with CommandPS4Controller or CommandJoystick if needed
+  private final XboxController xboxCon = new XboxController(Constants.xBoxControllerid);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-    m_DriveTrain.setDefaultCommand(new JoyStickCommand(m_DriveTrain,() -> flightStick.getX(), () -> flightStick.getY()));configureBindings();
-
-
+    driveTrain.setDefaultCommand(new XboxDrive(driveTrain, () -> xboxCon.getRightX(), () -> xboxCon.getLeftY()));
+    configureBindings();
   }
 
   /**
@@ -58,8 +55,8 @@ public class RobotContainer {
    
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
+    // new Trigger(m_exampleSubsystem::exampleCondition)
+    //     .onTrue(new ExampleCommand(m_exampleSubsystem));
 
 
 
@@ -74,6 +71,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+    return new AutoBalancing(navX, driveTrain);
   }
 }
