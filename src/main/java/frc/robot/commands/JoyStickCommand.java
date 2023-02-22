@@ -4,40 +4,39 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.*;
 import java.util.function.Supplier;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.Constants;
-
-public class XboxDrive extends CommandBase {
-  /** Creates a new XboxDrive. */
+public class JoyStickCommand extends CommandBase {
+  /** Creates a new JoyStickCommand. */
   private DriveTrain driveTrain;
-  private Supplier <Double> x_Supplier, y_Supplier;
-  public XboxDrive(DriveTrain driveTrain, Supplier <Double> x_Supplier, Supplier <Double> y_Supplier) {
+  private Supplier <Double> x_value, y_value;
+
+  public JoyStickCommand(DriveTrain driveTrain,Supplier <Double> x_value, Supplier <Double> y_value) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain = driveTrain;
-    this.x_Supplier = x_Supplier;
-    this.y_Supplier = y_Supplier;
+    this.x_value = x_value;
+    this.y_value = y_value;
     addRequirements(driveTrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("JoyStickDrive has started!");
+    driveTrain.setRightSpeed(0);
+    driveTrain.setLeftSpeed(0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double L = y_Supplier.get();
-    double R = x_Supplier.get();
-    driveTrain.setRightSpeed(Constants.powerAdjustment*(L+R*Constants.turnAdjustment));
-    driveTrain.setLeftSpeed(Constants.powerAdjustment*(L-R*Constants.turnAdjustment));
+    double x = x_value.get();
+    double y = y_value.get();
+    driveTrain.setRightSpeed(y-x);
+    driveTrain.setLeftSpeed(y+x);
 
-    driveTrain.setRightSpeed((rightStick + leftStick/1.9)*0.65);
-    driveTrain.setLeftSpeed((rightStick - leftStick/1.9)*0.65);
+
   }
 
   // Called once the command ends or is interrupted.
@@ -45,6 +44,7 @@ public class XboxDrive extends CommandBase {
   public void end(boolean interrupted) {
     driveTrain.setRightSpeed(0);
     driveTrain.setLeftSpeed(0);
+
   }
 
   // Returns true when the command should end.
