@@ -36,6 +36,13 @@ public final class Constants {
   public static final int Xbox_Button_RB = 6;
   public static final int Xbox_Button_LS = 9;
   public static final int Xbox_Button_RS = 10;
+
+  //Flightstick ID's
+  public static final int kflightStick = 1;
+  public static final int Flight_Stick_X = 0;
+  public static final int Flight_Stick_Y = 1;
+  public static final int Flight_Stick_Z = 2;
+
   //We need some flight stick constants I guess
   //Also some motor id constant for the intake
   public static final int deviceIdIntakeM1 = 9;
