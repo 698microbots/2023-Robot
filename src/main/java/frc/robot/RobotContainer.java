@@ -8,8 +8,12 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.EncoderAutoDrive;
 import frc.robot.commands.XboxDrive;
 import frc.robot.subsystems.DriveTrain;
+
+import com.pathplanner.lib.PathPlannerTrajectory;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -55,8 +59,11 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
+
+  PathPlannerTrajectory 
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return new EncoderAutoDrive();
+    // return new EncoderAutoDrive();
+    return new RamseteCommand(null, null, null, null, null, null, null, null, null, null)
   }
 }
