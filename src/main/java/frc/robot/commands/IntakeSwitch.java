@@ -25,6 +25,7 @@ public class IntakeSwitch extends CommandBase {
   @Override
   public void initialize() {
     // Put xbox input here
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
