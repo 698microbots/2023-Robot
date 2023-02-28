@@ -4,26 +4,24 @@
 
 package frc.robot.commands;
 
-import java.util.function.Supplier;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.navXSubsystem;
 
-public class FlightstickDrive extends CommandBase {
-  /** Creates a new FlightstickDrive. */
+public class AutoDrive extends CommandBase {
+  /** Creates a new AutoDrive. */
   private final DriveTrain driveTrain;
-  private final Supplier <Double> x_axis, y_axis, z_axis;
-  private double X, Y, Z;
-
-  public FlightstickDrive(DriveTrain driveTrain, Supplier <Double>  x_axis, Supplier <Double> y_axis, Supplier <Double> z_axis) {
+  private final navXSubsystem navX;
+  private double counter;
+  private final int millis;
+  public AutoDrive(DriveTrain driveTrain, navXSubsystem navX, double target, int millis) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain = driveTrain;
-    this. x_axis = x_axis;
-    this.y_axis = y_axis;
-    this.z_axis = z_axis;
-    this.X = 0;
-    this.Y = 0;
+    this.navX = navX;
+    this.counter = 0;
+    this.millis = millis;
     addRequirements(driveTrain);
+    addRequirements(navX);
   }
 
   // Called when the command is initially scheduled.
@@ -36,25 +34,12 @@ public class FlightstickDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    X =  x_axis.get();
-    Y = y_axis.get();
-    Z = -z_axis.get();
-    if(Z>0){
-      driveTrain.setRightSpeed((Y + X/3)*Z);
-      driveTrain.setLeftSpeed((Y-X/3)*Z);  
-    }
-    if(Z<0){
-      driveTrain.setRightSpeed((Y-X/2)*Z);
-      driveTrain.setLeftSpeed((Y+X/2)*Z);
-    }
+    // driveTrain.PIDdrive(driveTrain.get, counter);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    driveTrain.setRightSpeed(0);
-    driveTrain.setLeftSpeed(0);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
