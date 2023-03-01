@@ -14,11 +14,15 @@ public class AutoTurn extends CommandBase {
   private final navXSubsystem navX;
   private final double turnTarget;
   private int counter;
-  public AutoTurn(DriveTrain driveTrain, navXSubsystem navX, double turnTarget) {
+  private final int timeout;
+  private int errorCounter;
+  public AutoTurn(DriveTrain driveTrain, navXSubsystem navX, double turnTarget, int timeout) {
     this.driveTrain = driveTrain;
     this.navX = navX;
     this.turnTarget = turnTarget;
     counter = 0;
+    errorCounter = 0;
+    this.timeout = timeout;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
     addRequirements(navX);
@@ -31,6 +35,7 @@ public class AutoTurn extends CommandBase {
     driveTrain.setTurnTarget(turnTarget);
     driveTrain.setLeftSpeed(0);
     driveTrain.setRightSpeed(0);
+    System.out.println("Auto Turn Initiated");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -39,6 +44,11 @@ public class AutoTurn extends CommandBase {
     driveTrain.PIDturn(navX.getYaw());
     driveTrain.setLeftSpeed(-driveTrain.getTurnOutput());
     driveTrain.setRightSpeed(driveTrain.getTurnOutput());
+    if(Math.abs(driveTrain.getTurnError())<3){
+      errorCounter++;
+    }else{
+      errorCounter = 0;
+    }
     counter++;
   }
 
@@ -47,12 +57,13 @@ public class AutoTurn extends CommandBase {
   public void end(boolean interrupted) {
     driveTrain.setLeftSpeed(0);
     driveTrain.setRightSpeed(0);
+    System.out.println("Autoturn has ended");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(driveTrain.getTurnError()<5){
+    if(errorCounter>10 || counter > timeout/20){
       return true;
     }else{
     return false;
