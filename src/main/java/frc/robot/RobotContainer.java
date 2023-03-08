@@ -5,7 +5,6 @@
 package frc.robot;
 
 
-import frc.robot.commands.IntakeSwitch;
 import frc.robot.subsystems.LimeLightSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
@@ -29,7 +28,10 @@ import frc.robot.subsystems.rasberryPiCamera;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public LimeLightSubsystem LimeLightSubsystem = new LimeLightSubsystem();
-  public XboxController Xbox = new XboxController(0);
+  public ArmSubsystem armSubsystem = new ArmSubsystem();
+  public XboxController Xbox = new XboxController(Constants.xBoxControllerid);
+  public XboxController Xbox2 = new XboxController(Constants.xBoxControllerid2);
+
   public rasberryPiCamera rasberryPiCamera = new rasberryPiCamera();
   //Intake
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
@@ -39,19 +41,21 @@ public class RobotContainer {
   public final JoystickButton Abutton = new JoystickButton(Xbox, Constants.Xbox_Button_A);
   public final JoystickButton Bbutton = new JoystickButton(Xbox, Constants.Xbox_Button_B);
 
+  public final JoystickButton AButtonX2 = new JoystickButton(Xbox, Constants.Xbox_Button_AX2);
+
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
   private final DriveTrain driveTrain = new DriveTrain();
   public navXSubsystem navX = new navXSubsystem();
   
-  // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final XboxController xboxCon = new XboxController(Constants.xBoxControllerid);
+
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-    driveTrain.setDefaultCommand(new XboxDrive(driveTrain, () -> xboxCon.getRightX(), () -> xboxCon.getLeftY()));
+    driveTrain.setDefaultCommand(new XboxDrive(driveTrain, () -> Xbox.getRightX(), () -> Xbox.getLeftY()));
+    armSubsystem.setDefaultCommand(new XboxArm(() -> Xbox2.getRightX(), armSubsystem));
     configureBindings();
   }
 
@@ -69,6 +73,8 @@ public class RobotContainer {
 
     Xbutton.toggleWhenPressed(new IntakeSwitch(intakeSubsystem, false));
     Ybutton.toggleWhenPressed(new IntakeSwitch(intakeSubsystem, true));
+    Abutton.toggleWhenPressed(new autoDriveApriltag(driveTrain, rasberryPiCamera, LimeLightSubsystem));
+
 
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,

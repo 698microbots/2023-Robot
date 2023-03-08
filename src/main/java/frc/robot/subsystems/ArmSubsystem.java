@@ -15,42 +15,75 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class ArmSubsystem extends SubsystemBase {
   /** Creates a new ArmSubsystem. */
-  private  final TalonFX armPivotMotor = new TalonFX(Constants.talonArmPivot);
-  private final TalonFX elevatorLiftMotor1 = new TalonFX(Constants.talonLift1);
-  private final TalonFX elevatorLiftMotor2 = new TalonFX(Constants.talonLift2);
-  private final CANSparkMax extensionMotor = new CANSparkMax(Constants.extensionMotorID, MotorType.kBrushless);
+  private final TalonFX armMotor = new TalonFX(Constants.armMotor);
+  private double armTarget;
+  private double armError;
+  private double armPrevError;
+  private double armP;
+  private double armI;
+  private double armD;
+  private double armOutput;
+  private double prevArmOutput;
+
 
   public ArmSubsystem() 
   {
-     armPivotMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-     elevatorLiftMotor1.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-     elevatorLiftMotor2.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    armMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    armTarget = 0;
+    armError = 0;
+    armPrevError = 0;
+    armP = 0;
+    armI = 0;
+    armD = 0;
+    armOutput = 0;
+    prevArmOutput = 0;
   }
 
   //setters
   public void elevatorMove(double speed){
-    elevatorLiftMotor1.set(ControlMode.PercentOutput, speed);
-    elevatorLiftMotor2.set(ControlMode.PercentOutput, speed);
+    armMotor.set(ControlMode.PercentOutput, speed);
   }
 
-  public void armPivotMotor(double speed){
-    armPivotMotor.set(ControlMode.PercentOutput, speed);
+  public void resetArmPID(){
+    armTarget = 0;
+    armError = 0;
+    armPrevError = 0;
+    armP = 0;
+    armI = 0;
+    armD = 0;
+    armOutput = 0;
+    prevArmOutput = 0;
   }
 
-  public void extensionMotor (double speed){
-    extensionMotor.set(speed);
-  }
-
-  //getters
-  public double getElevatorPosition(){//one revolution is 2048 encoder units.
-    double position1 = elevatorLiftMotor1.getSelectedSensorPosition();
-    double position2 = elevatorLiftMotor2.getSelectedSensorPosition();
-    if(Math.abs(position1 - position2) < 100){
-      return (position1 + position2)/2;
-    }else{
-      return -1;//return '-1' if the two sensor positions vary too much.
+  public void moveArmPID(double sensorInput, double limit){
+    armError = armTarget - sensorInput;
+    armP = armError;
+    armI += armError;
+    armD = armError - armPrevError;
+    
+    
+    armOutput = Constants.kP*armP + Constants.kI*armI + Constants.kD*armD;
+    if(armOutput > limit){
+      armOutput = limit;
     }
+
+    if(armOutput < -limit){
+      armOutput = -limit;
+    }
+
+    armPrevError = armError;
+    prevArmOutput = armOutput;
   }
+  //getters
+  // public double getElevatorPosition(){//one revolution is 2048 encoder units.
+  //   double position1 = elevatorLiftMotor1.getSelectedSensorPosition();
+  //   double position2 = elevatorLiftMotor2.getSelectedSensorPosition();
+  //   if(Math.abs(position1 - position2) < 100){
+  //     return (position1 + position2)/2;
+  //   }else{
+  //     return -1;//return '-1' if the two sensor positions vary too much.
+  //   }
+  // }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

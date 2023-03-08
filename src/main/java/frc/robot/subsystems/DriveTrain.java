@@ -135,6 +135,21 @@ public class DriveTrain extends SubsystemBase {
 
   }
 
+  public void resetEncoders(){
+    FR.setSelectedSensorPosition(0);
+    FL.setSelectedSensorPosition(0);
+    BR.setSelectedSensorPosition(0);
+    BL.setSelectedSensorPosition(0);
+
+  }
+
+
+  public void getEncoderPosition(){
+    FL.getActiveTrajectoryVelocity();
+  }  
+
+
+
     public void PIDdrive(double sensorInput, double limit) {
       driveError = driveTarget - sensorInput;
       driveP = driveError;
@@ -173,11 +188,20 @@ public class DriveTrain extends SubsystemBase {
     balancePrevError = balanceError;
   }
 
+
   public double getBalanceOutput()
   {
     return balanceOutput;
   }
   
+  public double getDriveOutput(){
+    return driveOutput;
+  }
+
+  public void setDriveTarget(double encoderUnit){
+    driveTarget = encoderUnit;
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

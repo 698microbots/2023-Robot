@@ -4,12 +4,15 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 import java.util.List;
 
 import org.opencv.photo.Photo;
 import org.photonvision.PhotonCamera;
+import org.photonvision.PhotonUtils;
 import org.photonvision.targeting.PhotonPipelineResult;
 import org.photonvision.targeting.PhotonTrackedTarget;
 
@@ -17,7 +20,7 @@ import org.photonvision.targeting.PhotonTrackedTarget;
 
 public class rasberryPiCamera extends SubsystemBase {
   /** Creates a new rasber  ryPiCamera. */
-  private PhotonCamera photonCamera = new PhotonCamera("OV5647");
+  private PhotonCamera photonCamera = new PhotonCamera("698"); //original camera name is "OV5647"
   private PhotonPipelineResult result;
   private PhotonTrackedTarget target;
   private List<PhotonTrackedTarget> targets;
@@ -55,8 +58,26 @@ public class rasberryPiCamera extends SubsystemBase {
       return target.getPoseAmbiguity();
   }
   
+  public double getTargetSkew(){
+    target = result.getBestTarget();
+    return target.getSkew();
+  }
 
+  public double getTargetYaw(){
+    target = result.getBestTarget();
+    return target.getYaw();
+  }
 
+  public double getTargetPitch(){
+    target = result.getBestTarget();
+    return target.getPitch();
+  }
+
+  public double targetDistance(){
+    target = result.getBestTarget();
+    return PhotonUtils.calculateDistanceToTargetMeters(Constants.CAMERA_HEIGHT_METERS, Constants.TARGET_HEIGHT_METERS, Constants.CAMERA_PITCH_RADIANS, Units.radiansToDegrees(target.getPitch()));
+  }
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

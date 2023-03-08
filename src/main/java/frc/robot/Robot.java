@@ -31,7 +31,6 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    m_robotContainer.LimeLightSubsystem.getAprilId();
   }
 
   /**
@@ -53,6 +52,18 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putNumber("Target Area", m_robotContainer.rasberryPiCamera.getTargetArea());
     SmartDashboard.putNumber("Target Pose", m_robotContainer.rasberryPiCamera.getTargetPose());
+    SmartDashboard.putNumber("Target Yaw", m_robotContainer.rasberryPiCamera.getTargetYaw());
+    SmartDashboard.putNumber("Target Skew", m_robotContainer.rasberryPiCamera.getTargetSkew());
+    SmartDashboard.putNumber("Target Pitch", m_robotContainer.rasberryPiCamera.getTargetPitch());
+    SmartDashboard.putNumber("Target Distance", m_robotContainer.rasberryPiCamera.targetDistance());
+
+    SmartDashboard.putNumber("V Angle", m_robotContainer.LimeLightSubsystem.getV_angle());
+    SmartDashboard.putNumber("H Angle", m_robotContainer.LimeLightSubsystem.getH_angle());
+    SmartDashboard.putNumber("Z Distance", m_robotContainer.LimeLightSubsystem.calculateXdistance());
+    SmartDashboard.putNumber("X Distance", m_robotContainer.LimeLightSubsystem.calculateZdistance());
+
+
+
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
