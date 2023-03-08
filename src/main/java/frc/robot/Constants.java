@@ -13,6 +13,51 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+  public static final int FrontRightID = 0;
+  public static final int FrontLeftID = 3;
+  public static final int BackRightID = 5;
+  public static final int BackLeftID = 2;
+  
+  public static final int XBOX_R_XAXIS = 4;
+  public static final int XBOX_R_YAXIS = 5;
+  public static final int XBOX_L_XAXIS = 0;
+  public static final int XBOX_L_YAXIS = 1;
+  public static final int XBOX_pin = 0;
+  public static final int Xbox_LT = 2;
+  public static final int Xbox_RT = 3;
+
+
+  //Controller Button IDs
+  public static final int Xbox_Button_A = 1;
+  public static final int Xbox_Button_B = 2;
+  public static final int Xbox_Button_X = 3;
+  public static final int Xbox_Button_Y = 4;
+  public static final int Xbox_Button_LB = 5;
+  public static final int Xbox_Button_RB = 6;
+  public static final int Xbox_Button_LS = 9;
+  public static final int Xbox_Button_RS = 10;
+
+  //Flightstick ID's
+  public static final int kflightStick = 1;
+  public static final int Flight_Stick_X = 0;
+  public static final int Flight_Stick_Y = 1;
+  public static final int Flight_Stick_Z = 2;
+
+  //We need some flight stick constants I guess
+  //Also some motor id constant for the intake
+  public static final int deviceIdIntakeM1 = 9;
+  public static final int deviceIdIntakeM2 = 10;
+
+  public static final double intakeMotorSpeed = .4;
+  public static final int ampSpike= 8;
+  public static final int logitechPort6 = 6;
+  public static final int logitechPort7 = 7;
+  //Controller Stick Constants
+
+
+  public static final int kDriverControllerPort = 0;
+
+  
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
 

@@ -4,38 +4,31 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.navXSubsystem;
+import frc.robot.subsystems.LimeLightSubsystem;
 
-public class AutoDrive extends CommandBase {
-  /** Creates a new AutoDrive. */
-  private final DriveTrain driveTrain;
-  private final navXSubsystem navX;
-  private double counter;
-  private final int millis;
-  public AutoDrive(DriveTrain driveTrain, navXSubsystem navX, double target, int millis) {
+
+
+public class autoPlace extends CommandBase {
+  /** Creates a new autoPlace. */
+  private final LimeLightSubsystem limeLightSubsystem;
+  
+  
+  public autoPlace(LimeLightSubsystem limeLightSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.driveTrain = driveTrain;
-    this.navX = navX;
-    this.counter = 0;
-    this.millis = millis;
-    addRequirements(driveTrain);
-    addRequirements(navX);
+    this.limeLightSubsystem = limeLightSubsystem;
+    addRequirements(limeLightSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    driveTrain.setLeftSpeed(0);
-    driveTrain.setRightSpeed(0);
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    // driveTrain.PIDdrive(driveTrain.get, counter);
-  }
+  public void execute() {}
+
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}
