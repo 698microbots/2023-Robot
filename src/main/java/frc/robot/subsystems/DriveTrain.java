@@ -112,6 +112,19 @@ public class DriveTrain extends SubsystemBase {
     turnOutput = 0;
   }
 
+  //setters
+  public void setTurnTarget(double turnTarget){
+    this.turnTarget = turnTarget;
+  }
+
+  public void setDriveTarget(double driveTarget){
+    this.driveTarget = driveTarget;
+  }
+
+  public void setBalanceTarget(double balanceTarget){
+    this.balanceTarget = balanceTarget;
+  }
+
   //takes in sensor input to turn robot into the correct angle
   public void PIDturn(double sensorInput){
     turnError = turnTarget - sensorInput;
@@ -162,6 +175,19 @@ public class DriveTrain extends SubsystemBase {
     return turnOutput;
   }
 
+  //getters
+  public double getTurnError(){
+    return turnError;
+  }
+
+  public double getDriveError(){
+    return driveError;
+  }
+
+  public double getBalanceError(){
+    return balanceError;
+  }
+  
   //Balance PIDs
   public void PIDBalance(double sensorInput)
   {
