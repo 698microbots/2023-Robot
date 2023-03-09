@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.LimeLightSubsystem;
-import frc.robot.subsystems.rasberryPiCamera;
+import frc.robot.subsystems.RasberryPiCamera;
 import frc.robot.subsystems.navXSubsystem;
 
 
@@ -16,12 +16,12 @@ public class autoDriveApriltag extends CommandBase {
   /** Creates a new autoDriveApriltag. */
   private DriveTrain driveTrain;
   private LimeLightSubsystem limeLightSubsystem;
-  private rasberryPiCamera rasberryPiCamera;
+  private RasberryPiCamera rasberryPiCamera;
   private double piAngle = 0;
   private double H_angle;
   private double distance;
   
-  public autoDriveApriltag(DriveTrain driveTrain, rasberryPiCamera rasberryPiCamera, LimeLightSubsystem limeLightSubsystem) {
+  public autoDriveApriltag(DriveTrain driveTrain, RasberryPiCamera rasberryPiCamera, LimeLightSubsystem limeLightSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain = driveTrain;
     this.rasberryPiCamera = rasberryPiCamera;
@@ -50,7 +50,7 @@ public class autoDriveApriltag extends CommandBase {
       H_angle = H_angle / 2;
       distance = distance / 2;
       driveTrain.PIDdrive(distance, 0.5);
-      
+
       driveTrain.PIDturn(H_angle);
     }
 

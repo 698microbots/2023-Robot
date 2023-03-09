@@ -18,14 +18,14 @@ import org.photonvision.targeting.PhotonTrackedTarget;
 
 
 
-public class rasberryPiCamera extends SubsystemBase {
+public class RasberryPiCamera extends SubsystemBase {
   /** Creates a new rasber  ryPiCamera. */
   private PhotonCamera photonCamera = new PhotonCamera("698"); //original camera name is "OV5647"
   private PhotonPipelineResult result;
   private PhotonTrackedTarget target;
   private List<PhotonTrackedTarget> targets;
   private int aprilID;
-  public rasberryPiCamera() {
+  public RasberryPiCamera() {
     
     
     // piCam = NetworkTableInstance.getDefault().getTable("photonvision");
@@ -38,7 +38,7 @@ public class rasberryPiCamera extends SubsystemBase {
   }
 
 
-  public double aprilTagID(){
+  public double getaprilTagID(){
     aprilID = target.getFiducialId();
     return aprilID;
   }
