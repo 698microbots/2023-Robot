@@ -4,12 +4,21 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.LimeLightSubsystem;
 
-public class VisionAutoDrive extends CommandBase {
-  /** Creates a new VisionAutoDrive. */
-  public VisionAutoDrive() {
+
+
+public class autoPlace extends CommandBase {
+  /** Creates a new autoPlace. */
+  private final LimeLightSubsystem limeLightSubsystem;
+  
+  
+  public autoPlace(LimeLightSubsystem limeLightSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.limeLightSubsystem = limeLightSubsystem;
+    addRequirements(limeLightSubsystem);
   }
 
   // Called when the command is initially scheduled.
