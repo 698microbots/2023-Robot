@@ -156,20 +156,22 @@ public class DriveTrain extends SubsystemBase {
       
       
       driveOutput = Constants.kP*driveP + Constants.kI*driveI + Constants.kD*driveD;
-      if(driveOutput > limit){
-        driveOutput = limit;
-      }
+      // if(driveOutput > limit){
+      //   driveOutput = limit;
+      // }
 
-      if(driveOutput < -limit){
-        driveOutput = -limit;
-      }
+      // if(driveOutput < -limit){
+      //   driveOutput = -limit;
+      // }
 
       drivePrevError = driveError;
       prevDriveOutput = driveOutput;
       //SmartDashboard.putNumber("PID Drive output:", driveOutput);
-
     }  
 
+  public double getDriveOutput(){
+    return driveOutput;
+  }
   public double getTurnOutput()
   {
     return turnOutput;
