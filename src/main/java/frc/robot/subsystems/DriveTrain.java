@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.fasterxml.jackson.annotation.JacksonInject.Value;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -187,7 +188,7 @@ public class DriveTrain extends SubsystemBase {
     balancePrevError = balanceError;
   }
 
-
+//getters
   public double getBalanceOutput(){
     return balanceOutput;
   }
@@ -204,6 +205,9 @@ public class DriveTrain extends SubsystemBase {
     return turnError;
   }
 
+  // public double getFRid(){
+  //   // return FR.value;
+  // }
   public void setDriveTarget(double encoderUnit){
     driveTarget = encoderUnit;
   }

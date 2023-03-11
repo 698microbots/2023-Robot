@@ -12,7 +12,7 @@ import frc.robot.subsystems.RasberryPiCamera;
 import frc.robot.subsystems.navXSubsystem;
 
 
-public class autoDriveApriltag extends CommandBase {
+public class AutoDriveApriltag extends CommandBase {
   /** Creates a new autoDriveApriltag. */
   private DriveTrain driveTrain;
   private LimeLightSubsystem limeLightSubsystem;
@@ -21,7 +21,7 @@ public class autoDriveApriltag extends CommandBase {
   private double H_angle;
   private double distance;
   
-  public autoDriveApriltag(DriveTrain driveTrain, RasberryPiCamera rasberryPiCamera, LimeLightSubsystem limeLightSubsystem) {
+  public AutoDriveApriltag(DriveTrain driveTrain, RasberryPiCamera rasberryPiCamera, LimeLightSubsystem limeLightSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain = driveTrain;
     this.rasberryPiCamera = rasberryPiCamera;
