@@ -37,7 +37,6 @@ public class RobotContainer {
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public final JoystickButton Xbutton = new JoystickButton(Xbox, Constants.Xbox_Button_X);
   public final JoystickButton Ybutton = new JoystickButton(Xbox, Constants.Xbox_Button_Y);
-
   public final JoystickButton Abutton = new JoystickButton(Xbox, Constants.Xbox_Button_A);
   public final JoystickButton Bbutton = new JoystickButton(Xbox, Constants.Xbox_Button_B);
 
@@ -48,7 +47,9 @@ public class RobotContainer {
   private final DriveTrain driveTrain = new DriveTrain();
   public navXSubsystem navX = new navXSubsystem();
   
-
+  // Replace with CommandPS4Controller or CommandJoystick if needed
+  private final XboxController xboxCon = new XboxController(Constants.xBoxControllerid);
+  private final XboxController flightStick = new XboxController(Constants.kflightStick);
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -88,6 +89,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return new AutoBalancing(navX, driveTrain);
+    return new AutoTurn(driveTrain, navX, 90, 30000);
+    //new AutoBalancing(navX, driveTrain);
   }
 }

@@ -7,20 +7,30 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.navXSubsystem;
 
-public class autoArmPickup extends CommandBase {
-  /** Creates a new autoArmPickup. */
-  private ArmSubsystem armSubsystem; 
-  
-  
-  public autoArmPickup(ArmSubsystem armSubsystem) {
-    this.armSubsystem = armSubsystem;
-    addRequirements(armSubsystem);
+
+public class AutoDrive extends CommandBase {
+  /** Creates a new AutoDrive. */
+  private final DriveTrain driveTrain;
+  private final navXSubsystem navX;
+  private double counter;
+  private final int millis;
+  public AutoDrive(DriveTrain driveTrain, navXSubsystem navX, double target, int millis) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    this.driveTrain = driveTrain;
+    this.navX = navX;
+    this.counter = 0;
+    this.millis = millis;
+    addRequirements(driveTrain);
+    addRequirements(navX);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    driveTrain.setLeftSpeed(0);
+    driveTrain.setRightSpeed(0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

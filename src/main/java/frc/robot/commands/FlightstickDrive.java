@@ -4,28 +4,31 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.AddressableLED;
+import java.util.function.Supplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.navXSubsystem;
 
-public class AutoBalancing extends CommandBase {
-  /** Creates a new AutoBalancing. */
-  private final navXSubsystem navX;
+public class FlightstickDrive extends CommandBase {
+  /** Creates a new FlightstickDrive. */
   private final DriveTrain driveTrain;
-  public AutoBalancing(navXSubsystem navX, DriveTrain driveTrain) {
-    this.navX = navX;
-    this.driveTrain = driveTrain;
+  private final Supplier <Double> x_axis, y_axis, z_axis;
+  private double X, Y, Z;
+
+  public FlightstickDrive(DriveTrain driveTrain, Supplier <Double>  x_axis, Supplier <Double> y_axis, Supplier <Double> z_axis) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(navX);
+    this.driveTrain = driveTrain;
+    this. x_axis = x_axis;
+    this.y_axis = y_axis;
+    this.z_axis = z_axis;
+    this.X = 0;
+    this.Y = 0;
     addRequirements(driveTrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    navX.resetYaw();
-    driveTrain.resetTurnPID();
     driveTrain.setLeftSpeed(0);
     driveTrain.setRightSpeed(0);
   }
@@ -33,17 +36,24 @@ public class AutoBalancing extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.PIDBalance(navX.getPitch());
-    driveTrain.PIDturn(navX.getYaw());
-    driveTrain.setLeftSpeed(driveTrain.getBalanceOutput() - driveTrain.getTurnOutput());
-    driveTrain.setRightSpeed(driveTrain.getBalanceOutput() + driveTrain.getTurnOutput());
+    X =  x_axis.get();
+    Y = y_axis.get();
+    Z = -z_axis.get();
+    if(Z>0){
+      driveTrain.setRightSpeed((Y + X/3)*Z);
+      driveTrain.setLeftSpeed((Y-X/3)*Z);  
+    }
+    if(Z<0){
+      driveTrain.setRightSpeed((Y-X/2)*Z);
+      driveTrain.setLeftSpeed((Y+X/2)*Z);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    driveTrain.setLeftSpeed(0);
     driveTrain.setRightSpeed(0);
+    driveTrain.setLeftSpeed(0);
   }
 
   // Returns true when the command should end.

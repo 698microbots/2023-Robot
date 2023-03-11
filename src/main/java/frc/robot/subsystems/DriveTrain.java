@@ -112,6 +112,17 @@ public class DriveTrain extends SubsystemBase {
     turnOutput = 0;
   }
 
+  //setters
+  public void setTurnTarget(double turnTarget){
+    this.turnTarget = turnTarget;
+  }
+
+
+
+  public void setBalanceTarget(double balanceTarget){
+    this.balanceTarget = balanceTarget;
+  }
+
   //takes in sensor input to turn robot into the correct angle
   public void PIDturn(double sensorInput){
     turnError = turnTarget - sensorInput;
@@ -158,25 +169,40 @@ public class DriveTrain extends SubsystemBase {
       
       
       driveOutput = Constants.kP*driveP + Constants.kI*driveI + Constants.kD*driveD;
-      if(driveOutput > limit){
-        driveOutput = limit;
-      }
+      // if(driveOutput > limit){
+      //   driveOutput = limit;
+      // }
 
-      if(driveOutput < -limit){
-        driveOutput = -limit;
-      }
+      // if(driveOutput < -limit){
+      //   driveOutput = -limit;
+      // }
 
       drivePrevError = driveError;
       prevDriveOutput = driveOutput;
       //SmartDashboard.putNumber("PID Drive output:", driveOutput);
-
     }  
 
+  public double getDriveOutput(){
+    return driveOutput;
+  }
   public double getTurnOutput()
   {
     return turnOutput;
   }
 
+  //getters
+  public double getTurnError(){
+    return turnError;
+  }
+
+  public double getDriveError(){
+    return driveError;
+  }
+
+  public double getBalanceError(){
+    return balanceError;
+  }
+  
   //Balance PIDs
   public void PIDBalance(double sensorInput)
   {
@@ -194,9 +220,7 @@ public class DriveTrain extends SubsystemBase {
     return balanceOutput;
   }
   
-  public double getDriveOutput(){
-    return driveOutput;
-  }
+
 
   public void setDriveTarget(double encoderUnit){
     driveTarget = encoderUnit;
