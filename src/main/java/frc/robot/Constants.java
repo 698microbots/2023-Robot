@@ -56,14 +56,6 @@ public final class Constants {
     public static final int XBOX_pinX2 = 0;
     public static final int Xbox_LTX2 = 2;
     public static final int Xbox_RTX2 = 3;
-
-  //Flightstick ID's
-  public static final int kflightStick = 1;
-  public static final int Flight_Stick_X = 0;
-  public static final int Flight_Stick_Y = 1;
-  public static final int Flight_Stick_Z = 2;
-
-  //We need some flight stick constants I guess
   //Also some motor id constant for the intake
   public static final int deviceIdIntakeM1 = 9;
   public static final int deviceIdIntakeM2 = 10;
@@ -114,14 +106,16 @@ public final class Constants {
  public static final int yLeftidX2 = 1;
 
   // turn PID constants
-  public static final double turnkP = 0.005;
-  public static final double turnkI = 0.0008;
-  public static final double turnkD = 0.007;
+  public static final double turnkP = 0.1;
+  public static final double turnkI = 0.00;
+  public static final double turnkD = 0;
+  public static final double maximumDriveError = 1000.0;
 
   // balance PID constants
   public static final double balancekP = 0.007;
   public static final double balancekI = 0;
   public static final double balancekD = 0;
+  public static final double levelConstant = 2;
 
   // auton drive PID constants
   //public static final int kTimeoutMs = 20;
