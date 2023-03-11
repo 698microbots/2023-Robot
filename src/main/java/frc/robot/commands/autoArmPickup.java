@@ -7,10 +7,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ArmSubsystem;
 
-public class autoArmPickup extends CommandBase {
+public class AutoArmPickup extends CommandBase {
   /** Creates a new autoArmPickup. */
   private ArmSubsystem armSubsystem; 
-  public autoArmPickup() {
+  public AutoArmPickup() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

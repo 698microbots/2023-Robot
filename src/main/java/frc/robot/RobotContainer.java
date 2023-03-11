@@ -73,7 +73,7 @@ public class RobotContainer {
 
     Xbutton.toggleWhenPressed(new IntakeSwitch(intakeSubsystem, false));
     Ybutton.toggleWhenPressed(new IntakeSwitch(intakeSubsystem, true));
-    Abutton.toggleWhenPressed(new autoDriveApriltag(driveTrain, rasberryPiCamera, LimeLightSubsystem));
+    Abutton.toggleWhenPressed(new ApriltagAutoDrive(driveTrain, rasberryPiCamera, LimeLightSubsystem));
 
 
 

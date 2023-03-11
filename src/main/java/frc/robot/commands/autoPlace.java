@@ -11,13 +11,13 @@ import frc.robot.subsystems.RasberryPiCamera;
 
 
 
-public class autoPlace extends CommandBase {
+public class AutoPlace extends CommandBase {
   /** Creates a new autoPlace. */
   private final LimeLightSubsystem limeLightSubsystem;
   private final RasberryPiCamera rasberryPiCamera;
   
   
-  public autoPlace(LimeLightSubsystem limeLightSubsystem, RasberryPiCamera rasberryPiCamera) {
+  public AutoPlace(LimeLightSubsystem limeLightSubsystem, RasberryPiCamera rasberryPiCamera) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.limeLightSubsystem = limeLightSubsystem;
     this.rasberryPiCamera = rasberryPiCamera;
