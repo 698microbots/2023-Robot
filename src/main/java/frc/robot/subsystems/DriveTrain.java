@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import java.lang.annotation.Target;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
@@ -89,7 +91,7 @@ public class DriveTrain extends SubsystemBase {
     BL.set(ControlMode.PercentOutput, speed);
   }
 
-  //Turn and Drive PIDs
+  // PIDs reset
   public void resetDrivePID(){
     driveTarget = 0;
     driveError = 0;
@@ -161,15 +163,12 @@ public class DriveTrain extends SubsystemBase {
       if(driveOutput > limit){
         driveOutput = limit;
       }
-
       if(driveOutput < -limit){
         driveOutput = -limit;
       }
 
       drivePrevError = driveError;
       prevDriveOutput = driveOutput;
-      //SmartDashboard.putNumber("PID Drive output:", driveOutput);
-
     }  
 
   public double getTurnOutput()
@@ -189,8 +188,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
 
-  public double getBalanceOutput()
-  {
+  public double getBalanceOutput(){
     return balanceOutput;
   }
   
@@ -198,10 +196,17 @@ public class DriveTrain extends SubsystemBase {
     return driveOutput;
   }
 
+  public double getDriveError(){
+    return driveError;
+  }
+
   public void setDriveTarget(double encoderUnit){
     driveTarget = encoderUnit;
   }
 
+  public void setTurnTarget(double degrees){
+    turnTarget = degrees;
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

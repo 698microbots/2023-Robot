@@ -109,11 +109,13 @@ public final class Constants {
   public static final double turnkP = 0.1;
   public static final double turnkI = 0.00;
   public static final double turnkD = 0;
+  public static final double maximumDriveError = 1000.0;
 
   // balance PID constants
   public static final double balancekP = 0.007;
   public static final double balancekI = 0;
   public static final double balancekD = 0;
+  public static final double levelConstant = 2;
 
   // auton drive PID constants
   //public static final int kTimeoutMs = 20;
