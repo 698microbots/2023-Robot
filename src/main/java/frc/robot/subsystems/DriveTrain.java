@@ -200,6 +200,10 @@ public class DriveTrain extends SubsystemBase {
     return driveError;
   }
 
+  public double getTurnError(){
+    return turnError;
+  }
+
   public void setDriveTarget(double encoderUnit){
     driveTarget = encoderUnit;
   }
