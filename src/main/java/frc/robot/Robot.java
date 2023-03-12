@@ -48,7 +48,7 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
     // SmartDashboard.putBoolean("Has Target", m_robotContainer.rasberryPiCamera.getHasTarget());
-    SmartDashboard.putNumber("Fiducial ID", m_robotContainer.rasberryPiCamera.getaprilTagID());
+    // SmartDashboard.putNumber("Fiducial ID", m_robotContainer.rasberryPiCamera.getaprilTagID());
 
     // SmartDashboard.putNumber("Target Area", m_robotContainer.rasberryPiCamera.getTargetArea());
     // SmartDashboard.putNumber("Target Pose", m_robotContainer.rasberryPiCamera.getTargetPose());

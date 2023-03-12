@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.subsystems.RasberryPiCamera;
+// import frc.robot.subsystems.RasberryPiCamera;
 
 
 /**
@@ -32,7 +32,7 @@ public class RobotContainer {
   public XboxController Xbox = new XboxController(Constants.xBoxControllerid);
   public XboxController Xbox2 = new XboxController(Constants.xBoxControllerid2);
 
-  public RasberryPiCamera rasberryPiCamera = new RasberryPiCamera();
+  // public RasberryPiCamera rasberryPiCamera = new RasberryPiCamera();
   //Intake
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public final JoystickButton Xbutton = new JoystickButton(Xbox, Constants.Xbox_Button_X);

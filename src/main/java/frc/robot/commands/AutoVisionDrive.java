@@ -15,23 +15,21 @@ import frc.robot.Constants;
 public class AutoVisionDrive extends CommandBase {
   /** Creates a new AutoVisionDrive. */
   private final DriveTrain driveTrain;
-  private final RasberryPiCamera rasberryPiCamera;
   private final LimeLightSubsystem limelight;
   private final navXSubsystem navX;
   private final double initialSpeed;
   private int counter;
   private boolean triggered;
 
-  public AutoVisionDrive(DriveTrain driveTrain, RasberryPiCamera rasberryPiCamera, LimeLightSubsystem limelight, navXSubsystem navX, double initialSpeed) {
+  public AutoVisionDrive(DriveTrain driveTrain, LimeLightSubsystem limelight, navXSubsystem navX, double initialSpeed) {
     this.driveTrain = driveTrain;
     this.limelight = limelight;
-    this.rasberryPiCamera = rasberryPiCamera;
     this.navX = navX;
     this.initialSpeed = initialSpeed;
     this.triggered = false;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
-    addRequirements(rasberryPiCamera);
+    // addRequirements(rasberryPiCamera);
   }
   // Called when the command is initially scheduled.
   @Override
