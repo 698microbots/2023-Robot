@@ -7,22 +7,18 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.LimeLightSubsystem;
-import frc.robot.subsystems.RasberryPiCamera;
 
 
 
 public class autoPlace extends CommandBase {
   /** Creates a new autoPlace. */
   private final LimeLightSubsystem limeLightSubsystem;
-  private final RasberryPiCamera rasberryPiCamera;
   
   
-  public autoPlace(LimeLightSubsystem limeLightSubsystem, RasberryPiCamera rasberryPiCamera) {
+  public autoPlace(LimeLightSubsystem limeLightSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.limeLightSubsystem = limeLightSubsystem;
-    this.rasberryPiCamera = rasberryPiCamera;
     addRequirements(limeLightSubsystem);
-    addRequirements(rasberryPiCamera);
   }
 
   // Called when the command is initially scheduled.
