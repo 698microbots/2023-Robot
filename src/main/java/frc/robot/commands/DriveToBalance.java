@@ -5,37 +5,35 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.navXSubsystem;
+import frc.robot.subsystems.DriveTrain;
 
-public class AutoDrive extends CommandBase {
-  /** Creates a new AutoDrive. */
-  private final DriveTrain driveTrain;
+public class DriveToBalance extends CommandBase {
+  /** Creates a new DriveToBalance. */
   private final navXSubsystem navX;
-  private double counter;
-  private final int millis;
-  public AutoDrive(DriveTrain driveTrain, navXSubsystem navX, double target, int millis) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    this.driveTrain = driveTrain;
+  private final double initialSpeed;
+  private final DriveTrain driveTrain;
+  public DriveToBalance(navXSubsystem navX, DriveTrain driveTrain, double initialSpeed) {
+    this.initialSpeed = initialSpeed;
     this.navX = navX;
-    this.counter = 0;
-    this.millis = millis;
-    addRequirements(driveTrain);
+    this.driveTrain = driveTrain;
+    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(navX);
+    addRequirements(driveTrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    driveTrain.setLeftSpeed(0);
-    driveTrain.setRightSpeed(0);
+    driveTrain.setTurnTarget(0);
+    driveTrain.setLeftSpeed(initialSpeed);
+    driveTrain.setRightSpeed(initialSpeed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    // driveTrain.PIDdrive(driveTrain.get, counter);
-  }
+  public void execute() {}
+
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}
