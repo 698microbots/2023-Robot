@@ -61,7 +61,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("H Angle", m_robotContainer.LimeLightSubsystem.getH_angle());
     SmartDashboard.putNumber("Z Distance", m_robotContainer.LimeLightSubsystem.calculateXdistance());
     SmartDashboard.putNumber("X Distance", m_robotContainer.LimeLightSubsystem.calculateZdistance());
-
+    SmartDashboard.putNumberArray("Bot Pose", m_robotContainer.LimeLightSubsystem.getBotPose());
+    SmartDashboard.putNumber("AprilTag ID", m_robotContainer.LimeLightSubsystem.getaprilTagID());
 
 
   }
