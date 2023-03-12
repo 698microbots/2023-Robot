@@ -95,6 +95,10 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Y-Displacement:", (double)m_robotContainer.navX.getDisplacementY());
     SmartDashboard.putNumber("X Position:", m_robotContainer.navX.getXPosition());
     SmartDashboard.putNumber("Y Position:", m_robotContainer.navX.getYPosition());
+    SmartDashboard.putNumber("FR: Position", m_robotContainer.driveTrain.getFRid());
+    SmartDashboard.putNumber("FL: Position", m_robotContainer.driveTrain.getFLid());
+    SmartDashboard.putNumber("BR: Position", m_robotContainer.driveTrain.getBRid());
+    SmartDashboard.putNumber("BL: Position", m_robotContainer.driveTrain.getBLid());
 
   }
 
@@ -120,6 +124,10 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Y-Displacement:", (double)m_robotContainer.navX.getDisplacementY());
     SmartDashboard.putNumber("X Position:", m_robotContainer.navX.getXPosition());
     SmartDashboard.putNumber("Y Position:", m_robotContainer.navX.getYPosition());
+    SmartDashboard.putNumber("FR: Position", m_robotContainer.driveTrain.getFRid());
+    SmartDashboard.putNumber("FL: Position", m_robotContainer.driveTrain.getFLid());
+    SmartDashboard.putNumber("BR: Position", m_robotContainer.driveTrain.getBRid());
+    SmartDashboard.putNumber("BL: Position", m_robotContainer.driveTrain.getBLid());
   }
 
   @Override

@@ -45,7 +45,7 @@ public class RobotContainer {
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
-  private final DriveTrain driveTrain = new DriveTrain();
+  public final DriveTrain driveTrain = new DriveTrain();
   public navXSubsystem navX = new navXSubsystem();
   
 

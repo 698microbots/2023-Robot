@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import java.lang.annotation.Target;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.fasterxml.jackson.annotation.JacksonInject.Value;
 
@@ -205,9 +206,18 @@ public class DriveTrain extends SubsystemBase {
     return turnError;
   }
 
-  // public double getFRid(){
-  //   // return FR.value;
-  // }
+  public double getFRid(){
+    return FR.getSelectedSensorPosition();
+  }
+  public double getFLid(){
+    return FL.getSelectedSensorPosition();
+  }
+  public double getBRid(){
+    return BR.getSelectedSensorPosition();
+  }
+  public double getBLid(){
+    return BL.getSelectedSensorPosition();
+  }
   public void setDriveTarget(double encoderUnit){
     driveTarget = encoderUnit;
   }

@@ -32,8 +32,8 @@ public class RasberryPiCamera extends SubsystemBase {
     // hasTarget = piCam.getEntry("hasTarget");
     // targetArea = piCam.getEntry("targetArea");
     // targetPose = piCam.getEntry("targetPose");
-    this.result = photonCamera.getLatestResult();
-    targets = result.getTargets();
+    // this.result = photonCamera.getLatestResult();
+    // targets = result.getTargets();
 
   }
 
@@ -81,7 +81,7 @@ public class RasberryPiCamera extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    result = photonCamera.getLatestResult();
-    target = result.getBestTarget();
+    // result = photonCamera.getLatestResult();
+    // target = result.getBestTarget();
   }
 }
