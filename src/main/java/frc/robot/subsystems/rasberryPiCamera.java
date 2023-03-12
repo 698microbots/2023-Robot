@@ -28,20 +28,11 @@
 //   public RasberryPiCamera() {
     
     
-<<<<<<< HEAD
-    // piCam = NetworkTableInstance.getDefault().getTable("photonvision");
-    // hasTarget = piCam.getEntry("hasTarget");
-    // targetArea = piCam.getEntry("targetArea");
-    // targetPose = piCam.getEntry("targetPose");
-    // this.result = photonCamera.getLatestResult();
-    // targets = result.getTargets();
-=======
 //     // piCam = NetworkTableInstance.getDefault().getTable("photonvision");
 //     // hasTarget = piCam.getEntry("hasTarget");
 //     // targetArea = piCam.getEntry("targetArea");
 //     // targetPose = piCam.getEntry("targetPose");
 //       this.result = photonCamera.getLatestResult();
->>>>>>> 03a579312f504c62f64f8b65ff25fd252ed512de
 
 //     targets = result.getTargets();
 
@@ -119,15 +110,6 @@
  
 //   }
   
-<<<<<<< HEAD
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-    // result = photonCamera.getLatestResult();
-    // target = result.getBestTarget();
-  }
-}
-=======
 //   @Override
 //   public void periodic() {
 //     // This method will be called once per scheduler run
@@ -135,4 +117,3 @@
 //     // target = result.getBestTarget();
 //   }
 // }
->>>>>>> 03a579312f504c62f64f8b65ff25fd252ed512de
