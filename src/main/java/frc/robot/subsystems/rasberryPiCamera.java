@@ -32,15 +32,22 @@ public class RasberryPiCamera extends SubsystemBase {
     // hasTarget = piCam.getEntry("hasTarget");
     // targetArea = piCam.getEntry("targetArea");
     // targetPose = piCam.getEntry("targetPose");
-    this.result = photonCamera.getLatestResult();
+      this.result = photonCamera.getLatestResult();
+
     targets = result.getTargets();
 
   }
 
 
   public double getaprilTagID(){
-    aprilID = target.getFiducialId();
-    return aprilID;
+    if (getHasTarget() == true){
+      aprilID = target.getFiducialId();
+      return aprilID;
+    } else {
+      return 404;
+    }
+
+
   }
 
 
@@ -49,8 +56,13 @@ public class RasberryPiCamera extends SubsystemBase {
   }
   
   public double getTargetArea(){
+    if (getHasTarget() == true) {
       target = result.getBestTarget();
       return target.getArea();
+    } else {
+      return 404;
+    }
+
   }
 
   public double getTargetPose(){
@@ -59,29 +71,49 @@ public class RasberryPiCamera extends SubsystemBase {
   }
   
   public double getTargetSkew(){
-    target = result.getBestTarget();
-    return target.getSkew();
+    if (getHasTarget() == true){
+      target = result.getBestTarget();
+      return target.getSkew();
+    } else {
+      return 404;
+    }
+
   }
 
   public double getTargetYaw(){
-    target = result.getBestTarget();
-    return target.getYaw();
+    if (getHasTarget() == true){
+      target = result.getBestTarget();
+      return target.getYaw();
+    } else {
+      return 404;
+    }
+
   }
 
   public double getTargetPitch(){
-    target = result.getBestTarget();
-    return target.getPitch();
+    if (getHasTarget() == true){
+      target = result.getBestTarget();
+      return target.getPitch();
+    } else {
+      return 404;
+    }
+
   }
 
   public double targetDistance(){
-    target = result.getBestTarget();
-    return PhotonUtils.calculateDistanceToTargetMeters(Constants.CAMERA_HEIGHT_METERS, Constants.TARGET_HEIGHT_METERS, Constants.CAMERA_PITCH_RADIANS, Units.radiansToDegrees(target.getPitch()));
+    if (getHasTarget() == true){
+      target = result.getBestTarget();
+      return PhotonUtils.calculateDistanceToTargetMeters(Constants.CAMERA_HEIGHT_METERS, Constants.TARGET_HEIGHT_METERS, Constants.CAMERA_PITCH_RADIANS, Units.radiansToDegrees(target.getPitch()));
+    } else {
+      return 404;
+    }
+ 
   }
   
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     result = photonCamera.getLatestResult();
-    target = result.getBestTarget();
+    // target = result.getBestTarget();
   }
 }
