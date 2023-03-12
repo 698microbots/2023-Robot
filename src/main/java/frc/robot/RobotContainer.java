@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-// import frc.robot.subsystems.rasberryPiCamera;
+// import frc.robot.subsystems.RasberryPiCamera;
 
 
 /**
@@ -28,30 +28,34 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public LimeLightSubsystem LimeLightSubsystem = new LimeLightSubsystem();
-  public XboxController Xbox = new XboxController(0);
-  // public rasberryPiCamera rasberryPiCamera = new rasberryPiCamera();
+  public ArmSubsystem armSubsystem = new ArmSubsystem();
+  public XboxController Xbox = new XboxController(Constants.xBoxControllerid);
+  public XboxController Xbox2 = new XboxController(Constants.xBoxControllerid2);
+
+  // public RasberryPiCamera rasberryPiCamera = new RasberryPiCamera();
   //Intake
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public final JoystickButton Xbutton = new JoystickButton(Xbox, Constants.Xbox_Button_X);
   public final JoystickButton Ybutton = new JoystickButton(Xbox, Constants.Xbox_Button_Y);
+
   public final JoystickButton Abutton = new JoystickButton(Xbox, Constants.Xbox_Button_A);
   public final JoystickButton Bbutton = new JoystickButton(Xbox, Constants.Xbox_Button_B);
 
+  public final JoystickButton AButtonX2 = new JoystickButton(Xbox, Constants.Xbox_Button_AX2);
+
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
-  private final DriveTrain driveTrain = new DriveTrain();
+  public final DriveTrain driveTrain = new DriveTrain();
   public navXSubsystem navX = new navXSubsystem();
   
-  // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final XboxController xboxCon = new XboxController(Constants.xBoxControllerid);
-  private final XboxController flightStick = new XboxController(Constants.kflightStick);
+
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-    // driveTrain.setDefaultCommand(new XboxDrive(driveTrain, () -> xboxCon.getRightX(), () -> xboxCon.getLeftY()));
-    driveTrain.setDefaultCommand(new FlightstickDrive(driveTrain, () -> flightStick.getRawAxis(Constants.Flight_Stick_X), () -> flightStick.getRawAxis(Constants.Flight_Stick_Y), () -> flightStick.getRawAxis(Constants.Flight_Stick_Z)));
+    driveTrain.setDefaultCommand(new XboxDrive(driveTrain, () -> Xbox.getRightX(), () -> Xbox.getLeftY()));
+    armSubsystem.setDefaultCommand(new XboxArm(() -> Xbox2.getRightX(), armSubsystem));
     configureBindings();
   }
 
@@ -71,6 +75,7 @@ public class RobotContainer {
     Ybutton.toggleWhenPressed(new IntakeSwitch(intakeSubsystem, true));
 
 
+
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
   }
@@ -82,7 +87,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return new AutoTurn(driveTrain, navX, 90, 30000);
-    //new AutoBalancing(navX, driveTrain);
+    return new AutoBalancing(navX, driveTrain);
   }
 }

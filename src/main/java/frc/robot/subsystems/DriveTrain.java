@@ -4,8 +4,12 @@
 
 package frc.robot.subsystems;
 
+import java.lang.annotation.Target;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.fasterxml.jackson.annotation.JacksonInject.Value;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -89,7 +93,7 @@ public class DriveTrain extends SubsystemBase {
     BL.set(ControlMode.PercentOutput, speed);
   }
 
-  //Turn and Drive PIDs
+  // PIDs reset
   public void resetDrivePID(){
     driveTarget = 0;
     driveError = 0;
@@ -110,19 +114,6 @@ public class DriveTrain extends SubsystemBase {
     turnI = 0;
     turnD = 0;
     turnOutput = 0;
-  }
-
-  //setters
-  public void setTurnTarget(double turnTarget){
-    this.turnTarget = turnTarget;
-  }
-
-  public void setDriveTarget(double driveTarget){
-    this.driveTarget = driveTarget;
-  }
-
-  public void setBalanceTarget(double balanceTarget){
-    this.balanceTarget = balanceTarget;
   }
 
   //takes in sensor input to turn robot into the correct angle
@@ -148,6 +139,21 @@ public class DriveTrain extends SubsystemBase {
 
   }
 
+  public void resetEncoders(){
+    FR.setSelectedSensorPosition(0);
+    FL.setSelectedSensorPosition(0);
+    BR.setSelectedSensorPosition(0);
+    BL.setSelectedSensorPosition(0);
+
+  }
+
+
+  public void getEncoderPosition(){
+    FL.getActiveTrajectoryVelocity();
+  }  
+
+
+
     public void PIDdrive(double sensorInput, double limit) {
       driveError = driveTarget - sensorInput;
       driveP = driveError;
@@ -159,15 +165,12 @@ public class DriveTrain extends SubsystemBase {
       if(driveOutput > limit){
         driveOutput = limit;
       }
-
       if(driveOutput < -limit){
         driveOutput = -limit;
       }
 
       drivePrevError = driveError;
       prevDriveOutput = driveOutput;
-      //SmartDashboard.putNumber("PID Drive output:", driveOutput);
-
     }  
 
   public double getTurnOutput()
@@ -175,19 +178,6 @@ public class DriveTrain extends SubsystemBase {
     return turnOutput;
   }
 
-  //getters
-  public double getTurnError(){
-    return turnError;
-  }
-
-  public double getDriveError(){
-    return driveError;
-  }
-
-  public double getBalanceError(){
-    return balanceError;
-  }
-  
   //Balance PIDs
   public void PIDBalance(double sensorInput)
   {
@@ -199,11 +189,42 @@ public class DriveTrain extends SubsystemBase {
     balancePrevError = balanceError;
   }
 
-  public double getBalanceOutput()
-  {
+//getters
+  public double getBalanceOutput(){
     return balanceOutput;
   }
   
+  public double getDriveOutput(){
+    return driveOutput;
+  }
+
+  public double getDriveError(){
+    return driveError;
+  }
+
+  public double getTurnError(){
+    return turnError;
+  }
+
+  public double getFRid(){
+    return FR.getSelectedSensorPosition();
+  }
+  public double getFLid(){
+    return FL.getSelectedSensorPosition();
+  }
+  public double getBRid(){
+    return BR.getSelectedSensorPosition();
+  }
+  public double getBLid(){
+    return BL.getSelectedSensorPosition();
+  }
+  public void setDriveTarget(double encoderUnit){
+    driveTarget = encoderUnit;
+  }
+
+  public void setTurnTarget(double degrees){
+    turnTarget = degrees;
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

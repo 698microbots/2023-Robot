@@ -4,38 +4,37 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.navXSubsystem;
+import java.util.function.Supplier;
 
-public class AutoDrive extends CommandBase {
-  /** Creates a new AutoDrive. */
-  private final DriveTrain driveTrain;
-  private final navXSubsystem navX;
-  private double counter;
-  private final int millis;
-  public AutoDrive(DriveTrain driveTrain, navXSubsystem navX, double target, int millis) {
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.ArmSubsystem;
+
+public class XboxArm extends CommandBase {
+  /** Creates a new XboxArm. */
+  private final ArmSubsystem armSubsystem;
+  private final Supplier <Double> x_Supplier;
+  public XboxArm(Supplier<Double>  x_supplier,ArmSubsystem armSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.driveTrain = driveTrain;
-    this.navX = navX;
-    this.counter = 0;
-    this.millis = millis;
-    addRequirements(driveTrain);
-    addRequirements(navX);
+    this.armSubsystem = armSubsystem;
+    this.x_Supplier = x_supplier;
+    addRequirements(armSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    driveTrain.setLeftSpeed(0);
-    driveTrain.setRightSpeed(0);
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // driveTrain.PIDdrive(driveTrain.get, counter);
+    if (x_Supplier.get() <= 0.5){
+      armSubsystem.elevatorMove(x_Supplier.get());
+    } else {
+      armSubsystem.elevatorMove(0.5);
+    }
+
   }
+
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}
