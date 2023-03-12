@@ -47,15 +47,15 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    SmartDashboard.putBoolean("Has Target", m_robotContainer.rasberryPiCamera.getHasTarget());
-    SmartDashboard.putNumber("Fiducial ID", m_robotContainer.rasberryPiCamera.getaprilTagID());
+    // SmartDashboard.putBoolean("Has Target", m_robotContainer.rasberryPiCamera.getHasTarget());
+    // SmartDashboard.putNumber("Fiducial ID", m_robotContainer.rasberryPiCamera.getaprilTagID());
 
-    SmartDashboard.putNumber("Target Area", m_robotContainer.rasberryPiCamera.getTargetArea());
-    SmartDashboard.putNumber("Target Pose", m_robotContainer.rasberryPiCamera.getTargetPose());
-    SmartDashboard.putNumber("Target Yaw", m_robotContainer.rasberryPiCamera.getTargetYaw());
-    SmartDashboard.putNumber("Target Skew", m_robotContainer.rasberryPiCamera.getTargetSkew());
-    SmartDashboard.putNumber("Target Pitch", m_robotContainer.rasberryPiCamera.getTargetPitch());
-    SmartDashboard.putNumber("Target Distance", m_robotContainer.rasberryPiCamera.targetDistance());
+    // SmartDashboard.putNumber("Target Area", m_robotContainer.rasberryPiCamera.getTargetArea());
+    // SmartDashboard.putNumber("Target Pose", m_robotContainer.rasberryPiCamera.getTargetPose());
+    // SmartDashboard.putNumber("Target Yaw", m_robotContainer.rasberryPiCamera.getTargetYaw());
+    // SmartDashboard.putNumber("Target Skew", m_robotContainer.rasberryPiCamera.getTargetSkew());
+    // SmartDashboard.putNumber("Target Pitch", m_robotContainer.rasberryPiCamera.getTargetPitch());
+    // SmartDashboard.putNumber("Target Distance", m_robotContainer.rasberryPiCamera.targetDistance());
 
     SmartDashboard.putNumber("V Angle", m_robotContainer.LimeLightSubsystem.getV_angle());
     SmartDashboard.putNumber("H Angle", m_robotContainer.LimeLightSubsystem.getH_angle());
