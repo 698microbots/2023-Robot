@@ -120,23 +120,14 @@ public class DriveTrain extends SubsystemBase {
   public void PIDturn(double sensorInput){
     turnError = turnTarget - sensorInput;
     turnP = turnError;
-    if(turnError<Constants.IactZone){
-      turnI += turnError;
-    } else{
-      turnI=0;
-    }
 
     turnD = turnError - turnPrevError;
-    
-
 
     turnOutput = Constants.turnkP*turnP + Constants.turnkI*turnI + Constants.turnkD*turnD;
-    //SmartDashboard.putNumber("PID output:", turnOutput);
     turnPrevError = turnError;
-    // clamp output between -100% and 100%
-    // if(output >= 1) output = 1;
-    // if(output <= -1) output = -1;
-
+    //clamp output between -50% and 50%
+    if(turnOutput >= 0.5) turnOutput = 0.5;
+    if(turnOutput <= -0.5) turnOutput = -0.5;
   }
 
   public void resetEncoders(){
@@ -152,26 +143,24 @@ public class DriveTrain extends SubsystemBase {
     FL.getActiveTrajectoryVelocity();
   }  
 
+  public void PIDdrive(double sensorInput, double limit) {
+    driveError = driveTarget - sensorInput;
+    driveP = driveError;
+    driveI += driveError;
+    driveD = driveError - drivePrevError;
+    
+    
+    driveOutput = Constants.kP*driveP + Constants.kI*driveI + Constants.kD*driveD;
+    if(driveOutput > limit){
+      driveOutput = limit;
+    }
+    if(driveOutput < -limit){
+      driveOutput = -limit;
+    }
 
-
-    public void PIDdrive(double sensorInput, double limit) {
-      driveError = driveTarget - sensorInput;
-      driveP = driveError;
-      driveI += driveError;
-      driveD = driveError - drivePrevError;
-      
-      
-      driveOutput = Constants.kP*driveP + Constants.kI*driveI + Constants.kD*driveD;
-      if(driveOutput > limit){
-        driveOutput = limit;
-      }
-      if(driveOutput < -limit){
-        driveOutput = -limit;
-      }
-
-      drivePrevError = driveError;
-      prevDriveOutput = driveOutput;
-    }  
+    drivePrevError = driveError;
+    prevDriveOutput = driveOutput;
+  }  
 
   public double getTurnOutput()
   {
