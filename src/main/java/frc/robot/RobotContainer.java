@@ -13,6 +13,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -88,6 +89,17 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
     // return new AutoBalancing(navX, driveTrain);
-    return new AutoTurn(driveTrain, navX, 45, 30000);
+    // return new SequentialCommandGroup(
+    //   new SetPipeline(LimeLightSubsystem, 0),
+    //   new Wait(10000),
+    //   new SetPipeline(LimeLightSubsystem, 1),
+    //   new Wait(10000),
+    //   new SetPipeline(LimeLightSubsystem, 2)
+    // );
+    return new SequentialCommandGroup(
+      new AutoTurn(driveTrain, navX, 180, 2000),
+      new AutoTurn(driveTrain, navX, 0, 2000),
+      new AutoTurn(driveTrain, navX, -90, 2000)
+    );
   }
 }

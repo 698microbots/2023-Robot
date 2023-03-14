@@ -120,12 +120,14 @@ public class DriveTrain extends SubsystemBase {
   public void PIDturn(double sensorInput){
     turnError = turnTarget - sensorInput;
     turnP = turnError;
-    turnI += turnError;
+
     turnD = turnError - turnPrevError;
 
     turnOutput = Constants.turnkP*turnP + Constants.turnkI*turnI + Constants.turnkD*turnD;
-
     turnPrevError = turnError;
+    //clamp output between -50% and 50%
+    if(turnOutput >= 0.5) turnOutput = 0.5;
+    if(turnOutput <= -0.5) turnOutput = -0.5;
   }
 
   public void resetEncoders(){
@@ -135,7 +137,6 @@ public class DriveTrain extends SubsystemBase {
     BL.setSelectedSensorPosition(0);
 
   }
-
   public void PIDdrive(double sensorInput, double limit) {
     driveError = driveTarget - sensorInput;
     driveP = driveError;

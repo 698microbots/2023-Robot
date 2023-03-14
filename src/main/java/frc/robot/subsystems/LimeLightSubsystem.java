@@ -16,31 +16,51 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class LimeLightSubsystem extends SubsystemBase {
   /** Creates a new LimelightSubSystem. */
   private NetworkTable limeLight;
-  private NetworkTableEntry V_angle;
-  private NetworkTableEntry H_angle;
+  private NetworkTableEntry V_angle, H_angle, hasTargets, botPose, aprilID;
+  // private double[] botPose;
+
   private double zDistance;
   private double xDistance;
 
-  private NetworkTableEntry hasTargets;
   public LimeLightSubsystem() {
     limeLight = NetworkTableInstance.getDefault().getTable("limelight");
+    
     V_angle = limeLight.getEntry("ty");
     H_angle = limeLight.getEntry("tx");
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("<variablename>").getDoubleArray(new double[6]);
+    hasTargets = limeLight.getEntry("tv");
+    botPose = limeLight.getEntry("botPose");
+    aprilID = limeLight.getEntry("tid");
+    
 
     zDistance = -1;//this value is for if there's an error, makes sense that distance will never be negative
     xDistance = -1;//the distance in the x direction offset from center of robot.
 
   }
   
+  public double hasTargets(){
+    return hasTargets.getDouble(0);
+  }
   public double getV_angle(){
     return V_angle.getDouble(0);
   }
-
   public double getH_angle(){
     return H_angle.getDouble(0);
   }
-  
+  public double[] getBotPose(){
+    return botPose.getDoubleArray(new double[6]);
+    
+  }
+  public double getaprilTagID(){
+    return aprilID.getDouble(0);
+
+  }
+
+   public void setPipeline(int pipe){
+    limeLight.getEntry("pipeline").setNumber(pipe); 
+   }
+   //0: AprilTag
+   //1: Reflective
+   //2: Zoomed In
   
   public double calculateZdistance(){//Z direction is foward from the robot
     zDistance = ((Constants.goalHeight-Constants.limeLightHeight)/(Math.tan(Math.toRadians(getV_angle()+Constants.limeLightInitAngle))));
