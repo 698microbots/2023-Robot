@@ -106,7 +106,7 @@ public final class Constants {
  public static final int yLeftidX2 = 1;
 
   // turn PID constants
-  public static final double turnkP = 0.1;
+  public static final double turnkP = 0.003;
   public static final double turnkI = 0.00;
   public static final double turnkD = 0;
   public static final double maximumDriveError = 1000.0;

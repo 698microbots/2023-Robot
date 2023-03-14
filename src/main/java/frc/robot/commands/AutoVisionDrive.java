@@ -42,7 +42,7 @@ public class AutoVisionDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.PIDturn(limelight.yaw);
+    driveTrain.PIDturn(limelight.getH_angle());
     driveTrain.setLeftSpeed(driveTrain.getTurnOutput());
     driveTrain.setRightSpeed(driveTrain.getTurnOutput());
     if(navX.getPitch() > Constants.levelConstant){

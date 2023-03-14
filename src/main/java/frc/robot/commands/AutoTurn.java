@@ -44,11 +44,11 @@ public class AutoTurn extends CommandBase {
     driveTrain.PIDturn(navX.getYaw());
     driveTrain.setLeftSpeed(-driveTrain.getTurnOutput());
     driveTrain.setRightSpeed(driveTrain.getTurnOutput());
-    if(Math.abs(driveTrain.getTurnError())<3){
-      errorCounter++;
-    }else{
-      errorCounter = 0;
-    }
+    // if(Math.abs(driveTrain.getTurnError())<3){
+    //   errorCounter++;
+    // }else{
+    //   errorCounter = 0;
+    // }
     counter++;
   }
 
