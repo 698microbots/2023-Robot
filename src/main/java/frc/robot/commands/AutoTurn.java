@@ -41,6 +41,7 @@ public class AutoTurn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
     driveTrain.PIDturn(navX.getYaw());
     driveTrain.setLeftSpeed(-driveTrain.getTurnOutput());
     driveTrain.setRightSpeed(driveTrain.getTurnOutput());
@@ -63,7 +64,7 @@ public class AutoTurn extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(errorCounter>10 || counter > timeout/20){
+    if(errorCounter>20 || counter > timeout/20){ //was counter > timeout/20
       return true;
     }else{
     return false;

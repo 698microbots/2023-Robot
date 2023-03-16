@@ -106,9 +106,9 @@ public final class Constants {
  public static final int yLeftidX2 = 1;
 
   // turn PID constants
-  public static final double turnkP = 0.1;
-  public static final double turnkI = 0.00;
-  public static final double turnkD = 0;
+  public static final double turnkP = 0.0035; //0.01
+  public static final double turnkI = 0.0; //0.00
+  public static final double turnkD = 0; // 0
   public static final double maximumDriveError = 1000.0;
 
   // balance PID constants
@@ -126,7 +126,7 @@ public final class Constants {
   public static final double kI = 0.0;
   public static final double kD = 0;
 
-  public static final double IactZone = 0.5;
+  public static final double IactZone = 0;//was 0.5
 
   //pi constants
   public static final double CAMERA_HEIGHT_METERS = 0;
@@ -137,6 +137,6 @@ public final class Constants {
   public static final double goalHeight = 107; //what are the units????
   public static final double limeLightHeight = 32;
   public static final double limeLightInitAngle = 0;
-
+  public static final double cameraOffset = 0; // degrees horizontal angle
 
 }

@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -21,6 +22,8 @@ public class DriveTrain extends SubsystemBase {
   private final TalonFX FL = new TalonFX(Constants.FLid);
   private final TalonFX BL = new TalonFX(Constants.BLid);
   
+  private double velocity;
+
   //PIDturn variables
   private double turnTarget;
   private double turnError;
@@ -120,11 +123,7 @@ public class DriveTrain extends SubsystemBase {
   public void PIDturn(double sensorInput){
     turnError = turnTarget - sensorInput;
     turnP = turnError;
-    if(turnError<Constants.IactZone){
-      turnI += turnError;
-    } else{
-      turnI=0;
-    }
+    turnI += turnError;
 
     turnD = turnError - turnPrevError;
     
@@ -148,11 +147,17 @@ public class DriveTrain extends SubsystemBase {
   }
 
 
-  public void getEncoderPosition(){
-    FL.getActiveTrajectoryVelocity();
-  }  
+  public double getEncoderPosition(){
+    return (-(FR.getSelectedSensorPosition()+BR.getSelectedSensorPosition()+FL.getSelectedSensorPosition()+BL.getSelectedSensorPosition())/4);
+  }
 
+  public double getRightEncoders(){
+    return ((FR.getSelectedSensorPosition() + BR.getSelectedSensorPosition())/2);
+  }
 
+  public double getLeftEncoders(){
+    return ((FL.getSelectedSensorPosition() + BL.getSelectedSensorPosition())/2);
+  }
 
     public void PIDdrive(double sensorInput, double limit) {
       driveError = driveTarget - sensorInput;
@@ -194,6 +199,10 @@ public class DriveTrain extends SubsystemBase {
     return balanceOutput;
   }
   
+  public double getVelocity(){
+    velocity = (FR.getActiveTrajectoryVelocity() + FL.getActiveTrajectoryVelocity() + BR.getActiveTrajectoryVelocity() + BL.getActiveTrajectoryVelocity()) / 4;
+    return velocity;
+  }
   public double getDriveOutput(){
     return driveOutput;
   }
@@ -221,7 +230,10 @@ public class DriveTrain extends SubsystemBase {
   public void setDriveTarget(double encoderUnit){
     driveTarget = encoderUnit;
   }
-
+  
+  public double getTurnTarget(){
+    return turnTarget;
+  }
   public void setTurnTarget(double degrees){
     turnTarget = degrees;
   }
