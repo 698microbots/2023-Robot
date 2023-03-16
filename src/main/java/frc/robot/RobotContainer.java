@@ -109,7 +109,17 @@ public class RobotContainer {
 
     // );
 
+
+    // return new SequentialCommandGroup(
+    //   new SetPipeline(LimeLightSubsystem, 0),
+    //   new Wait(10000),
+    //   new SetPipeline(LimeLightSubsystem, 1),
+    //   new Wait(10000),
+    //   new SetPipeline(LimeLightSubsystem, 2)
+    // );
     return new SequentialCommandGroup(
-      new EncoderAutoDrive(driveTrain, navX, 20000)
+      new AutoTurn(driveTrain, navX, 180, 2000),
+      new AutoTurn(driveTrain, navX, 0, 2000),
+      new AutoTurn(driveTrain, navX, -90, 2000)
     );
   }}
