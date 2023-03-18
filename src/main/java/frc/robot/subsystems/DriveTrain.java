@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.fasterxml.jackson.annotation.JacksonInject.Value;
 
@@ -56,6 +57,10 @@ public class DriveTrain extends SubsystemBase {
     BR.setInverted(false);
     FL.setInverted(true);
     BL.setInverted(true);
+    FR.setNeutralMode(NeutralMode.Coast);
+    BR.setNeutralMode(NeutralMode.Coast);
+    FL.setNeutralMode(NeutralMode.Coast);
+    BL.setNeutralMode(NeutralMode.Coast);
         //turn variables
         turnTarget = 0;
         turnError = 0;
@@ -126,8 +131,8 @@ public class DriveTrain extends SubsystemBase {
     turnOutput = Constants.turnkP*turnP + Constants.turnkI*turnI + Constants.turnkD*turnD;
     turnPrevError = turnError;
     //clamp output between -50% and 50%
-    if(turnOutput >= 0.5) turnOutput = 0.5;
-    if(turnOutput <= -0.5) turnOutput = -0.5;
+    if(turnOutput >= 0.6) turnOutput = 0.6;
+    if(turnOutput <= -0.6) turnOutput = -0.6;
   }
 
   public void resetEncoders(){
@@ -187,6 +192,10 @@ public class DriveTrain extends SubsystemBase {
 
   public double getTurnError(){
     return turnError;
+  }
+
+  public double getTurnPrevError(){
+    return turnPrevError;
   }
 
   public double getFRid(){

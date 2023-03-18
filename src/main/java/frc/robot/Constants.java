@@ -26,8 +26,6 @@ public final class Constants {
   public static final int Xbox_LT = 2;
   public static final int Xbox_RT = 3;
 
-
-
   //We need some flight stick constants I guess
   //Controller Button IDs CONTROLLER 1 (port 0)
   public static final int Xbox_Button_A = 1;
@@ -39,27 +37,28 @@ public final class Constants {
   public static final int Xbox_Button_LS = 9;
   public static final int Xbox_Button_RS = 10;
   
-    //Controller Button IDs FOR CONTROLLER 2 (port 1)
-    public static final int Xbox_Button_AX2 = 1;
-    public static final int Xbox_Button_BX2 = 2;
-    public static final int Xbox_Button_XX2 = 3;
-    public static final int Xbox_Button_YX2 = 4;
-    public static final int Xbox_Button_LBX2 = 5;
-    public static final int Xbox_Button_RBX2 = 6;
-    public static final int Xbox_Button_LSX2 = 9;
-    public static final int Xbox_Button_RSX2 = 10;
+  //Controller Button IDs FOR CONTROLLER 2 (port 1)
+  public static final int Xbox_Button_AX2 = 1;
+  public static final int Xbox_Button_BX2 = 2;
+  public static final int Xbox_Button_XX2 = 3;
+  public static final int Xbox_Button_YX2 = 4;
+  public static final int Xbox_Button_LBX2 = 5;
+  public static final int Xbox_Button_RBX2 = 6;
+  public static final int Xbox_Button_LSX2 = 9;
+  public static final int Xbox_Button_RSX2 = 10;
 
-    public static final int XBOX_R_XAXISX2 = 4;
-    public static final int XBOX_R_YAXISX2 = 5;
-    public static final int XBOX_L_XAXISX2 = 0;
-    public static final int XBOX_L_YAXISX2 = 1;
-    public static final int XBOX_pinX2 = 0;
-    public static final int Xbox_LTX2 = 2;
-    public static final int Xbox_RTX2 = 3;
+  public static final int XBOX_R_XAXISX2 = 4;
+  public static final int XBOX_R_YAXISX2 = 5;
+  public static final int XBOX_L_XAXISX2 = 0;
+  public static final int XBOX_L_YAXISX2 = 1;
+  public static final int XBOX_pinX2 = 0;
+  public static final int Xbox_LTX2 = 2;
+  public static final int Xbox_RTX2 = 3;
+  
   //Also some motor id constant for the intake
+
   public static final int deviceIdIntakeM1 = 9;
   public static final int deviceIdIntakeM2 = 10;
-
   public static final double intakeMotorSpeed = .4;
   public static final int ampSpike= 8;
   public static final int logitechPort6 = 6;
@@ -68,12 +67,6 @@ public final class Constants {
 
 
   public static final int kDriverControllerPort = 0;
-
-  
-  public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
-
-  }
 
   public static final int talonArmPivot = 1;
   public static final int talonLift1 = 2;
@@ -107,8 +100,8 @@ public final class Constants {
 
   // turn PID constants
   public static final double turnkP = 0.003;
-  public static final double turnkI = 0.00005;
-  public static final double turnkD = 0.01;
+  public static final double turnkI = 0.0128;
+  public static final double turnkD = 0;
   public static final double maximumDriveError = 1000.0;
 
   // balance PID constants

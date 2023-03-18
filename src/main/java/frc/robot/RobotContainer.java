@@ -9,7 +9,6 @@ import frc.robot.subsystems.LimeLightSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -72,8 +71,8 @@ public class RobotContainer {
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
-    Xbutton.toggleWhenPressed(new IntakeSwitch(intakeSubsystem, false));
-    Ybutton.toggleWhenPressed(new IntakeSwitch(intakeSubsystem, true));
+    // Xbutton.toggleWhenPressed(new IntakeSwitch(intakeSubsystem, false));
+    // Ybutton.toggleWhenPressed(new IntakeSwitch(intakeSubsystem, true));
 
 
 
