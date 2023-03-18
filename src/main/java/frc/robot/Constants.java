@@ -75,10 +75,10 @@ public final class Constants {
   public static final int armMotor = 0;
 
   //DriveTrain Motor ID's
-  public static final int FRid = 0;
-  public static final int BLid = 1;
-  public static final int FLid = 3;
-  public static final int BRid = 6;
+  public static final int FRid = 2;
+  public static final int BLid = 3;
+  public static final int FLid = 0;
+  public static final int BRid = 5;
 
   //DriveTrain Constants
   public static final double turnAdjustment = 0.5;

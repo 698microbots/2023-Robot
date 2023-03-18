@@ -125,14 +125,10 @@ public class DriveTrain extends SubsystemBase {
   public void PIDturn(double sensorInput){
     turnError = turnTarget - sensorInput;
     turnP = turnError;
-
     turnD = turnError - turnPrevError;
 
     turnOutput = Constants.turnkP*turnP + Constants.turnkI*turnI + Constants.turnkD*turnD;
     turnPrevError = turnError;
-    //clamp output between -50% and 50%
-    if(turnOutput >= 0.6) turnOutput = 0.6;
-    if(turnOutput <= -0.6) turnOutput = -0.6;
   }
 
   public void resetEncoders(){
