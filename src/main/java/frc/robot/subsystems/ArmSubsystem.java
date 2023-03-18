@@ -4,18 +4,21 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.CAN;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.revrobotics.CANSparkMax;
+
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class ArmSubsystem extends SubsystemBase {
   /** Creates a new ArmSubsystem. */
-  private final TalonFX armMotor = new TalonFX(Constants.armMotor);
+  private final CANSparkMax armMotor = new CANSparkMax(Constants.armMotorID, MotorType.kBrushless);
   private double armTarget;
   private double armError;
   private double armPrevError;
@@ -28,7 +31,6 @@ public class ArmSubsystem extends SubsystemBase {
 
   public ArmSubsystem() 
   {
-    armMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     armTarget = 0;
     armError = 0;
     armPrevError = 0;
@@ -41,7 +43,16 @@ public class ArmSubsystem extends SubsystemBase {
 
   //setters
   public void elevatorMove(double speed){
-    armMotor.set(ControlMode.PercentOutput, speed);
+    armMotor.set(speed);
+  }
+
+  public double getArmPosition(){
+    return armMotor.getEncoder().getPosition();
+  }
+
+  public double getArmSpeed(){
+    return armMotor.get();
+
   }
 
   public void resetArmPID(){

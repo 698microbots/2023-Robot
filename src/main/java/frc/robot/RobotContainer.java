@@ -74,6 +74,7 @@ public class RobotContainer {
 
     Xbutton.toggleWhenPressed(new IntakeSwitch(intakeSubsystem, false));
     Ybutton.toggleWhenPressed(new IntakeSwitch(intakeSubsystem, true));
+    Abutton.whenPressed(new ResetEncoders(driveTrain));
 
 
 
@@ -103,11 +104,6 @@ public class RobotContainer {
     // );
 
     
-    // return new SequentialCommandGroup(
-
-    //   new AutoTurn(driveTrain, navX, 180, 10000)
-
-    // );
 
 
     // return new SequentialCommandGroup(
@@ -117,9 +113,17 @@ public class RobotContainer {
     //   new Wait(10000),
     //   new SetPipeline(LimeLightSubsystem, 2)
     // );
+    
+    // return new SequentialCommandGroup(
+    //   new AutoTurn(driveTrain, navX, 180, 2000),
+    //   new AutoTurn(driveTrain, navX, 0, 2000),
+    //   new AutoTurn(driveTrain, navX, -90, 2000)
+    // );
+
     return new SequentialCommandGroup(
-      new AutoTurn(driveTrain, navX, 180, 2000),
-      new AutoTurn(driveTrain, navX, 0, 2000),
-      new AutoTurn(driveTrain, navX, -90, 2000)
+      new EncoderAutoDrive(driveTrain, navX, 30000)
     );
+    // return new SequentialCommandGroup(
+    //   new testRightLeftMotor(driveTrain)
+    // );
   }}

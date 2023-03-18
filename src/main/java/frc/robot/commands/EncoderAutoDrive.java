@@ -17,6 +17,8 @@ public class EncoderAutoDrive extends CommandBase {
   private int counter;
   private final double target;
   private final navXSubsystem navx;
+  private double absRightEnc = 0;
+  private double absLeftEnc = 0;
   public EncoderAutoDrive(DriveTrain driveTrain, navXSubsystem navx, double target) { //target in inches
     this.driveTrain = driveTrain;
     this.navx = navx;
@@ -43,22 +45,36 @@ public class EncoderAutoDrive extends CommandBase {
   @Override
   public void execute() {
     // SmartDashboard.putNumber("turn target", driveTrain.getTurnTarget());
-    driveTrain.PIDdrive(driveTrain.getEncoderPosition(), 1);
+    System.out.println("turn target is" + driveTrain.getTurnTarget());
+    driveTrain.PIDdrive(driveTrain.getEncoderPosition(), .8);
     driveTrain.PIDturn(navx.getYaw());
-    
-    if (Math.abs(driveTrain.getRightEncoders()) > 1000-Math.abs(driveTrain.getLeftEncoders()) && Math.abs(driveTrain.getRightEncoders()) < 1000+Math.abs(driveTrain.getLeftEncoders())){
-    driveTrain.setRightSpeed(driveTrain.getDriveOutput());
-    driveTrain.setLeftSpeed(driveTrain.getDriveOutput());    
-    } else {
-    driveTrain.setRightSpeed(driveTrain.getTurnOutput());
-    driveTrain.setLeftSpeed(driveTrain.getTurnOutput());
-    }
-    // driveTrain.setRightSpeed(driveTrain.getDriveOutput());
-    // driveTrain.setLeftSpeed(driveTrain.getDriveOutput());
+    absRightEnc = Math.abs(driveTrain.getRightEncoders());
+    absLeftEnc = Math.abs(driveTrain.getLeftEncoders());
+
+    System.out.println("DriveOutput is " + driveTrain.getDriveOutput());
+    System.out.println("TurnOutput is " + driveTrain.getTurnOutput());
+
+    System.out.println(driveTrain.getDriveError());
+
+    // if (absRightEnc <= absLeftEnc + 1000 && absRightEnc >= absLeftEnc - 1000){
+      // System.out.println("condition met");
+      driveTrain.setRightSpeed(driveTrain.getDriveOutput() + driveTrain.getTurnOutput());
+      driveTrain.setLeftSpeed(driveTrain.getDriveOutput() - driveTrain.getTurnOutput());   
+    // } else {
     // driveTrain.setRightSpeed(driveTrain.getTurnOutput());
     // driveTrain.setLeftSpeed(-driveTrain.getTurnOutput());
+    // System.out.println("condition not met");
+    // }
 
-    if(driveTrain.getDriveError() < Constants.maximumDriveError){
+
+
+
+
+
+    // driveTrain.setRightSpeed(driveTrain.getDriveOutput() + driveTrain.getTurnOutput());
+    // driveTrain.setLeftSpeed(driveTrain.getDriveOutput() - driveTrain.getTurnOutput());
+
+    if(Math.abs(driveTrain.getDriveError()) < Constants.maximumDriveError){
       counter++;
     }else{
       counter = 0;
@@ -80,5 +96,6 @@ public class EncoderAutoDrive extends CommandBase {
     }else{
       return false;
     }
+
   }
 }

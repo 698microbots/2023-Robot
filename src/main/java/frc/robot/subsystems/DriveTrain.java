@@ -6,9 +6,11 @@ package frc.robot.subsystems;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
+import java.sql.Blob;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.fasterxml.jackson.annotation.JacksonInject.Value;
 
@@ -56,9 +58,15 @@ public class DriveTrain extends SubsystemBase {
 
   public DriveTrain() {
     FR.setInverted(false);
-    BR.setInverted(false);
-    FL.setInverted(true);
-    BL.setInverted(true);
+    BR.setInverted(true);
+    FL.setInverted(false);
+    BL.setInverted(false);
+
+    FR.setNeutralMode(NeutralMode.Coast);
+    BR.setNeutralMode(NeutralMode.Coast);
+    BL.setNeutralMode(NeutralMode.Coast);
+    FL.setNeutralMode(NeutralMode.Coast);
+
         //turn variables
         turnTarget = 0;
         turnError = 0;
@@ -129,8 +137,6 @@ public class DriveTrain extends SubsystemBase {
     turnOutput = Constants.turnkP*turnP + Constants.turnkI*turnI + Constants.turnkD*turnD;
     turnPrevError = turnError;
     //clamp output between -50% and 50%
-    if(turnOutput >= 0.5) turnOutput = 0.5;
-    if(turnOutput <= -0.5) turnOutput = -0.5;
   }
 
   public void resetEncoders(){
@@ -172,6 +178,25 @@ public class DriveTrain extends SubsystemBase {
       drivePrevError = driveError;
       prevDriveOutput = driveOutput;
     }  
+
+    // public void PIDdriveAndTurn(double encoderSensorInput, double speedLimit, double targetAngle, double currentAngle) {
+    //   driveError = driveTarget - encoderSensorInput;
+    //   driveP = driveError;
+    //   driveI += driveError;
+    //   driveD = driveError - drivePrevError;
+      
+      
+    //   driveOutput = Constants.kP*driveP + Constants.kI*driveI + Constants.kD*driveD;
+    //   if(driveOutput > speedLimit){
+    //     driveOutput = speedLimit;
+    //   }
+    //   if(driveOutput < -speedLimit){
+    //     driveOutput = -speedLimit;
+    //   }
+
+    //   drivePrevError = driveError;
+    //   prevDriveOutput = driveOutput;
+    // }  
 
   public double getTurnOutput()
   {
@@ -231,6 +256,20 @@ public class DriveTrain extends SubsystemBase {
   }
   public void setTurnTarget(double degrees){
     turnTarget = degrees;
+  }
+
+  public void setMotorsCoast(){
+    FR.setNeutralMode(NeutralMode.Coast);
+    BR.setNeutralMode(NeutralMode.Coast);
+    BL.setNeutralMode(NeutralMode.Coast);
+    FL.setNeutralMode(NeutralMode.Coast);
+  }
+
+  public void setMotorsLocked(){
+    FR.setNeutralMode(NeutralMode.Brake);
+    BR.setNeutralMode(NeutralMode.Brake);
+    FL.setNeutralMode(NeutralMode.Brake);
+    BL.setNeutralMode(NeutralMode.Brake);
   }
   @Override
   public void periodic() {
