@@ -44,14 +44,8 @@ public class AutoTurn extends CommandBase {
   @Override
   public void execute() {
     driveTrain.PIDturn(navX.getYaw());
-    
-    driveTrain.setLeftSpeed(-driveTrain.getTurnOutput());
-    driveTrain.setRightSpeed(driveTrain.getTurnOutput());
-    // if(Math.abs(driveTrain.getTurnError())<3){
-    //   errorCounter++;
-    // }else{
-    //   errorCounter = 0;
-    // }
+    driveTrain.setLeftSpeed(-(driveTrain.getTurnOutput()-(driveTrain.getTurnOutput() - driveTrain.getTurnPrevOutput())));
+    driveTrain.setRightSpeed(driveTrain.getTurnOutput()-(driveTrain.getTurnOutput() - driveTrain.getTurnPrevOutput()));
     counter++;
   }
 

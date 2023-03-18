@@ -30,6 +30,7 @@ public class DriveTrain extends SubsystemBase {
   private double turnI;
   private double turnD;
   private double turnOutput;
+  private double turnPrevOutput;
   
 
   //PIDdrive variables
@@ -41,7 +42,7 @@ public class DriveTrain extends SubsystemBase {
   private double driveD;
   private double driveOutput;
   private double potDriveOutput;
-  private double prevDriveOutput;
+  private double drivePrevOutput;
 
   //BalancePID variables
   private double balanceTarget;
@@ -73,12 +74,12 @@ public class DriveTrain extends SubsystemBase {
         driveTarget = 0;
         driveError = 0;
         drivePrevError = 0;
+        drivePrevOutput = 0;
         driveP = 0;
         driveI = 0;
         driveD = 0;
         driveOutput = 0;
         potDriveOutput = 0;
-        prevDriveOutput = 0;
         //BalancePID variables
         balanceTarget = 0;
         balanceError = 0;
@@ -108,7 +109,7 @@ public class DriveTrain extends SubsystemBase {
     driveD = 0;
     driveOutput = 0;
     potDriveOutput = 0;
-    prevDriveOutput = 0;
+    drivePrevOutput = 0;
   }
 
   public void resetTurnPID(){
@@ -129,6 +130,7 @@ public class DriveTrain extends SubsystemBase {
 
     turnOutput = Constants.turnkP*turnP + Constants.turnkI*turnI + Constants.turnkD*turnD;
     turnPrevError = turnError;
+    turnPrevOutput = turnOutput;
   }
 
   public void resetEncoders(){
@@ -144,8 +146,7 @@ public class DriveTrain extends SubsystemBase {
     driveI += driveError;
     driveD = driveError - drivePrevError;
     
-    
-    driveOutput = Constants.kP*driveP + Constants.kI*driveI + Constants.kD*driveD;
+    driveOutput = (Constants.kP*driveP + Constants.kI*driveI + Constants.kD*driveD);
     if(driveOutput > limit){
       driveOutput = limit;
     }
@@ -154,7 +155,7 @@ public class DriveTrain extends SubsystemBase {
     }
 
     drivePrevError = driveError;
-    prevDriveOutput = driveOutput;
+    drivePrevOutput = driveOutput;
   }  
 
   public double getTurnOutput()
@@ -194,7 +195,10 @@ public class DriveTrain extends SubsystemBase {
     return turnPrevError;
   }
 
-  public double getFRid(){
+  public double getTurnPrevOutput(){
+    return turnPrevOutput;
+  }
+  public double getFRid(){//actual bot is negative since the gear box was mounted upside down.
     return FR.getSelectedSensorPosition();
   }
   public double getFLid(){
@@ -206,10 +210,15 @@ public class DriveTrain extends SubsystemBase {
   public double getBLid(){
     return BL.getSelectedSensorPosition();
   }
+  public double getAveragePosition(){
+    return (getFRid()+getFLid()+getBRid()+getBLid())/4;
+  }
+  public double getDrivePrevOutput(){
+    return drivePrevOutput;
+  }
   public void setDriveTarget(double encoderUnit){
     driveTarget = encoderUnit;
   }
-
   public void setTurnTarget(double degrees){
     turnTarget = degrees;
   }
