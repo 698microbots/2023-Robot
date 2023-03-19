@@ -54,7 +54,6 @@ public class EncoderAutoDrive extends CommandBase {
     System.out.println("DriveOutput is " + driveTrain.getDriveOutput());
     System.out.println("TurnOutput is " + driveTrain.getTurnOutput());
 
-    System.out.println(driveTrain.getDriveError());
 
     // if (absRightEnc <= absLeftEnc + 1000 && absRightEnc >= absLeftEnc - 1000){
       // System.out.println("condition met");
