@@ -167,7 +167,7 @@ public class DriveTrain extends SubsystemBase {
       driveD = driveError - drivePrevError;
       
       
-      driveOutput = Constants.kP*driveP + Constants.kI*driveI + Constants.kD*driveD;
+      driveOutput = Constants.kDriveP*driveP + Constants.kDriveI*driveI + Constants.kDriveD*driveD;
       if(driveOutput > limit){
         driveOutput = limit;
       }

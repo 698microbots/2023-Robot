@@ -42,7 +42,7 @@ public class RobotContainer {
   public final JoystickButton Abutton = new JoystickButton(Xbox, Constants.Xbox_Button_A);
   public final JoystickButton Bbutton = new JoystickButton(Xbox, Constants.Xbox_Button_B);
 
-  public final JoystickButton AButtonX2 = new JoystickButton(Xbox, Constants.Xbox_Button_AX2);
+  public final JoystickButton AbuttonX2 = new JoystickButton(Xbox2, Constants.Xbox_Button_AX2);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
@@ -74,7 +74,7 @@ public class RobotContainer {
 
     Xbutton.toggleWhenPressed(new IntakeSwitch(intakeSubsystem, false));
     Ybutton.toggleWhenPressed(new IntakeSwitch(intakeSubsystem, true));
-    Abutton.whenPressed(new ResetEncoders(driveTrain));
+    AbuttonX2.whenPressed(new ResetEncoders(driveTrain, armSubsystem));
 
 
 
@@ -90,14 +90,14 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
     // return new AutoBalancing(navX, driveTrain);
-  //   return new SequentialCommandGroup(
-  //     new SetPipeline(LimeLightSubsystem, 0),
-  //     new Wait(10000),
-  //     new SetPipeline(LimeLightSubsystem, 1),
-  //     new Wait(10000),
-  //     new SetPipeline(LimeLightSubsystem, 2)
-  //   );
-  // }
+    return new SequentialCommandGroup(
+      new SetPipeline(LimeLightSubsystem, 0),
+      new Wait(10000),
+      new SetPipeline(LimeLightSubsystem, 1),
+      new Wait(10000),
+      new SetPipeline(LimeLightSubsystem, 2)
+    );
+  }
 
     // return new SequentialCommandGroup(
     //   new AutoVisionPitch(driveTrain, LimeLightSubsystem, navX, 0.5)
@@ -120,10 +120,10 @@ public class RobotContainer {
     //   new AutoTurn(driveTrain, navX, -90, 2000)
     // );
 
-    return new SequentialCommandGroup(
-      new EncoderAutoDrive(driveTrain, navX, 30000)
-    );
+    // return new SequentialCommandGroup(
+    //   new EncoderAutoDrive(driveTrain, navX, 30000)
+    // );
     // return new SequentialCommandGroup(
     //   new testRightLeftMotor(driveTrain)
     // );
-  }}
+  }

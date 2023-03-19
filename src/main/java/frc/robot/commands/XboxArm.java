@@ -7,6 +7,7 @@ package frc.robot.commands;
 import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.ArmSubsystem;
 
 public class XboxArm extends CommandBase {
@@ -27,10 +28,12 @@ public class XboxArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (Math.abs(x_Supplier.get()) <= 0.5){
-      armSubsystem.elevatorMove(x_Supplier.get());
-    } else {
-      armSubsystem.elevatorMove(0.5);
+    if (armSubsystem.getArmPosition() >= Constants.armBackEncoderLimit && armSubsystem.getArmPosition() <= Constants.armFrontEncoderLimit){
+      if (Math.abs(x_Supplier.get()) <= 0.5){
+        armSubsystem.armMove(x_Supplier.get());
+      } else {
+        armSubsystem.armMove(0);
+      }
     }
 
   }
@@ -38,7 +41,7 @@ public class XboxArm extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    
+    armSubsystem.armMove(0);
   }
 
   // Returns true when the command should end.

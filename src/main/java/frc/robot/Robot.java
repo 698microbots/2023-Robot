@@ -69,6 +69,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Right Encoder avg", m_robotContainer.driveTrain.getRightEncoders());
     SmartDashboard.putNumber("Left Encoder avg", m_robotContainer.driveTrain.getLeftEncoders());
     SmartDashboard.putBoolean("navx connected", m_robotContainer.navX.isConnected());
+    SmartDashboard.putNumber("Arm Encoders", m_robotContainer.armSubsystem.getArmPosition());
 
   }
 

@@ -63,6 +63,7 @@ public final class Constants {
   //Also some motor id constant for the intake
   public static final int deviceIdIntakeM1 = 9;
   public static final int deviceIdIntakeM2 = 10;
+  public static final int intakeGearRatio = 5;
 
   public static final double intakeMotorSpeed = .4;
   public static final int ampSpike= 8;
@@ -78,12 +79,18 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
 
   }
-
+  //arm Constants
   public static final int talonArmPivot = 1;
   public static final int talonLift1 = 2;
   public static final int talonLift2 = 3;
   public static final int extensionMotorID = 0;
   public static final int armMotorID = 0;
+  public static final double armFrontEncoderLimit = 0;
+  public static final double armBackEncoderLimit = 0;
+  public static final double kArmP = 0;
+  public static final double kArmI = 0;
+  public static final double kArmD = 0;
+  public static final double armGearRatio = 75;// 75:1
 
   //DriveTrain Motor ID's
   public static final int FRid = 0;
@@ -125,10 +132,10 @@ public final class Constants {
   //public static final int kTimeoutMs = 20;
   public static final double driveAdjustment = 0.85;
   public static final int kPIDLoopIdx = 0;//run primary loop
-  public static final double kF = 0;
-  public static final double kP = 0.00005;
-  public static final double kI = 0.0;
-  public static final double kD = 0;
+  public static final double kDriveF = 0;
+  public static final double kDriveP = 0.00005;
+  public static final double kDriveI = 0.0;
+  public static final double kDriveD = 0;
 
   public static final double IactZone = 0;//was 0.5
 
