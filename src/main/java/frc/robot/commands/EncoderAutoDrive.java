@@ -19,7 +19,7 @@ public class EncoderAutoDrive extends CommandBase {
     this.driveTrain = driveTrain;
     this.navX = navX;
     counter = 0;
-    this.target = target;
+    this.target = -target;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
   }
@@ -60,7 +60,7 @@ public class EncoderAutoDrive extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(counter > 10){
+    if(counter > 100000){
       return true;
     }else{
       return false;

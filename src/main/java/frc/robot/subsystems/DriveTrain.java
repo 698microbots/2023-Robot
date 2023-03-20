@@ -81,7 +81,7 @@ public class DriveTrain extends SubsystemBase {
         driveOutput = 0;
         potDriveOutput = 0;
         //BalancePID variables
-        balanceTarget = 0;
+        balanceTarget = Constants.balanceTarget;
         balanceError = 0;
         balancePrevError = 0;
         balanceP = 0;

@@ -75,14 +75,14 @@ public final class Constants {
   public static final int armMotor = 0;
 
   //DriveTrain Motor ID's
-  // public static final int FRid = 2;
-  // public static final int BLid = 3;
-  // public static final int FLid = 0;
-  // public static final int BRid = 5;
-  public static final int FRid = 0;
-  public static final int BLid = 1;
-  public static final int FLid = 3;
-  public static final int BRid = 6;
+  public static final int FRid = 2;
+  public static final int BLid = 3;
+  public static final int FLid = 0;
+  public static final int BRid = 5;
+  // public static final int FRid = 0;
+  // public static final int BLid = 1;
+  // public static final int FLid = 3;
+  // public static final int BRid = 6;
 
   //DriveTrain Constants
   public static final double turnAdjustment = 0.5;
@@ -103,13 +103,13 @@ public final class Constants {
  public static final int yLeftidX2 = 1;
 
   // turn PID constants
-  public static final double turnkP = 0.003;
-  public static final double turnkI = 0.0128;
+  public static final double turnkP = 0.0034;
+  public static final double turnkI = 0.0328;
   public static final double turnkD = 0;
   public static final double maximumDriveError = 1000.0;
 
   // balance PID constants
-  public static final double balancekP = 0.007;
+  public static final double balancekP = 0.001;
   public static final double balancekI = 0;
   public static final double balancekD = 0;
   public static final double levelConstant = 2;
@@ -134,6 +134,7 @@ public final class Constants {
   public static final double goalHeight = 107; //what are the units????
   public static final double limeLightHeight = 32;
   public static final double limeLightInitAngle = 0;
+  public static double balanceTarget = 0.9;
 
 
 }

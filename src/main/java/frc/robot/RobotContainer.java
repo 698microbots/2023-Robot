@@ -96,12 +96,12 @@ public class RobotContainer {
     //   new SetPipeline(LimeLightSubsystem, 2)
     // );
     return new SequentialCommandGroup(
-      // new AutoTurn(driveTrain, navX, 180, 3000),
+      // new AutoTurn(driveTrain, navX, 90, 3000),
       // new AutoTurn(driveTrain, navX, 0, 3000),
-      // new AutoTurn(driveTrain, navX, -90, 2000),
-      // new AutoTurn(driveTrain, navX, 720, 6000)
-      new EncoderAutoDrive(driveTrain, -50000, navX)
+      // new AutoTurn(driveTrain, navX, -90, 2000)
+      // new EncoderAutoDrive(driveTrain, 10000, navX)
       // new EncoderAutoDrive(driveTrain, 100000, navX)
+      new AutoBalancing(navX, driveTrain)
     );
   }
 }
