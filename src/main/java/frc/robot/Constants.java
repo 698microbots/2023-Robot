@@ -13,22 +13,8 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  // public static final int FrontRightID = 0; //was 0
-  // public static final int FrontLeftID = 3; //was 1
-  // public static final int BackRightID = 5; //was 3
-  // public static final int BackLeftID = 2; //was 6
-  
-//new ids
-// public static final int FrontRightID = 0;
-// public static final int FrontLeftID = 3;
-// public static final int BackRightID = 5;
-// public static final int BackLeftID = 2;
-  
-//old ids
-public static final int FrontRightID = 0;
-public static final int FrontLeftID = 3;
-public static final int BackRightID = 6;
-public static final int BackLeftID = 1;
+
+
   
   public static final int XBOX_R_XAXIS = 4;
   public static final int XBOX_R_YAXIS = 5;
@@ -106,6 +92,17 @@ public static final int BackLeftID = 1;
   public static final int FLid = 3;
   public static final int BRid = 6;
 
+  //new ids
+// public static final int FrontRightID = 0;
+// public static final int FrontLeftID = 3;
+// public static final int BackRightID = 5;
+// public static final int BackLeftID = 2;
+  
+//old ids
+// public static final int FrontRightID = 0;
+// public static final int FrontLeftID = 3;
+// public static final int BackRightID = 6;
+// public static final int BackLeftID = 1;
   //DriveTrain Constants
   public static final double turnAdjustment = 0.5;
   public static final double powerAdjustment = 0.5;
