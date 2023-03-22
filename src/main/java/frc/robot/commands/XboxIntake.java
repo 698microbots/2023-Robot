@@ -9,14 +9,14 @@ import java.util.function.Supplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IntakeSubsystem;
 
-public class IntakeSwitch extends CommandBase {
+public class XboxIntake extends CommandBase {
   /** Creates a new IntakeSwitch. */
   private final IntakeSubsystem intakeSubsystem;
-  private final boolean reverse;
-  public IntakeSwitch(IntakeSubsystem intakeSubsystem, boolean reverse) {
+  private final Supplier <Double> rightY_Supplier;
+  public XboxIntake(IntakeSubsystem intakeSubsystem, Supplier <Double> rightY_Supplier) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.intakeSubsystem = intakeSubsystem;
-    this.reverse = reverse;
+    this.rightY_Supplier = rightY_Supplier;
     addRequirements(intakeSubsystem);
 
   }
@@ -30,11 +30,7 @@ public class IntakeSwitch extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (reverse == true) {
-      intakeSubsystem.outputGP();
-    } else {
-      intakeSubsystem.intakeGP();
-    }
+    intakeSubsystem.intakeSetSpeed(rightY_Supplier.get());
   }
 
   // Called once the command ends or is interrupted.

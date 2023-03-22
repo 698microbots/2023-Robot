@@ -13,11 +13,11 @@ import frc.robot.subsystems.ArmSubsystem;
 public class XboxArm extends CommandBase {
   /** Creates a new XboxArm. */
   private final ArmSubsystem armSubsystem;
-  private final Supplier <Double> x_Supplier;
-  public XboxArm(Supplier<Double>  x_supplier,ArmSubsystem armSubsystem) {
+  private final Supplier <Double> y_Supplier;
+  public XboxArm(Supplier<Double>  y_supplier, ArmSubsystem armSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.armSubsystem = armSubsystem;
-    this.x_Supplier = x_supplier;
+    this.y_Supplier = y_supplier;
     addRequirements(armSubsystem);
   }
 
@@ -28,9 +28,11 @@ public class XboxArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    
+    
     if (armSubsystem.getArmPosition() >= Constants.armBackEncoderLimit && armSubsystem.getArmPosition() <= Constants.armFrontEncoderLimit){
-      if (Math.abs(x_Supplier.get()) <= 0.5){
-        armSubsystem.armMove(x_Supplier.get());
+      if (Math.abs(y_Supplier.get()) <= 0.5){
+        armSubsystem.armMove(y_Supplier.get());
       } else {
         armSubsystem.armMove(0);
       }

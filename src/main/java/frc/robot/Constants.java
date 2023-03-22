@@ -56,7 +56,7 @@ public final class Constants {
     public static final int Xbox_RTX2 = 3;
   //Also some motor id constant for the intake
   public static final int deviceIdIntakeM1 = 9;
-  public static final int deviceIdIntakeM2 = 10;
+  // public static final int deviceIdIntakeM2 = 10;
   public static final int intakeGearRatio = 5;
 
   public static final double intakeMotorSpeed = .4;
@@ -78,7 +78,7 @@ public final class Constants {
   public static final int talonLift1 = 2;
   public static final int talonLift2 = 3;
   public static final int extensionMotorID = 0;
-  public static final int armMotorID = 0;
+  public static final int armMotorID = 7;
   public static final double armFrontEncoderLimit = 1000;
   public static final double armBackEncoderLimit = -100;
   public static final double kArmP = 0;
@@ -86,17 +86,17 @@ public final class Constants {
   public static final double kArmD = 0;
   public static final double armGearRatio = 75;// 75:1
 
-  //DriveTrain Motor ID's
-  public static final int FRid = 0;
-  public static final int BLid = 1;
-  public static final int FLid = 3;
-  public static final int BRid = 6;
+  // //DriveTrain Motor ID's
+  // public static final int FRid = 0;
+  // public static final int BLid = 1;
+  // public static final int FLid = 3;
+  // public static final int BRid = 6;
 
   //new ids
-// public static final int FrontRightID = 0;
-// public static final int FrontLeftID = 3;
-// public static final int BackRightID = 5;
-// public static final int BackLeftID = 2;
+public static final int FRid = 0;
+public static final int FLid = 3;
+public static final int BRid = 5;
+public static final int BLid = 2;
   
 //old ids
 // public static final int FrontRightID = 0;
@@ -154,5 +154,4 @@ public final class Constants {
   public static final double limeLightHeight = 32;
   public static final double limeLightInitAngle = 0;
   public static final double cameraOffset = 0; // degrees horizontal angle
-
 }

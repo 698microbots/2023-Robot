@@ -56,7 +56,8 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     driveTrain.setDefaultCommand(new XboxDrive(driveTrain, () -> Xbox.getRightX(), () -> Xbox.getLeftY()));
-    armSubsystem.setDefaultCommand(new XboxArm(() -> Xbox2.getRightX(), armSubsystem));
+    armSubsystem.setDefaultCommand(new XboxArm(() -> Xbox2.getLeftY(), armSubsystem));
+    intakeSubsystem.setDefaultCommand(new XboxIntake(intakeSubsystem, () -> Xbox2.getRightY()));
     configureBindings();
   }
 
@@ -72,8 +73,8 @@ public class RobotContainer {
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
-    Xbutton.toggleWhenPressed(new IntakeSwitch(intakeSubsystem, false));
-    Ybutton.toggleWhenPressed(new IntakeSwitch(intakeSubsystem, true));
+    // Xbutton.toggleWhenPressed(new XboxIntake(intakeSubsystem, false));
+    // Ybutton.toggleWhenPressed(new XboxIntake(intakeSubsystem, true));
     AbuttonX2.whenPressed(new ResetEncoders(driveTrain, armSubsystem));
 
 
