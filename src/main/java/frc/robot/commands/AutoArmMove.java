@@ -8,39 +8,39 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveTrain;
 
-public class AutoArmPickup extends CommandBase {
+public class AutoArmMove extends CommandBase {
   /** Creates a new autoArmPickup. */
   private final ArmSubsystem armSubsystem; 
-  private double target, timeOut;
+  private double target, timeOut, distanceMove;
   private int errorCounter, cycleCounter;
   
-  public AutoArmPickup(ArmSubsystem armSubsystem, double target, double timeOut) {
+  public AutoArmMove(ArmSubsystem armSubsystem, double target, double timeOut) {
     this.armSubsystem = armSubsystem;
     this.target = target;
     this.timeOut = timeOut;
     errorCounter = 0;
     cycleCounter = 0;
+    distanceMove = 0;
     addRequirements(armSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    armSubsystem.resetArmPID();
     armSubsystem.armMove(0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
+  
   public void execute() {
-    armSubsystem.moveArmPID(armSubsystem.getArmPosition(), 0.5);
-    armSubsystem.armMove(armSubsystem.getArmMoveOutput());
-    if (Math.abs(armSubsystem.getArmMoveError()) <= 5000){
-      errorCounter++;
-    } else{
-      errorCounter = 0;
+    distanceMove = armSubsystem.getArmPosition() - target;
+    if(distanceMove > 0){
+      armSubsystem.armMove(-.1);
+    } else if(distanceMove < 0){
+      armSubsystem.armMove(.1);
     }
-    
+    cycleCounter++;
   }
   // Called once the command ends or is interrupted.
   @Override
@@ -51,7 +51,7 @@ public class AutoArmPickup extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (errorCounter > 10 || cycleCounter > (timeOut/20)){
+    if (armSubsystem.getArmPosition() == target || cycleCounter > timeOut/20){
       return true;
     } else {
       return false;
