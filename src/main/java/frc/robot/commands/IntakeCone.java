@@ -4,40 +4,39 @@
 
 package frc.robot.commands;
 
-import java.util.function.Supplier;
-
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.Constants;
-import frc.robot.subsystems.ArmSubsystem;
 
-public class XboxArm extends CommandBase {
-  /** Creates a new XboxArm. */
-  private final ArmSubsystem armSubsystem;
-  private Supplier <Double> y_Supplier;
-  public XboxArm(Supplier<Double>  y_supplier, ArmSubsystem armSubsystem) {
+public class IntakeCone extends CommandBase {
+  /** Creates a new IntakeCone. */
+  private final IntakeSubsystem intake;
+  private final XboxController xbox2;
+  public IntakeCone(IntakeSubsystem intake, XboxController xbox2) {
+    this.intake = intake;
+    this.xbox2 = xbox2;
     // Use addRequirements() here to declare subsystem dependencies.
-    this.armSubsystem = armSubsystem;
-    this.y_Supplier = y_supplier;
-    addRequirements(armSubsystem);
+    addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    armSubsystem.armMove(0);
-    armSubsystem.resetArmEncoders();
+    intake.intakeSetSpeed(Constants.intakeMotorSpeed);
+    xbox2.setRumble(RumbleType.kRightRumble, 1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    armSubsystem.armMove(y_Supplier.get());
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    armSubsystem.armMove(0);
+    intake.intakeSetSpeed(0);
+    xbox2.setRumble(RumbleType.kBothRumble, 0);
   }
 
   // Returns true when the command should end.

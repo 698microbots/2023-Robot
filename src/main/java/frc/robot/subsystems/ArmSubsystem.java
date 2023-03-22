@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.revrobotics.CANSparkMax;
 
@@ -40,6 +41,7 @@ public class ArmSubsystem extends SubsystemBase {
     armD = 0;
     armOutput = 0;
     prevArmOutput = 0;
+    armMotor.setNeutralMode(NeutralMode.Coast);
   }
 
   //setters
@@ -53,7 +55,6 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public double getArmPosition(){
-    // return armMotor.getEncoder().getPosition();
     return armMotor.getSelectedSensorPosition();
   }
 
@@ -79,7 +80,6 @@ public class ArmSubsystem extends SubsystemBase {
     armI += armError;
     armD = armError - armPrevError;
     
-    
     armOutput = Constants.kArmP*armP + Constants.kArmI*armI + Constants.kArmD*armD;
     if(armOutput > limit){
       armOutput = limit;
@@ -93,6 +93,7 @@ public class ArmSubsystem extends SubsystemBase {
     prevArmOutput = armOutput;
   }
   
+  //getters
   public double getArmMoveOutput(){
     return armOutput;
   }
@@ -100,16 +101,11 @@ public class ArmSubsystem extends SubsystemBase {
   public double getArmMoveError(){
     return armError;
   }
-  //getters
-  // public double getElevatorPosition(){//one revolution is 2048 encoder units.
-  //   double position1 = elevatorLiftMotor1.getSelectedSensorPosition();
-  //   double position2 = elevatorLiftMotor2.getSelectedSensorPosition();
-  //   if(Math.abs(position1 - position2) < 100){
-  //     return (position1 + position2)/2;
-  //   }else{
-  //     return -1;//return '-1' if the two sensor positions vary too much.
-  //   }
-  // }
+
+  //setters
+  public void setPIDtarget(double target){
+    armTarget = target;
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

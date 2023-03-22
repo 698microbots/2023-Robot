@@ -31,6 +31,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    m_robotContainer.armSubsystem.resetArmEncoders();
   }
 
   /**
@@ -69,8 +70,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Right Encoder avg", m_robotContainer.driveTrain.getRightEncoders());
     SmartDashboard.putNumber("Left Encoder avg", m_robotContainer.driveTrain.getLeftEncoders());
     SmartDashboard.putBoolean("navx connected", m_robotContainer.navX.isConnected());
-    SmartDashboard.putNumber("Arm Encoders", m_robotContainer.armSubsystem.getArmPosition());
-
+    SmartDashboard.putNumber("Arm Position", m_robotContainer.armSubsystem.getArmPosition());
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -106,6 +106,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("FL: Position", m_robotContainer.driveTrain.getFLid());
     SmartDashboard.putNumber("BR: Position", m_robotContainer.driveTrain.getBRid());
     SmartDashboard.putNumber("BL: Position", m_robotContainer.driveTrain.getBLid());
+    SmartDashboard.putNumber("Arm Position", m_robotContainer.armSubsystem.getArmPosition());
 
   }
 
@@ -135,6 +136,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("FL: Position", m_robotContainer.driveTrain.getFLid());
     SmartDashboard.putNumber("BR: Position", m_robotContainer.driveTrain.getBRid());
     SmartDashboard.putNumber("BL: Position", m_robotContainer.driveTrain.getBLid());
+    SmartDashboard.putNumber("Arm Position", m_robotContainer.armSubsystem.getArmPosition());
   }
 
   @Override

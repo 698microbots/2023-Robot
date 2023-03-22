@@ -25,7 +25,7 @@ public class EncoderAutoDrive extends CommandBase {
     this.target = -target;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
-    addRequirements(navx);
+    addRequirements(navX);
   }
 
   // Called when the command is initially scheduled.

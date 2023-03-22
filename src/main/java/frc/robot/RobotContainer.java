@@ -34,13 +34,18 @@ public class RobotContainer {
   // public RasberryPiCamera rasberryPiCamera = new RasberryPiCamera();
   //Intake
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-  public final JoystickButton Xbutton = new JoystickButton(Xbox, Constants.Xbox_Button_X);
-  public final JoystickButton Ybutton = new JoystickButton(Xbox, Constants.Xbox_Button_Y);
-
-  public final JoystickButton Abutton = new JoystickButton(Xbox, Constants.Xbox_Button_A);
-  public final JoystickButton Bbutton = new JoystickButton(Xbox, Constants.Xbox_Button_B);
-
-  public final JoystickButton AbuttonX2 = new JoystickButton(Xbox2, Constants.Xbox_Button_AX2);
+  private final JoystickButton Xbutton = new JoystickButton(Xbox, Constants.Xbox_Button_X);
+  private final JoystickButton Ybutton = new JoystickButton(Xbox, Constants.Xbox_Button_Y);
+  private final JoystickButton Abutton = new JoystickButton(Xbox, Constants.Xbox_Button_A);
+  private final JoystickButton Bbutton = new JoystickButton(Xbox, Constants.Xbox_Button_B);
+  private final JoystickButton RBbutton = new JoystickButton(Xbox, Constants.Xbox_Button_RB);
+  private final JoystickButton LBbutton = new JoystickButton(Xbox, Constants.Xbox_Button_LB);
+  private final JoystickButton AbuttonX2 = new JoystickButton(Xbox2, Constants.Xbox_Button_A);
+  private final JoystickButton BbuttonX2 = new JoystickButton(Xbox2, Constants.Xbox_Button_B);
+  private final JoystickButton YbuttonX2 = new JoystickButton(Xbox2, Constants.Xbox_Button_Y);
+  private final JoystickButton XbuttonX2 = new JoystickButton(Xbox2, Constants.Xbox_Button_X);
+  private final JoystickButton RBbuttonX2 = new JoystickButton(Xbox2, Constants.Xbox_Button_RB);
+  private final JoystickButton LBbuttonX2 = new JoystickButton(Xbox2, Constants.Xbox_Button_LB);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
@@ -54,8 +59,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     driveTrain.setDefaultCommand(new XboxDrive(driveTrain, () -> Xbox.getRightX(), () -> Xbox.getLeftY()));
-    armSubsystem.setDefaultCommand(new XboxArm(() -> Xbox2.getLeftY(), armSubsystem));
-    intakeSubsystem.setDefaultCommand(new XboxIntake(intakeSubsystem, () -> Xbox2.getRightY()));
+    armSubsystem.setDefaultCommand(new PIDAssistedArmMovement(armSubsystem, () -> Xbox2.getRawAxis(Constants.XBOX_L_YAXIS)));
     configureBindings();
   }
 
@@ -70,12 +74,9 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-
-    // Xbutton.toggleWhenPressed(new IntakeSwitch(intakeSubsystem, false));
-    // Ybutton.toggleWhenPressed(new IntakeSwitch(intakeSubsystem, true));
-    // Xbutton.toggleWhenPressed(new XboxIntake(intakeSubsystem, false));
-    // Ybutton.toggleWhenPressed(new XboxIntake(intakeSubsystem, true));
     AbuttonX2.whenPressed(new ResetEncoders(driveTrain, armSubsystem));
+    LBbuttonX2.whenHeld(new IntakeCube(intakeSubsystem, Xbox2));
+    RBbuttonX2.whenHeld(new IntakeCone(intakeSubsystem, Xbox2));
 
 
 

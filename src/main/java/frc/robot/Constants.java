@@ -15,12 +15,11 @@ package frc.robot;
 public final class Constants {
 
 
-  
+  //general xbox pins
   public static final int XBOX_R_XAXIS = 4;
   public static final int XBOX_R_YAXIS = 5;
   public static final int XBOX_L_XAXIS = 0;
   public static final int XBOX_L_YAXIS = 1;
-  public static final int XBOX_pin = 0;
   public static final int Xbox_LT = 2;
   public static final int Xbox_RT = 3;
 
@@ -57,7 +56,7 @@ public final class Constants {
 
   public static final int deviceIdIntakeM1 = 9;
   public static final int deviceIdIntakeM2 = 10;
-  public static final double intakeMotorSpeed = .4;
+  public static final double intakeMotorSpeed = .2;
   public static final int ampSpike= 8;
   public static final int logitechPort6 = 6;
   public static final int logitechPort7 = 7;
@@ -67,13 +66,15 @@ public final class Constants {
   public static final int talonLift1 = 2;
   public static final int talonLift2 = 3;
   public static final int extensionMotorID = 0;
+  //arm constant
   public static final int armMotorID = 7;
-  public static final double armFrontEncoderLimit = 1000;
-  public static final double armBackEncoderLimit = -100;
-  public static final double kArmP = 0;
-  public static final double kArmI = 0;
+  public static final double armFrontEncoderLimit = 40000;
+  public static final double armBackEncoderLimit = -40000;
+  public static final double kArmP = 0.0001;
+  public static final double kArmI = 0.00001;
   public static final double kArmD = 0;
   public static final double armGearRatio = 75;// 75:1
+  public static final double kArmPID = 400;
 
   //DriveTrain Motor ID's
   public static final int FRid = 2;
