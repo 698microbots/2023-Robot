@@ -7,43 +7,36 @@ package frc.robot.commands;
 import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
-public class XboxArm extends CommandBase {
-  /** Creates a new XboxArm. */
-  private final ArmSubsystem armSubsystem;
-  private final Supplier <Double> y_Supplier;
-  public XboxArm(Supplier<Double>  y_supplier, ArmSubsystem armSubsystem) {
+public class XboxIntake extends CommandBase {
+  /** Creates a new IntakeSwitch. */
+  private final IntakeSubsystem intakeSubsystem;
+  private final Supplier <Double> rightY_Supplier;
+  public XboxIntake(IntakeSubsystem intakeSubsystem, Supplier <Double> rightY_Supplier) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.armSubsystem = armSubsystem;
-    this.y_Supplier = y_supplier;
-    addRequirements(armSubsystem);
+    this.intakeSubsystem = intakeSubsystem;
+    this.rightY_Supplier = rightY_Supplier;
+    addRequirements(intakeSubsystem);
+
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    // Put xbox input here
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
-    
-    if (armSubsystem.getArmPosition() >= Constants.armBackEncoderLimit && armSubsystem.getArmPosition() <= Constants.armFrontEncoderLimit){
-      if (Math.abs(y_Supplier.get()) <= 0.5){
-        armSubsystem.armMove(y_Supplier.get());
-      } else {
-        armSubsystem.armMove(0);
-      }
-    }
-
+    intakeSubsystem.intakeSetSpeed(rightY_Supplier.get());
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    armSubsystem.armMove(0);
+    intakeSubsystem.stopMotor();
   }
 
   // Returns true when the command should end.

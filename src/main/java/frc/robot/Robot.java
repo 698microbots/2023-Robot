@@ -63,7 +63,13 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("X Distance", m_robotContainer.LimeLightSubsystem.calculateZdistance());
     SmartDashboard.putNumberArray("Bot Pose", m_robotContainer.LimeLightSubsystem.getBotPose());
     SmartDashboard.putNumber("AprilTag ID", m_robotContainer.LimeLightSubsystem.getaprilTagID());
-
+    SmartDashboard.putNumber("NavX Yaw", m_robotContainer.navX.getYaw());
+    SmartDashboard.putNumber("drive output", m_robotContainer.driveTrain.getDriveOutput());
+    SmartDashboard.putNumber("getTurn output", m_robotContainer.driveTrain.getTurnOutput());
+    SmartDashboard.putNumber("Right Encoder avg", m_robotContainer.driveTrain.getRightEncoders());
+    SmartDashboard.putNumber("Left Encoder avg", m_robotContainer.driveTrain.getLeftEncoders());
+    SmartDashboard.putBoolean("navx connected", m_robotContainer.navX.isConnected());
+    SmartDashboard.putNumber("Arm Encoders", m_robotContainer.armSubsystem.getArmPosition());
 
   }
 

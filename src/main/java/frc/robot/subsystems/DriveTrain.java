@@ -4,7 +4,9 @@
 
 package frc.robot.subsystems;
 
+import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
+import java.sql.Blob;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -22,6 +24,8 @@ public class DriveTrain extends SubsystemBase {
   private final TalonFX FL = new TalonFX(Constants.FLid);
   private final TalonFX BL = new TalonFX(Constants.BLid);
   
+  private double velocity;
+
   //PIDturn variables
   private double turnTarget;
   private double turnError;
@@ -140,23 +144,57 @@ public class DriveTrain extends SubsystemBase {
     BL.setSelectedSensorPosition(0);
 
   }
-  public void PIDdrive(double sensorInput, double limit) {
-    driveError = driveTarget - sensorInput;
-    driveP = driveError;
-    driveI += driveError;
-    driveD = driveError - drivePrevError;
-    
-    driveOutput = (Constants.kP*driveP + Constants.kI*driveI + Constants.kD*driveD);
-    if(driveOutput > limit){
-      driveOutput = limit;
-    }
-    if(driveOutput < -limit){
-      driveOutput = -limit;
-    }
 
-    drivePrevError = driveError;
-    drivePrevOutput = driveOutput;
-  }  
+
+  public double getEncoderPosition(){
+    return (-(FR.getSelectedSensorPosition()+BR.getSelectedSensorPosition()+FL.getSelectedSensorPosition()+BL.getSelectedSensorPosition())/4);
+  }
+
+  public double getRightEncoders(){
+    return ((FR.getSelectedSensorPosition() + BR.getSelectedSensorPosition())/2);
+  }
+
+  public double getLeftEncoders(){
+    return ((FL.getSelectedSensorPosition() + BL.getSelectedSensorPosition())/2);
+  }
+
+    public void PIDdrive(double sensorInput, double limit) {
+      driveError = driveTarget - sensorInput;
+      driveP = driveError;
+      driveI += driveError;
+      driveD = driveError - drivePrevError;
+      
+      
+      driveOutput = Constants.kDriveP*driveP + Constants.kDriveI*driveI + Constants.kDriveD*driveD;
+      if(driveOutput > limit){
+        driveOutput = limit;
+      }
+      if(driveOutput < -limit){
+        driveOutput = -limit;
+      }
+
+      drivePrevError = driveError;
+      drivePrevOutput = driveOutput;
+    }  
+
+    // public void PIDdriveAndTurn(double encoderSensorInput, double speedLimit, double targetAngle, double currentAngle) {
+    //   driveError = driveTarget - encoderSensorInput;
+    //   driveP = driveError;
+    //   driveI += driveError;
+    //   driveD = driveError - drivePrevError;
+      
+      
+    //   driveOutput = Constants.kP*driveP + Constants.kI*driveI + Constants.kD*driveD;
+    //   if(driveOutput > speedLimit){
+    //     driveOutput = speedLimit;
+    //   }
+    //   if(driveOutput < -speedLimit){
+    //     driveOutput = -speedLimit;
+    //   }
+
+    //   drivePrevError = driveError;
+    //   prevDriveOutput = driveOutput;
+    // }  
 
   public double getTurnOutput()
   {
@@ -179,6 +217,10 @@ public class DriveTrain extends SubsystemBase {
     return balanceOutput;
   }
   
+  public double getVelocity(){
+    velocity = (FR.getActiveTrajectoryVelocity() + FL.getActiveTrajectoryVelocity() + BR.getActiveTrajectoryVelocity() + BL.getActiveTrajectoryVelocity()) / 4;
+    return velocity;
+  }
   public double getDriveOutput(){
     return driveOutput;
   }
@@ -219,8 +261,25 @@ public class DriveTrain extends SubsystemBase {
   public void setDriveTarget(double encoderUnit){
     driveTarget = encoderUnit;
   }
+  public double getTurnTarget(){
+    return turnTarget;
+  }
   public void setTurnTarget(double degrees){
     turnTarget = degrees;
+  }
+
+  public void setMotorsCoast(){
+    FR.setNeutralMode(NeutralMode.Coast);
+    BR.setNeutralMode(NeutralMode.Coast);
+    BL.setNeutralMode(NeutralMode.Coast);
+    FL.setNeutralMode(NeutralMode.Coast);
+  }
+
+  public void setMotorsLocked(){
+    FR.setNeutralMode(NeutralMode.Brake);
+    BR.setNeutralMode(NeutralMode.Brake);
+    FL.setNeutralMode(NeutralMode.Brake);
+    BL.setNeutralMode(NeutralMode.Brake);
   }
   @Override
   public void periodic() {

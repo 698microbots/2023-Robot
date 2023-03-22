@@ -7,7 +7,6 @@ package frc.robot;
 
 import frc.robot.subsystems.LimeLightSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
@@ -41,7 +40,7 @@ public class RobotContainer {
   public final JoystickButton Abutton = new JoystickButton(Xbox, Constants.Xbox_Button_A);
   public final JoystickButton Bbutton = new JoystickButton(Xbox, Constants.Xbox_Button_B);
 
-  public final JoystickButton AButtonX2 = new JoystickButton(Xbox, Constants.Xbox_Button_AX2);
+  public final JoystickButton AbuttonX2 = new JoystickButton(Xbox2, Constants.Xbox_Button_AX2);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
@@ -55,7 +54,8 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     driveTrain.setDefaultCommand(new XboxDrive(driveTrain, () -> Xbox.getRightX(), () -> Xbox.getLeftY()));
-    armSubsystem.setDefaultCommand(new XboxArm(() -> Xbox2.getRightX(), armSubsystem));
+    armSubsystem.setDefaultCommand(new XboxArm(() -> Xbox2.getLeftY(), armSubsystem));
+    intakeSubsystem.setDefaultCommand(new XboxIntake(intakeSubsystem, () -> Xbox2.getRightY()));
     configureBindings();
   }
 
@@ -73,6 +73,9 @@ public class RobotContainer {
 
     // Xbutton.toggleWhenPressed(new IntakeSwitch(intakeSubsystem, false));
     // Ybutton.toggleWhenPressed(new IntakeSwitch(intakeSubsystem, true));
+    // Xbutton.toggleWhenPressed(new XboxIntake(intakeSubsystem, false));
+    // Ybutton.toggleWhenPressed(new XboxIntake(intakeSubsystem, true));
+    AbuttonX2.whenPressed(new ResetEncoders(driveTrain, armSubsystem));
 
 
 
@@ -89,12 +92,14 @@ public class RobotContainer {
     // An example command will be run in autonomous
     // return new AutoBalancing(navX, driveTrain);
     // return new SequentialCommandGroup(
-    //   new SetPipeline(LimeLightSubsystem, 0),
-    //   new Wait(10000),
-    //   new SetPipeline(LimeLightSubsystem, 1),
-    //   new Wait(10000),
-    //   new SetPipeline(LimeLightSubsystem, 2)
+    //   //limelight testing
+    // new SetPipeline(LimeLightSubsystem, 0),
+    // new Wait(10000),
+    // new SetPipeline(LimeLightSubsystem, 1),
+    // new Wait(10000),
+    // new SetPipeline(LimeLightSubsystem, 2)
     // );
+      //auto driving test
     return new SequentialCommandGroup(
       // new AutoTurn(driveTrain, navX, 90, 3000),
       // new AutoTurn(driveTrain, navX, 0, 3000),
@@ -103,5 +108,11 @@ public class RobotContainer {
       // new EncoderAutoDrive(driveTrain, 100000, navX)
       new AutoBalancing(navX, driveTrain)
     );
+    //auto turning test
+    // return new SequentialCommandGroup(
+    //   new AutoTurn(driveTrain, navX, 180, 2000),
+    //   new AutoTurn(driveTrain, navX, 0, 2000),
+    //   new AutoTurn(driveTrain, navX, -90, 2000)
+    // );
   }
 }

@@ -1,4 +1,4 @@
-// Copyright (c) FIRST and other WPILib contributors.
+ // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
@@ -13,10 +13,8 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static final int FrontRightID = 0;
-  public static final int FrontLeftID = 3;
-  public static final int BackRightID = 5;
-  public static final int BackLeftID = 2;
+
+
   
   public static final int XBOX_R_XAXIS = 4;
   public static final int XBOX_R_YAXIS = 5;
@@ -64,15 +62,18 @@ public final class Constants {
   public static final int logitechPort6 = 6;
   public static final int logitechPort7 = 7;
   //Controller Stick Constants
-
-
   public static final int kDriverControllerPort = 0;
-
   public static final int talonArmPivot = 1;
   public static final int talonLift1 = 2;
   public static final int talonLift2 = 3;
   public static final int extensionMotorID = 0;
-  public static final int armMotor = 0;
+  public static final int armMotorID = 7;
+  public static final double armFrontEncoderLimit = 1000;
+  public static final double armBackEncoderLimit = -100;
+  public static final double kArmP = 0;
+  public static final double kArmI = 0;
+  public static final double kArmD = 0;
+  public static final double armGearRatio = 75;// 75:1
 
   //DriveTrain Motor ID's
   public static final int FRid = 2;
@@ -83,7 +84,6 @@ public final class Constants {
   // public static final int BLid = 1;
   // public static final int FLid = 3;
   // public static final int BRid = 6;
-
   //DriveTrain Constants
   public static final double turnAdjustment = 0.5;
   public static final double powerAdjustment = 0.5;
@@ -118,12 +118,12 @@ public final class Constants {
   //public static final int kTimeoutMs = 20;
   public static final double driveAdjustment = 0.85;
   public static final int kPIDLoopIdx = 0;//run primary loop
-  public static final double kF = 0;
-  public static final double kP = 0.00005;
-  public static final double kI = 0.0;
-  public static final double kD = 0;
+  public static final double kDriveF = 0;
+  public static final double kDriveP = 0.00005;
+  public static final double kDriveI = 0.0;
+  public static final double kDriveD = 0;
 
-  public static final double IactZone = 0.5;
+  public static final double IactZone = 0;//was 0.5
 
   //pi constants
   public static final double CAMERA_HEIGHT_METERS = 0;
@@ -135,6 +135,5 @@ public final class Constants {
   public static final double limeLightHeight = 32;
   public static final double limeLightInitAngle = 0;
   public static double balanceTarget = 0.9;
-
-
+  public static final double cameraOffset = 0; // degrees horizontal angle
 }

@@ -4,48 +4,42 @@
 
 package frc.robot.commands;
 
-import java.util.function.Supplier;
+import java.sql.Driver;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.DriveTrain;
 
-public class IntakeSwitch extends CommandBase {
-  /** Creates a new IntakeSwitch. */
-  private final IntakeSubsystem intakeSubsystem;
-  private final boolean reverse;
+public class ResetEncoders extends CommandBase {
+  /** Creates a new ResetEncoders. */
+  private final DriveTrain driveTrain;
+  private final ArmSubsystem armSubsystem;
 
-  public IntakeSwitch(IntakeSubsystem intakeSubsystem, boolean reverse) {
+  public ResetEncoders(DriveTrain driveTrain, ArmSubsystem armSubsystem) {
+    this.driveTrain = driveTrain;
+    this.armSubsystem = armSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    this.intakeSubsystem = intakeSubsystem;
-    this.reverse = reverse;
-    addRequirements(intakeSubsystem);
+    addRequirements(driveTrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // Put xbox input here
+    driveTrain.resetEncoders();
+    armSubsystem.resetArmEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    if (reverse == true) {
-      intakeSubsystem.outputGP();
-    } else {
-      intakeSubsystem.intakeGP();
-    }
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    intakeSubsystem.stopMotor();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

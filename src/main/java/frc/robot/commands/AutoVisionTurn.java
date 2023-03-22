@@ -6,9 +6,9 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class NavXAutoDrive extends CommandBase {
-  /** Creates a new NavXAutoDrive. */
-  public NavXAutoDrive() {
+public class AutoVisionTurn extends CommandBase {
+  /** Creates a new AutoVisionTurn. */
+  public AutoVisionTurn() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
