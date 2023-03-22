@@ -40,14 +40,12 @@ public class AutoArmPickup extends CommandBase {
     } else{
       errorCounter = 0;
     }
-    
   }
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     armSubsystem.armMove(0);
   }
-
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
