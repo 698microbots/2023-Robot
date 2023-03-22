@@ -47,7 +47,6 @@ public class AutoArmMove extends CommandBase {
   public void end(boolean interrupted) {
     armSubsystem.armMove(0);
   }
-
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
