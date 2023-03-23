@@ -36,11 +36,11 @@ public class PIDAssistedArmMovement extends CommandBase {
   public void execute() {
     value = xbox.get();
     if(Math.abs(value) > 0.04){
-      target += value*Constants.kArmPID;
+      target = value*Constants.kArmPID;
     }
     SmartDashboard.putNumber("Arm PID Target:", target);
     arm.setPIDtarget(target);
-    arm.moveArmPID(arm.getArmPosition(), 1);
+    arm.moveArmPID(arm.getArmPosition(), 0.5);
     if(arm.getArmPosition()<Constants.armFrontEncoderLimit & arm.getArmPosition()>Constants.armBackEncoderLimit){
       arm.armMove(arm.getArmMoveOutput());
     }else{

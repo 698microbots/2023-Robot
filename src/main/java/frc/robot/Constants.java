@@ -68,13 +68,13 @@ public final class Constants {
   public static final int extensionMotorID = 0;
   //arm constant
   public static final int armMotorID = 7;
-  public static final double armFrontEncoderLimit = 40000;
-  public static final double armBackEncoderLimit = -40000;
-  public static final double kArmP = 0.0001;
-  public static final double kArmI = 0.00001;
+  public static final double armFrontEncoderLimit = 30000;
+  public static final double armBackEncoderLimit = -0;
+  public static final double kArmP = 0.00005;
+  public static final double kArmI = 0.00000001;
   public static final double kArmD = 0;
   public static final double armGearRatio = 75;// 75:1
-  public static final double kArmPID = 400;
+  public static final double kArmPID = 30000;
 
   //DriveTrain Motor ID's
   public static final int FRid = 2;

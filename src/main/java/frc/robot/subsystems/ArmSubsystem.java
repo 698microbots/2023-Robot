@@ -88,7 +88,6 @@ public class ArmSubsystem extends SubsystemBase {
     if(armOutput < -limit){
       armOutput = -limit;
     }
-
     armPrevError = armError;
     prevArmOutput = armOutput;
   }

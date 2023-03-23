@@ -30,10 +30,11 @@ public class RobotContainer {
   public ArmSubsystem armSubsystem = new ArmSubsystem();
   public XboxController Xbox = new XboxController(Constants.xBoxControllerid);
   public XboxController Xbox2 = new XboxController(Constants.xBoxControllerid2);
-
-  // public RasberryPiCamera rasberryPiCamera = new RasberryPiCamera();
-  //Intake
+  public final DriveTrain driveTrain = new DriveTrain();
+  public navXSubsystem navX = new navXSubsystem();
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+
+  //button definitions
   private final JoystickButton Xbutton = new JoystickButton(Xbox, Constants.Xbox_Button_X);
   private final JoystickButton Ybutton = new JoystickButton(Xbox, Constants.Xbox_Button_Y);
   private final JoystickButton Abutton = new JoystickButton(Xbox, Constants.Xbox_Button_A);
@@ -46,14 +47,6 @@ public class RobotContainer {
   private final JoystickButton XbuttonX2 = new JoystickButton(Xbox2, Constants.Xbox_Button_X);
   private final JoystickButton RBbuttonX2 = new JoystickButton(Xbox2, Constants.Xbox_Button_RB);
   private final JoystickButton LBbuttonX2 = new JoystickButton(Xbox2, Constants.Xbox_Button_LB);
-
-  // Replace with CommandPS4Controller or CommandJoystick if needed
-
-  public final DriveTrain driveTrain = new DriveTrain();
-  public navXSubsystem navX = new navXSubsystem();
-  
-
-
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -74,14 +67,9 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    AbuttonX2.whenPressed(new ResetEncoders(driveTrain, armSubsystem));
-    LBbuttonX2.whenHeld(new IntakeCube(intakeSubsystem, Xbox2));
-    RBbuttonX2.whenHeld(new IntakeCone(intakeSubsystem, Xbox2));
-
-
-
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
+    AbuttonX2.onTrue(new ResetEncoders(driveTrain, armSubsystem));
+    LBbuttonX2.whileTrue(new IntakeCube(intakeSubsystem, Xbox2));
+    RBbuttonX2.whileTrue(new IntakeCone(intakeSubsystem, Xbox2));
   }
 
   /**
@@ -91,16 +79,18 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    // return new AutoBalancing(navX, driveTrain);
-    // return new SequentialCommandGroup(
-    //   //limelight testing
-    // new SetPipeline(LimeLightSubsystem, 0),
-    // new Wait(10000),
-    // new SetPipeline(LimeLightSubsystem, 1),
-    // new Wait(10000),
-    // new SetPipeline(LimeLightSubsystem, 2)
-    // );
-      //auto driving test
+
+      // return new AutoBalancin navX, driveTrain);
+
+      // return new SequentialCommandGroup(
+      //   //limelight testing
+      // new SetPipeline(LimeLightSubsystem, 0),
+      // new Wait(10000),
+      // new SetPipeline(LimeLightSubsystem, 1),
+      // new Wait(10000),
+      // new SetPipeline(LimeLightSubsystem, 2)
+      // );
+    //auto driving test
     return new SequentialCommandGroup(
       // new AutoTurn(driveTrain, navX, 90, 3000),
       // new AutoTurn(driveTrain, navX, 0, 3000),
