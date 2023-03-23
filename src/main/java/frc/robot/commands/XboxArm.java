@@ -32,9 +32,10 @@ public class XboxArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(armSubsystem.getArmPosition()>Constants.armFrontEncoderLimit && armSubsystem.getArmPosition()<Constants.armBackEncoderLimit){
+    if(armSubsystem.getArmPosition()>Constants.armFrontEncoderLimit && armSubsystem.getArmPosition()<=Constants.armBackEncoderLimit){
       armSubsystem.armMove(y_Supplier.get()*0.5);
     }else{
+      // if(armSubsystem.get)
       armSubsystem.armMove(0);
     }
   }
