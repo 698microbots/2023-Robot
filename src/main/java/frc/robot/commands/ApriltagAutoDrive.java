@@ -11,14 +11,14 @@ import frc.robot.subsystems.LimeLightSubsystem;
 import frc.robot.subsystems.navXSubsystem;
 
 
-public class AutoDriveApriltag extends CommandBase {
+public class ApriltagAutoDrive extends CommandBase {
   /** Creates a new autoDriveApriltag. */
   private DriveTrain driveTrain;
   private LimeLightSubsystem limeLightSubsystem;
   private double H_angle;
   private double distance;
   
-  public AutoDriveApriltag(DriveTrain driveTrain, LimeLightSubsystem limeLightSubsystem) {
+  public ApriltagAutoDrive(DriveTrain driveTrain, LimeLightSubsystem limeLightSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain = driveTrain;
     this.limeLightSubsystem = limeLightSubsystem;
@@ -42,7 +42,7 @@ public class AutoDriveApriltag extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
+    driveTrain.PIDdrive(distance, H_angle);
   }
 
   // Called once the command ends or is interrupted.

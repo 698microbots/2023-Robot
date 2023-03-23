@@ -25,19 +25,25 @@ public class XboxArm extends CommandBase {
   @Override
   public void initialize() {
     armSubsystem.armMove(0);
+    armSubsystem.setBrake(true);
     armSubsystem.resetArmEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    armSubsystem.armMove(y_Supplier.get());
+    if(armSubsystem.getArmPosition()>Constants.armFrontEncoderLimit && armSubsystem.getArmPosition()<Constants.armBackEncoderLimit){
+      armSubsystem.armMove(y_Supplier.get()*0.5);
+    }else{
+      armSubsystem.armMove(0);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     armSubsystem.armMove(0);
+    armSubsystem.setBrake(false);
   }
 
   // Returns true when the command should end.

@@ -62,7 +62,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("H Angle", m_robotContainer.LimeLightSubsystem.getH_angle());
     SmartDashboard.putNumber("Z Distance", m_robotContainer.LimeLightSubsystem.calculateXdistance());
     SmartDashboard.putNumber("X Distance", m_robotContainer.LimeLightSubsystem.calculateZdistance());
-    SmartDashboard.putNumberArray("Bot Pose", m_robotContainer.LimeLightSubsystem.getBotPose());
+    SmartDashboard.putNumber("Bot Pose", m_robotContainer.LimeLightSubsystem.getBotPose());
     SmartDashboard.putNumber("AprilTag ID", m_robotContainer.LimeLightSubsystem.getaprilTagID());
     SmartDashboard.putNumber("NavX Yaw", m_robotContainer.navX.getYaw());
     SmartDashboard.putNumber("drive output", m_robotContainer.driveTrain.getDriveOutput());
@@ -106,8 +106,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("FL: Position", m_robotContainer.driveTrain.getFLid());
     SmartDashboard.putNumber("BR: Position", m_robotContainer.driveTrain.getBRid());
     SmartDashboard.putNumber("BL: Position", m_robotContainer.driveTrain.getBLid());
-    SmartDashboard.putNumber("Arm Position", m_robotContainer.armSubsystem.getArmPosition());
-
+    
   }
 
   @Override

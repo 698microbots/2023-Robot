@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -52,7 +53,8 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     driveTrain.setDefaultCommand(new XboxDrive(driveTrain, () -> Xbox.getRightX(), () -> Xbox.getLeftY()));
-    armSubsystem.setDefaultCommand(new PIDAssistedArmMovement(armSubsystem, () -> Xbox2.getRawAxis(Constants.XBOX_L_YAXIS)));
+    armSubsystem.setDefaultCommand(new XboxArm(()-> Xbox2.getLeftY(), armSubsystem));
+    // armSubsystem.setDefaultCommand(new PIDAssistedArmMovement(armSubsystem, () -> Xbox2.getLeftY()));
     configureBindings();
   }
 
@@ -92,12 +94,11 @@ public class RobotContainer {
       // );
     //auto driving test
     return new SequentialCommandGroup(
-      // new AutoTurn(driveTrain, navX, 90, 3000),
-      // new AutoTurn(driveTrain, navX, 0, 3000),
-      // new AutoTurn(driveTrain, navX, -90, 2000)
-      // new EncoderAutoDrive(driveTrain, 10000, navX)
-      // new EncoderAutoDrive(driveTrain, 100000, navX)
-      // new AutoBalancing(navX, driveTrain)
+      new PIDAssistedArmMovement(armSubsystem, null),
+      new EncoderAutoDrive(driveTrain, 0, navX),
+      new IntakeCone(intakeSubsystem, Xbox2)
+      
+
     );
     //auto turning test
     // return new SequentialCommandGroup(

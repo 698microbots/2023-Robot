@@ -68,8 +68,8 @@ public final class Constants {
   public static final int extensionMotorID = 0;
   //arm constant
   public static final int armMotorID = 7;
-  public static final double armFrontEncoderLimit = 30000;
-  public static final double armBackEncoderLimit = -0;
+  public static final double armFrontEncoderLimit = -40000;
+  public static final double armBackEncoderLimit = 0;
   public static final double kArmP = 0.00005;
   public static final double kArmI = 0.00000001;
   public static final double kArmD = 0;
@@ -132,8 +132,8 @@ public final class Constants {
   public static final double CAMERA_PITCH_RADIANS = 0;
 
   //limelight constants
-  public static final double goalHeight = 107; //what are the units????
-  public static final double limeLightHeight = 32;
+  public static final double goalHeight = 23.375; //what are the units????
+  public static final double limeLightHeight = 16;
   public static final double limeLightInitAngle = 0;
   public static double balanceTarget = 0.9;
   public static final double cameraOffset = 0; // degrees horizontal angle

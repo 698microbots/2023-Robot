@@ -18,7 +18,7 @@ public class LimeLightSubsystem extends SubsystemBase {
   private NetworkTable limeLight;
   private NetworkTableEntry V_angle, H_angle, hasTargets, botPose, aprilID;
   // private double[] botPose;
-
+  private double[] aprilTagList;
   private double zDistance;
   private double xDistance;
 
@@ -46,8 +46,9 @@ public class LimeLightSubsystem extends SubsystemBase {
   public double getH_angle(){
     return H_angle.getDouble(0);
   }
-  public double[] getBotPose(){
-    return botPose.getDoubleArray(new double[6]);
+  public double getBotPose(){
+    aprilTagList = botPose.getDoubleArray(new double[6]);
+    return aprilTagList[0];
     
   }
   public double getaprilTagID(){

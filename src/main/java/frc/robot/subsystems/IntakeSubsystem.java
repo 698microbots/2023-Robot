@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -34,6 +36,13 @@ public class IntakeSubsystem extends SubsystemBase {
       intakeMotorM1.set(0);
     }
 
+    public void setBrakeMode(boolean yes){
+      if (yes){
+        intakeMotorM1.setIdleMode(IdleMode.kBrake);
+      } else{
+        intakeMotorM1.setIdleMode(IdleMode.kCoast);
+      }
+    }
     //This method is kinda useless since we don't really take anything out throught the intake but its here
     // incase we need to 
     // public void outputGP()

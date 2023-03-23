@@ -45,6 +45,13 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   //setters
+  public void setBrake(boolean yes){
+    if(yes){
+      armMotor.setNeutralMode(NeutralMode.Brake);
+    }else{
+      armMotor.setNeutralMode(NeutralMode.Coast);
+    }
+  }
   public void armMove(double speed){
     // armMotor.set(speed);
     armMotor.set(ControlMode.PercentOutput, speed);
