@@ -68,7 +68,7 @@ public final class Constants {
   public static final int extensionMotorID = 0;
   //arm constant
   public static final int armMotorID = 7;
-  public static final double armFrontEncoderLimit = -40000;
+  public static final double armFrontEncoderLimit = -70000;
   public static final double armBackEncoderLimit = 0;
   public static final double kArmP = 0.00005;
   public static final double kArmI = 0.00000001;
