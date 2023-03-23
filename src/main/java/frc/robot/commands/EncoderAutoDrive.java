@@ -34,7 +34,7 @@ public class EncoderAutoDrive extends CommandBase {
     driveTrain.resetEncoders();
     driveTrain.resetDrivePID();
     driveTrain.resetTurnPID();
-    driveTrain.setDriveTarget(target);
+    driveTrain.setDriveTarget(target/0.0018);
     driveTrain.setTurnTarget(navX.getYaw());
     driveTrain.setLeftSpeed(0);
     driveTrain.setRightSpeed(0);

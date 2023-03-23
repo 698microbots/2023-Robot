@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import java.util.function.Supplier;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.ArmSubsystem;
@@ -26,17 +27,22 @@ public class XboxArm extends CommandBase {
   public void initialize() {
     armSubsystem.armMove(0);
     armSubsystem.setBrake(true);
-    armSubsystem.resetArmEncoders();
+    // armSubsystem.rese tArmEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     if(armSubsystem.getArmPosition()>Constants.armFrontEncoderLimit && armSubsystem.getArmPosition()<=Constants.armBackEncoderLimit){
-      armSubsystem.armMove(y_Supplier.get()*0.5);
+      armSubsystem.armMove(y_Supplier.get()*0.2);
     }else{
-      // if(armSubsystem.get)
-      armSubsystem.armMove(0);
+      if(armSubsystem.getArmPosition()<Constants.armFrontEncoderLimit && y_Supplier.get()>0){
+        armSubsystem.armMove(y_Supplier.get()*0.2);
+      }else if(armSubsystem.getArmPosition()> Constants.armBackEncoderLimit && y_Supplier.get()<0){
+        armSubsystem.armMove(y_Supplier.get()*0.2);
+      }else{
+        armSubsystem.armMove(0);
+      }
     }
   }
 

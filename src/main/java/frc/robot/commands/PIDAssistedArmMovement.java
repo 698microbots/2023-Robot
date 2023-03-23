@@ -42,12 +42,12 @@ public class PIDAssistedArmMovement extends CommandBase {
   public void execute() {
     SmartDashboard.putNumber("Arm PID Target:", target);
     arm.moveArmPID(arm.getArmPosition(), 0.2);
-    if(arm.getArmPosition()<Constants.armFrontEncoderLimit && arm.getArmPosition()>Constants.armBackEncoderLimit){
+    if(arm.getArmPosition()>Constants.armFrontEncoderLimit && arm.getArmPosition()<=Constants.armBackEncoderLimit+3500){
       arm.armMove(arm.getArmMoveOutput());
     }else{
       arm.armMove(0);
     }
-    if(Math.abs(arm.getArmMoveError())<1000){
+    if(Math.abs(arm.getArmMoveError())<10000){
       counter++;
     }else{
       counter = 0;

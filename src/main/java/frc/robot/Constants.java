@@ -56,7 +56,7 @@ public final class Constants {
 
   public static final int deviceIdIntakeM1 = 9;
   public static final int deviceIdIntakeM2 = 10;
-  public static final double intakeMotorSpeed = .2;
+  public static final double intakeMotorSpeed = .3;
   public static final int ampSpike= 8;
   public static final int logitechPort6 = 6;
   public static final int logitechPort7 = 7;
@@ -68,7 +68,7 @@ public final class Constants {
   public static final int extensionMotorID = 0;
   //arm constant
   public static final int armMotorID = 7;
-  public static final double armFrontEncoderLimit = -70000;
+  public static final double armFrontEncoderLimit = -62000;
   public static final double armBackEncoderLimit = 0;
   public static final double kArmP = 0.00005;
   public static final double kArmI = 0.00000001;
