@@ -5,52 +5,50 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.navXSubsystem;
 
-public class AutoTurn extends CommandBase {
-  /** Creates a new AutoTurn. */
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.LimeLightSubsystem;
+import frc.robot.subsystems.navXSubsystem;
+import frc.robot.Constants;
+
+public class AutoVisionDrive extends CommandBase {
+  /** Creates a new AutoVisionDrive. */
   private final DriveTrain driveTrain;
+  private final LimeLightSubsystem limelight;
   private final navXSubsystem navX;
-  private final double turnTarget;
+  private final double initialSpeed;
   private int counter;
-  private final int timeout;
-  private int errorCounter;
-  public AutoTurn(DriveTrain driveTrain, navXSubsystem navX, double turnTarget, int timeout) {
+  private boolean triggered;
+
+  public AutoVisionDrive(DriveTrain driveTrain, LimeLightSubsystem limelight, navXSubsystem navX, double initialSpeed) {
     this.driveTrain = driveTrain;
+    this.limelight = limelight;
     this.navX = navX;
-    this.turnTarget = turnTarget;
-    counter = 0;
-    errorCounter = 0;
-    this.timeout = timeout;
+    this.initialSpeed = initialSpeed;
+    this.triggered = false;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
-    addRequirements(navX);
+    // addRequirements(rasberryPiCamera);
   }
-
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    counter = 0;
-    driveTrain.setTurnTarget(turnTarget);
-    driveTrain.setLeftSpeed(0);
-    driveTrain.setRightSpeed(0);
-    System.out.println("Auto Turn Initiated");
+    driveTrain.setTurnTarget(0);
+    driveTrain.setLeftSpeed(initialSpeed);
+    driveTrain.setRightSpeed(initialSpeed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    driveTrain.PIDturn(navX.getYaw());
-    driveTrain.setLeftSpeed(-driveTrain.getTurnOutput());
-    driveTrain.setRightSpeed(driveTrain.getTurnOutput());
-    if(Math.abs(driveTrain.getTurnError())<3){
-      errorCounter++;
-    }else{
-      errorCounter = 0;
+    
+    if(Math.abs(navX.getPitch()) > Constants.levelConstant){
+      driveTrain.PIDturn(limelight.getH_angle());
+      driveTrain.setLeftSpeed(driveTrain.getTurnOutput());
+      driveTrain.setRightSpeed(driveTrain.getTurnOutput());
+      triggered = true;
     }
-    counter++;
   }
 
   // Called once the command ends or is interrupted.
@@ -58,16 +56,15 @@ public class AutoTurn extends CommandBase {
   public void end(boolean interrupted) {
     driveTrain.setLeftSpeed(0);
     driveTrain.setRightSpeed(0);
-    System.out.println("Autoturn has ended");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(errorCounter>20 || counter > timeout/20){ //was counter > timeout/20
+    if(triggered == true && navX.getPitch() < Constants.levelConstant){
       return true;
     }else{
-    return false;
+      return false;
     }
   }
 }

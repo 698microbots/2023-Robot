@@ -16,35 +16,31 @@ public class IntakeSubsystem extends SubsystemBase {
     //IntakeMoterL is the lower intake motor
     //IntakeMoterh is the Higher intake motor -  goes opposite direction of lower intake motor
     private final CANSparkMax intakeMotorM1;
-    private final CANSparkMax intakeMotorM2;  
   /*
    * Instansiates intakeMotor to allow us to control the motor of the intake
    */
     public IntakeSubsystem() {
       intakeMotorM1 = new CANSparkMax(Constants.deviceIdIntakeM1, CANSparkMax.MotorType.kBrushless);
-      intakeMotorM2 = new CANSparkMax(Constants.deviceIdIntakeM2, CANSparkMax.MotorType.kBrushless);
     }
   
-    public void intakeGP()
+    public void intakeSetSpeed(double speed)
     {
-      intakeMotorM1.set(Constants.intakeMotorSpeed);
-      intakeMotorM2.set(Constants.intakeMotorSpeed);
+      intakeMotorM1.set(speed);
     }
   
   
     public void stopMotor()
     {
       intakeMotorM1.set(0);
-      intakeMotorM2.set(0);
     }
 
     //This method is kinda useless since we don't really take anything out throught the intake but its here
     // incase we need to 
-    public void outputGP()
-    {
-      intakeMotorM1.set(-Constants.intakeMotorSpeed);
-      intakeMotorM2.set(-Constants.intakeMotorSpeed);
-    }
+    // public void outputGP()
+    // {
+    //   intakeMotorM1.set(-Constants.intakeMotorSpeed);
+    //   intakeMotorM2.set(-Constants.intakeMotorSpeed);
+    // }
   
   //The current should be the same between motors since they are moving at the same speed. 
     public double getElectricCurrentM1()

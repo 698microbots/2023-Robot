@@ -13,10 +13,11 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-// import frc.robot.subsystems.rasberryPiCamera;
+// import frc.robot.subsystems.RasberryPiCamera;
 
 
 /**
@@ -28,30 +29,35 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public LimeLightSubsystem LimeLightSubsystem = new LimeLightSubsystem();
-  public XboxController Xbox = new XboxController(0);
-  // public rasberryPiCamera rasberryPiCamera = new rasberryPiCamera();
+  public ArmSubsystem armSubsystem = new ArmSubsystem();
+  public XboxController Xbox = new XboxController(Constants.xBoxControllerid);
+  public XboxController Xbox2 = new XboxController(Constants.xBoxControllerid2);
+
+  // public RasberryPiCamera rasberryPiCamera = new RasberryPiCamera();
   //Intake
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public final JoystickButton Xbutton = new JoystickButton(Xbox, Constants.Xbox_Button_X);
   public final JoystickButton Ybutton = new JoystickButton(Xbox, Constants.Xbox_Button_Y);
+
   public final JoystickButton Abutton = new JoystickButton(Xbox, Constants.Xbox_Button_A);
   public final JoystickButton Bbutton = new JoystickButton(Xbox, Constants.Xbox_Button_B);
 
+  public final JoystickButton AbuttonX2 = new JoystickButton(Xbox2, Constants.Xbox_Button_AX2);
+
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
-  private final DriveTrain driveTrain = new DriveTrain();
+  public final DriveTrain driveTrain = new DriveTrain();
   public navXSubsystem navX = new navXSubsystem();
   
-  // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final XboxController xboxCon = new XboxController(Constants.xBoxControllerid);
-  private final XboxController flightStick = new XboxController(Constants.kflightStick);
+
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-    // driveTrain.setDefaultCommand(new XboxDrive(driveTrain, () -> xboxCon.getRightX(), () -> xboxCon.getLeftY()));
-    driveTrain.setDefaultCommand(new FlightstickDrive(driveTrain, () -> flightStick.getRawAxis(Constants.Flight_Stick_X), () -> flightStick.getRawAxis(Constants.Flight_Stick_Y), () -> flightStick.getRawAxis(Constants.Flight_Stick_Z)));
+    driveTrain.setDefaultCommand(new XboxDrive(driveTrain, () -> Xbox.getRightX(), () -> Xbox.getLeftY()));
+    armSubsystem.setDefaultCommand(new XboxArm(() -> Xbox2.getLeftY(), armSubsystem));
+    intakeSubsystem.setDefaultCommand(new XboxIntake(intakeSubsystem, () -> Xbox2.getRightY()));
     configureBindings();
   }
 
@@ -67,8 +73,10 @@ public class RobotContainer {
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
-    Xbutton.toggleWhenPressed(new IntakeSwitch(intakeSubsystem, false));
-    Ybutton.toggleWhenPressed(new IntakeSwitch(intakeSubsystem, true));
+    // Xbutton.toggleWhenPressed(new XboxIntake(intakeSubsystem, false));
+    // Ybutton.toggleWhenPressed(new XboxIntake(intakeSubsystem, true));
+    AbuttonX2.whenPressed(new ResetEncoders(driveTrain, armSubsystem));
+
 
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
@@ -82,7 +90,41 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return new AutoTurn(driveTrain, navX, 90, 30000);
-    //new AutoBalancing(navX, driveTrain);
+    // return new AutoBalancing(navX, driveTrain);
+    return new SequentialCommandGroup(
+      new SetPipeline(LimeLightSubsystem, 0),
+      new Wait(10000),
+      new SetPipeline(LimeLightSubsystem, 1),
+      new Wait(10000),
+      new SetPipeline(LimeLightSubsystem, 2)
+    );
   }
-}
+
+    // return new SequentialCommandGroup(
+    //   new AutoVisionPitch(driveTrain, LimeLightSubsystem, navX, 0.5)
+    // );
+
+    
+
+
+    // return new SequentialCommandGroup(
+    //   new SetPipeline(LimeLightSubsystem, 0),
+    //   new Wait(10000),
+    //   new SetPipeline(LimeLightSubsystem, 1),
+    //   new Wait(10000),
+    //   new SetPipeline(LimeLightSubsystem, 2)
+    // );
+    
+    // return new SequentialCommandGroup(
+    //   new AutoTurn(driveTrain, navX, 180, 2000),
+    //   new AutoTurn(driveTrain, navX, 0, 2000),
+    //   new AutoTurn(driveTrain, navX, -90, 2000)
+    // );
+
+    // return new SequentialCommandGroup(
+    //   new EncoderAutoDrive(driveTrain, navX, 30000)
+    // );
+    // return new SequentialCommandGroup(
+    //   new testRightLeftMotor(driveTrain)
+    // );
+  }

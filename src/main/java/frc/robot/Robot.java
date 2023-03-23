@@ -31,7 +31,6 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    m_robotContainer.LimeLightSubsystem.getAprilId();
   }
 
   /**
@@ -49,9 +48,29 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
     // SmartDashboard.putBoolean("Has Target", m_robotContainer.rasberryPiCamera.getHasTarget());
-    // SmartDashboard.putNumber("Fiducial ID", m_robotContainer.rasberryPiCamera.aprilTagID());
+    // SmartDashboard.putNumber("Fiducial ID", m_robotContainer.rasberryPiCamera.getaprilTagID());
+
     // SmartDashboard.putNumber("Target Area", m_robotContainer.rasberryPiCamera.getTargetArea());
     // SmartDashboard.putNumber("Target Pose", m_robotContainer.rasberryPiCamera.getTargetPose());
+    // SmartDashboard.putNumber("Target Yaw", m_robotContainer.rasberryPiCamera.getTargetYaw());
+    // SmartDashboard.putNumber("Target Skew", m_robotContainer.rasberryPiCamera.getTargetSkew());
+    // SmartDashboard.putNumber("Target Pitch", m_robotContainer.rasberryPiCamera.getTargetPitch());
+    // SmartDashboard.putNumber("Target Distance", m_robotContainer.rasberryPiCamera.targetDistance());
+
+    SmartDashboard.putNumber("V Angle", m_robotContainer.LimeLightSubsystem.getV_angle());
+    SmartDashboard.putNumber("H Angle", m_robotContainer.LimeLightSubsystem.getH_angle());
+    SmartDashboard.putNumber("Z Distance", m_robotContainer.LimeLightSubsystem.calculateXdistance());
+    SmartDashboard.putNumber("X Distance", m_robotContainer.LimeLightSubsystem.calculateZdistance());
+    SmartDashboard.putNumberArray("Bot Pose", m_robotContainer.LimeLightSubsystem.getBotPose());
+    SmartDashboard.putNumber("AprilTag ID", m_robotContainer.LimeLightSubsystem.getaprilTagID());
+    SmartDashboard.putNumber("NavX Yaw", m_robotContainer.navX.getYaw());
+    SmartDashboard.putNumber("drive output", m_robotContainer.driveTrain.getDriveOutput());
+    SmartDashboard.putNumber("getTurn output", m_robotContainer.driveTrain.getTurnOutput());
+    SmartDashboard.putNumber("Right Encoder avg", m_robotContainer.driveTrain.getRightEncoders());
+    SmartDashboard.putNumber("Left Encoder avg", m_robotContainer.driveTrain.getLeftEncoders());
+    SmartDashboard.putBoolean("navx connected", m_robotContainer.navX.isConnected());
+    SmartDashboard.putNumber("Arm Encoders", m_robotContainer.armSubsystem.getArmPosition());
+
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -83,6 +102,10 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Y-Displacement:", (double)m_robotContainer.navX.getDisplacementY());
     SmartDashboard.putNumber("X Position:", m_robotContainer.navX.getXPosition());
     SmartDashboard.putNumber("Y Position:", m_robotContainer.navX.getYPosition());
+    SmartDashboard.putNumber("FR: Position", m_robotContainer.driveTrain.getFRid());
+    SmartDashboard.putNumber("FL: Position", m_robotContainer.driveTrain.getFLid());
+    SmartDashboard.putNumber("BR: Position", m_robotContainer.driveTrain.getBRid());
+    SmartDashboard.putNumber("BL: Position", m_robotContainer.driveTrain.getBLid());
 
   }
 
@@ -108,6 +131,10 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Y-Displacement:", (double)m_robotContainer.navX.getDisplacementY());
     SmartDashboard.putNumber("X Position:", m_robotContainer.navX.getXPosition());
     SmartDashboard.putNumber("Y Position:", m_robotContainer.navX.getYPosition());
+    SmartDashboard.putNumber("FR: Position", m_robotContainer.driveTrain.getFRid());
+    SmartDashboard.putNumber("FL: Position", m_robotContainer.driveTrain.getFLid());
+    SmartDashboard.putNumber("BR: Position", m_robotContainer.driveTrain.getBRid());
+    SmartDashboard.putNumber("BL: Position", m_robotContainer.driveTrain.getBLid());
   }
 
   @Override
