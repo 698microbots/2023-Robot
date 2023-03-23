@@ -91,13 +91,20 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
     // return new AutoBalancing(navX, driveTrain);
+    // return new SequentialCommandGroup(
+    //   new SetPipeline(LimeLightSubsystem, 0),
+    //   new Wait(10000),
+    //   new SetPipeline(LimeLightSubsystem, 1),
+    //   new Wait(10000),
+    //   new SetPipeline(LimeLightSubsystem, 2)
+    // );
+
     return new SequentialCommandGroup(
-      new SetPipeline(LimeLightSubsystem, 0),
-      new Wait(10000),
-      new SetPipeline(LimeLightSubsystem, 1),
-      new Wait(10000),
-      new SetPipeline(LimeLightSubsystem, 2)
-    );
+      return 
+
+
+
+    )
   }
 
     // return new SequentialCommandGroup(
@@ -127,4 +134,6 @@ public class RobotContainer {
     // return new SequentialCommandGroup(
     //   new testRightLeftMotor(driveTrain)
     // );
+
+
   }
