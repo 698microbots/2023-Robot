@@ -45,13 +45,11 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   //setters
-  public void armMove(double speed, double limit){
+  public void armMove(double speed){
     // armMotor.set(speed);
-    if (speed > limit){
-      armMotor.set(ControlMode.PercentOutput, limit);
-    } else {
+
       armMotor.set(ControlMode.PercentOutput, speed);
-    }
+    
   }
 
   public void resetArmEncoders(){

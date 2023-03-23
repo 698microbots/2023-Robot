@@ -24,7 +24,7 @@ public class XboxArm extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    armSubsystem.armMove(0, 0);
+    armSubsystem.armMove(0);
     armSubsystem.resetArmEncoders();
   }
 
@@ -32,9 +32,9 @@ public class XboxArm extends CommandBase {
   @Override
   public void execute() {
     if (armSubsystem.getArmPosition() > 70000){
-      armSubsystem.armMove(0, 0);
+      armSubsystem.armMove(0);
     } else {
-      armSubsystem.armMove(y_Supplier.get(), 0.3);
+      armSubsystem.armMove(y_Supplier.get());
     }
 
     
@@ -43,7 +43,7 @@ public class XboxArm extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    armSubsystem.armMove(0, 0);
+    armSubsystem.armMove(0);
   }
 
   // Returns true when the command should end.
