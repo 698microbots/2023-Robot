@@ -97,7 +97,7 @@ public class RobotContainer {
       // new AutoTurn(driveTrain, navX, -90, 2000)
       // new EncoderAutoDrive(driveTrain, 10000, navX)
       // new EncoderAutoDrive(driveTrain, 100000, navX)
-      new AutoBalancing(navX, driveTrain)
+      // new AutoBalancing(navX, driveTrain)
     );
     //auto turning test
     // return new SequentialCommandGroup(
