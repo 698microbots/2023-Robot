@@ -34,6 +34,7 @@ public class DriveTrain extends SubsystemBase {
   private double turnI;
   private double turnD;
   private double turnOutput;
+  private double turnPrevOutput;
   
 
   //PIDdrive variables
@@ -45,7 +46,7 @@ public class DriveTrain extends SubsystemBase {
   private double driveD;
   private double driveOutput;
   private double potDriveOutput;
-  private double prevDriveOutput;
+  private double drivePrevOutput;
 
   //BalancePID variables
   private double balanceTarget;
@@ -58,15 +59,13 @@ public class DriveTrain extends SubsystemBase {
 
   public DriveTrain() {
     FR.setInverted(false);
-    BR.setInverted(true);
-    FL.setInverted(false);
-    BL.setInverted(false);
-
+    BR.setInverted(false);
+    FL.setInverted(true);
+    BL.setInverted(true);
     FR.setNeutralMode(NeutralMode.Coast);
     BR.setNeutralMode(NeutralMode.Coast);
-    BL.setNeutralMode(NeutralMode.Coast);
     FL.setNeutralMode(NeutralMode.Coast);
-
+    BL.setNeutralMode(NeutralMode.Coast);
         //turn variables
         turnTarget = 0;
         turnError = 0;
@@ -79,14 +78,14 @@ public class DriveTrain extends SubsystemBase {
         driveTarget = 0;
         driveError = 0;
         drivePrevError = 0;
+        drivePrevOutput = 0;
         driveP = 0;
         driveI = 0;
         driveD = 0;
         driveOutput = 0;
         potDriveOutput = 0;
-        prevDriveOutput = 0;
         //BalancePID variables
-        balanceTarget = 0;
+        balanceTarget = Constants.balanceTarget;
         balanceError = 0;
         balancePrevError = 0;
         balanceP = 0;
@@ -114,7 +113,7 @@ public class DriveTrain extends SubsystemBase {
     driveD = 0;
     driveOutput = 0;
     potDriveOutput = 0;
-    prevDriveOutput = 0;
+    drivePrevOutput = 0;
   }
 
   public void resetTurnPID(){
@@ -131,12 +130,11 @@ public class DriveTrain extends SubsystemBase {
   public void PIDturn(double sensorInput){
     turnError = turnTarget - sensorInput;
     turnP = turnError;
-
     turnD = turnError - turnPrevError;
 
     turnOutput = Constants.turnkP*turnP + Constants.turnkI*turnI + Constants.turnkD*turnD;
     turnPrevError = turnError;
-    //clamp output between -50% and 50%
+    turnPrevOutput = turnOutput;
   }
 
   public void resetEncoders(){
@@ -176,7 +174,7 @@ public class DriveTrain extends SubsystemBase {
       }
 
       drivePrevError = driveError;
-      prevDriveOutput = driveOutput;
+      drivePrevOutput = driveOutput;
     }  
 
     // public void PIDdriveAndTurn(double encoderSensorInput, double speedLimit, double targetAngle, double currentAngle) {
@@ -235,7 +233,14 @@ public class DriveTrain extends SubsystemBase {
     return turnError;
   }
 
-  public double getFRid(){
+  public double getTurnPrevError(){
+    return turnPrevError;
+  }
+
+  public double getTurnPrevOutput(){
+    return turnPrevOutput;
+  }
+  public double getFRid(){//actual bot is negative since the gear box was mounted upside down.
     return FR.getSelectedSensorPosition();
   }
   public double getFLid(){
@@ -247,10 +252,15 @@ public class DriveTrain extends SubsystemBase {
   public double getBLid(){
     return BL.getSelectedSensorPosition();
   }
+  public double getAveragePosition(){
+    return (getFRid()+getFLid()+getBRid()+getBLid())/4;
+  }
+  public double getDrivePrevOutput(){
+    return drivePrevOutput;
+  }
   public void setDriveTarget(double encoderUnit){
     driveTarget = encoderUnit;
   }
-  
   public double getTurnTarget(){
     return turnTarget;
   }

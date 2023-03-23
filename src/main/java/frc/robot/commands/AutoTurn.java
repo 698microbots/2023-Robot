@@ -16,12 +16,14 @@ public class AutoTurn extends CommandBase {
   private int counter;
   private final int timeout;
   private int errorCounter;
+  private double slew;
   public AutoTurn(DriveTrain driveTrain, navXSubsystem navX, double turnTarget, int timeout) {
     this.driveTrain = driveTrain;
     this.navX = navX;
     this.turnTarget = turnTarget;
     counter = 0;
     errorCounter = 0;
+    slew = 0;
     this.timeout = timeout;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
@@ -43,13 +45,8 @@ public class AutoTurn extends CommandBase {
   public void execute() {
 
     driveTrain.PIDturn(navX.getYaw());
-    driveTrain.setLeftSpeed(-driveTrain.getTurnOutput());
-    driveTrain.setRightSpeed(driveTrain.getTurnOutput());
-    if(Math.abs(driveTrain.getTurnError())<3){
-      errorCounter++;
-    }else{
-      errorCounter = 0;
-    }
+    driveTrain.setLeftSpeed(-(driveTrain.getTurnOutput()-(driveTrain.getTurnOutput() - driveTrain.getTurnPrevOutput())));
+    driveTrain.setRightSpeed(driveTrain.getTurnOutput()-(driveTrain.getTurnOutput() - driveTrain.getTurnPrevOutput()));
     counter++;
   }
 
