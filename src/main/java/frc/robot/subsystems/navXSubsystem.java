@@ -43,8 +43,8 @@ public class navXSubsystem extends SubsystemBase{
         return navX.isCalibrating();
     }
 
-    public float getYaw() {
-        return navX.getYaw();
+    public double getYaw() {
+        return navX.getAngle();
     }
 
     public float getPitch() {

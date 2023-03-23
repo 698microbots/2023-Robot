@@ -4,16 +4,17 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.navXSubsystem;
+import frc.robot.subsystems.DriveTrain;
 
-public class AutoBalancing extends CommandBase {
-  /** Creates a new AutoBalancing. */
+public class DriveToBalance extends CommandBase {
+  /** Creates a new DriveToBalance. */
   private final navXSubsystem navX;
+  private final double initialSpeed;
   private final DriveTrain driveTrain;
-  public AutoBalancing(navXSubsystem navX, DriveTrain driveTrain) {
+  public DriveToBalance(navXSubsystem navX, DriveTrain driveTrain, double initialSpeed) {
+    this.initialSpeed = initialSpeed;
     this.navX = navX;
     this.driveTrain = driveTrain;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -24,27 +25,18 @@ public class AutoBalancing extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    navX.resetYaw();
-    driveTrain.resetTurnPID();
-    driveTrain.setLeftSpeed(0);
-    driveTrain.setRightSpeed(0);
+    driveTrain.setTurnTarget(0);
+    driveTrain.setLeftSpeed(initialSpeed);
+    driveTrain.setRightSpeed(initialSpeed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    driveTrain.PIDBalance(navX.getRoll());
-    driveTrain.PIDturn(navX.getYaw());
-    driveTrain.setLeftSpeed(driveTrain.getBalanceOutput() - driveTrain.getTurnOutput());
-    driveTrain.setRightSpeed(driveTrain.getBalanceOutput() + driveTrain.getTurnOutput());
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    driveTrain.setLeftSpeed(0);
-    driveTrain.setRightSpeed(0);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

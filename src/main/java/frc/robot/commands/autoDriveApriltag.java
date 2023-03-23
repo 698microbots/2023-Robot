@@ -7,43 +7,48 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.LimeLightSubsystem;
 import frc.robot.subsystems.navXSubsystem;
 
-public class AutoBalancing extends CommandBase {
-  /** Creates a new AutoBalancing. */
-  private final navXSubsystem navX;
-  private final DriveTrain driveTrain;
-  public AutoBalancing(navXSubsystem navX, DriveTrain driveTrain) {
-    this.navX = navX;
-    this.driveTrain = driveTrain;
+
+public class AutoDriveApriltag extends CommandBase {
+  /** Creates a new autoDriveApriltag. */
+  private DriveTrain driveTrain;
+  private LimeLightSubsystem limeLightSubsystem;
+  private double H_angle;
+  private double distance;
+  
+  public AutoDriveApriltag(DriveTrain driveTrain, LimeLightSubsystem limeLightSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(navX);
+    this.driveTrain = driveTrain;
+    this.limeLightSubsystem = limeLightSubsystem;
+    H_angle = limeLightSubsystem.getH_angle();
+    distance = limeLightSubsystem.calculateXdistance();// distance to apriltag
     addRequirements(driveTrain);
+    addRequirements(limeLightSubsystem);
+
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    navX.resetYaw();
-    driveTrain.resetTurnPID();
+    driveTrain.resetDrivePID();
+    driveTrain.setDriveTarget(distance); // 
     driveTrain.setLeftSpeed(0);
     driveTrain.setRightSpeed(0);
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.PIDBalance(navX.getRoll());
-    driveTrain.PIDturn(navX.getYaw());
-    driveTrain.setLeftSpeed(driveTrain.getBalanceOutput() - driveTrain.getTurnOutput());
-    driveTrain.setRightSpeed(driveTrain.getBalanceOutput() + driveTrain.getTurnOutput());
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    driveTrain.setLeftSpeed(0);
-    driveTrain.setRightSpeed(0);
+
   }
 
   // Returns true when the command should end.
