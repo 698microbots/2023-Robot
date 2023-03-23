@@ -53,7 +53,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     driveTrain.setDefaultCommand(new XboxDrive(driveTrain, () -> Xbox.getRightX(), () -> Xbox.getLeftY()));
-    armSubsystem.setDefaultCommand(new XboxArm(()-> Xbox2.getLeftY(), armSubsystem));
+    armSubsystem.setDefaultCommand(new XboxArm(()-> Xbox2.getRawAxis(Constants.XBOX_L_YAXIS), armSubsystem));
     // armSubsystem.setDefaultCommand(new PIDAssistedArmMovement(armSubsystem, () -> Xbox2.getLeftY()));
     configureBindings();
   }
@@ -94,12 +94,11 @@ public class RobotContainer {
       // );
     //auto driving test
     return new SequentialCommandGroup(
-      new PIDAssistedArmMovement(armSubsystem, null),
-      new EncoderAutoDrive(driveTrain, 0, navX),
-      new IntakeCone(intakeSubsystem, Xbox2)
-      
-
+      // new PIDAssistedArmMovement(armSubsystem, () -> Xbox2.getLeftY(), 50000, 5000),//the arm is capable of 0 to 70,000 range of motion
+      new AutoIntakeCone(intakeSubsystem, false, 2000),
+      new EncoderAutoDrive(driveTrain, -50000, navX)
     );
+    // return new EncoderAutoDrive(driveTrain, 20000, navX);
     //auto turning test
     // return new SequentialCommandGroup(
     //   new AutoTurn(driveTrain, navX, 180, 2000),

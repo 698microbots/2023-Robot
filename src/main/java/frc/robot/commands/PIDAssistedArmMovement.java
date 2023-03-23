@@ -15,11 +15,15 @@ public class PIDAssistedArmMovement extends CommandBase {
   /** Creates a new PIDAssistedArmMovement. */
   private final ArmSubsystem arm;
   private Supplier<Double> xbox;
-  private double target, value;
-  public PIDAssistedArmMovement(ArmSubsystem arm, Supplier<Double> xbox) {
+  private double value;
+  private int limit, counter, target;
+  public PIDAssistedArmMovement(ArmSubsystem arm, Supplier<Double> xbox, int target, int millis) {
     this.arm = arm;
     this.xbox = xbox;
     value = 0;
+    this.target = target;
+    limit = millis;
+    counter = 0;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(arm);
   }
@@ -28,23 +32,25 @@ public class PIDAssistedArmMovement extends CommandBase {
   @Override
   public void initialize() {
     arm.resetArmPID();
+    arm.setPIDtarget(target);
     arm.armMove(0);
+    counter = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    value = xbox.get();
-    if(Math.abs(value) > 0.04){
-      target = value*Constants.kArmPID;
-    }
     SmartDashboard.putNumber("Arm PID Target:", target);
-    arm.setPIDtarget(target);
-    arm.moveArmPID(arm.getArmPosition(), 0.3);
+    arm.moveArmPID(arm.getArmPosition(), 0.2);
     if(arm.getArmPosition()<Constants.armFrontEncoderLimit && arm.getArmPosition()>Constants.armBackEncoderLimit){
       arm.armMove(arm.getArmMoveOutput());
     }else{
       arm.armMove(0);
+    }
+    if(Math.abs(arm.getArmMoveError())<1000){
+      counter++;
+    }else{
+      counter = 0;
     }
   }
 
@@ -57,6 +63,10 @@ public class PIDAssistedArmMovement extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if(counter > 10){
+      return true;
+    }else{
+      return false;
+    }
   }
 }
