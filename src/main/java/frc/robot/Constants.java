@@ -87,7 +87,7 @@ public final class Constants {
   // public static final int BRid = 6;
   //DriveTrain Constants
   public static final double turnAdjustment = 0.5;
-  public static final double powerAdjustment = 0.4;
+  public static final double powerAdjustment = 0.3;
 
   //Controller ID's
   public static final int xBoxControllerid = 0;
