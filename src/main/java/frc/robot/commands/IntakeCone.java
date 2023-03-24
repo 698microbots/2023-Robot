@@ -26,6 +26,7 @@ public class IntakeCone extends CommandBase {
   public void initialize() {
     intake.intakeSetSpeed(-Constants.intakeMotorSpeed);
     xbox2.setRumble(RumbleType.kRightRumble, 1);
+    intake.setBrakeMode(true);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -37,6 +38,7 @@ public class IntakeCone extends CommandBase {
   public void end(boolean interrupted) {
     intake.intakeSetSpeed(0);
     xbox2.setRumble(RumbleType.kBothRumble, 0);
+    intake.setBrakeMode(true);
   }
 
   // Returns true when the command should end.

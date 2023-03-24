@@ -29,6 +29,7 @@ public class IntakeCube extends CommandBase {
   public void initialize() {
     intakeSubsystem.intakeSetSpeed(0);
     xbox2.setRumble(RumbleType.kLeftRumble, 1);
+    intakeSubsystem.setBrakeMode(true);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,6 +43,7 @@ public class IntakeCube extends CommandBase {
   public void end(boolean interrupted) {
     intakeSubsystem.stopMotor();
     xbox2.setRumble(RumbleType.kBothRumble, 0);
+    intakeSubsystem.setBrakeMode(true);
   }
 
   // Returns true when the command should end.
