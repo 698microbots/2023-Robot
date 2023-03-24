@@ -36,9 +36,9 @@ public class XboxArm extends CommandBase {
     if(armSubsystem.getArmPosition()>Constants.armFrontEncoderLimit && armSubsystem.getArmPosition()<=Constants.armBackEncoderLimit){
       armSubsystem.armMove(y_Supplier.get()*0.2);
     }else{
-      if(armSubsystem.getArmPosition()<Constants.armFrontEncoderLimit && y_Supplier.get()>0){
+      if(armSubsystem.getArmPosition()<=Constants.armFrontEncoderLimit && y_Supplier.get()>0){
         armSubsystem.armMove(y_Supplier.get()*0.2);
-      }else if(armSubsystem.getArmPosition()> Constants.armBackEncoderLimit && y_Supplier.get()<0){
+      }else if(armSubsystem.getArmPosition()>= Constants.armBackEncoderLimit && y_Supplier.get()<0){
         armSubsystem.armMove(y_Supplier.get()*0.2);
       }else{
         armSubsystem.armMove(0);

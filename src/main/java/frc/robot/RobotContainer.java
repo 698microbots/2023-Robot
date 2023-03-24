@@ -94,7 +94,7 @@ public class RobotContainer {
       // );
     //auto driving test
     return new SequentialCommandGroup(
-      new PIDAssistedArmMovement(armSubsystem, () -> Xbox2.getLeftY(), -50000, 5000),//the arm is capable of 0 to 70,000 range of motion
+      new PIDAssistedArmMovement(armSubsystem, () -> Xbox2.getLeftY(), -60000, 5000),//the arm is capable of 0 to 70,000 range of motion
       new AutoIntakeCone(intakeSubsystem, true, 1000),
       new PIDAssistedArmMovement(armSubsystem, () -> Xbox2.getLeftY(), 0, 5000),//the arm is capable of 0 to 70,000 range of motion
       new EncoderAutoDrive(driveTrain, -300, navX)
