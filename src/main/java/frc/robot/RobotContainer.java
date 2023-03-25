@@ -99,17 +99,13 @@ public class RobotContainer {
       new AutoIntakeCone(intakeSubsystem, true, 1000),
       new PIDAssistedArmMovement(armSubsystem, () -> Xbox2.getLeftY(), 0, 5000),//the arm is capable of 0 to 70,000 range of motion
       new EncoderAutoDrive(driveTrain, -220, navX)
+      // new AutoTurn(driveTrain, navX, -90, 1500),
+      // new EncoderAutoDrive(driveTrain, 70, navX),
+      // new AutoTurn(driveTrain, navX, 0, 1500),
       // new DriveToBalance(navX, driveTrain, -0.25),
-      // new EncoderAutoDrive(driveTrain, 20, navX)
+      // new EncoderAutoDrive(driveTrain, 20, navX)//this value for the distance needs to be changed and perfected
       // new AutoBalancing(navX, driveTrain)
       // new PIDAssistedArmMovement(armSubsystem, ()-> Xbox2.getLeftY()), 0, 0)
     );
-    // return new EncoderAutoDrive(driveTrain, 20000, navX);
-    //auto turning test
-    // return new SequentialCommandGroup(
-    //   new AutoTurn(driveTrain, navX, 180, 2000),
-    //   new AutoTurn(driveTrain, navX, 0, 2000),
-    //   new AutoTurn(driveTrain, navX, -90, 2000)
-    // );
   }
 }

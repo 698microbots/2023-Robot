@@ -38,6 +38,7 @@ public class EncoderAutoDrive extends CommandBase {
     driveTrain.setTurnTarget(navX.getYaw());
     driveTrain.setLeftSpeed(0);
     driveTrain.setRightSpeed(0);
+    driveTrain.setMotorsLocked();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -59,6 +60,7 @@ public class EncoderAutoDrive extends CommandBase {
   public void end(boolean interrupted) {
     driveTrain.setLeftSpeed(0);
     driveTrain.setRightSpeed(0);
+    driveTrain.setMotorsLocked();
   }
 
   // Returns true when the command should end.

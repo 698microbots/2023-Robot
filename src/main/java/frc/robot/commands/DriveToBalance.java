@@ -52,8 +52,8 @@ public class DriveToBalance extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     driveTrain.setMotorsLocked();
-    driveTrain.setLeftSpeed(0);
-    driveTrain.setRightSpeed(0);
+    // driveTrain.setLeftSpeed(0);
+    // driveTrain.setRightSpeed(0);
   }
 
   // Returns true when the command should end.
