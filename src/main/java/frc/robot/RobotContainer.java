@@ -7,6 +7,7 @@ package frc.robot;
 
 import frc.robot.subsystems.LimeLightSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
@@ -52,7 +53,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-    driveTrain.setDefaultCommand(new XboxDrive(driveTrain, () -> Xbox.getRightX(), () -> Xbox.getLeftY()));
+    driveTrain.setDefaultCommand(new XboxDrive(driveTrain, () -> Xbox.getRightX(), () -> Xbox.getLeftY(), () -> Xbox.getRightTriggerAxis()));
     armSubsystem.setDefaultCommand(new XboxArm(()-> Xbox2.getRawAxis(Constants.XBOX_L_YAXIS), armSubsystem));
     // armSubsystem.setDefaultCommand(new PIDAssistedArmMovement(armSubsystem, () -> Xbox2.getLeftY()));
     configureBindings();
@@ -94,10 +95,14 @@ public class RobotContainer {
       // );
     //auto driving test
     return new SequentialCommandGroup(
-      new PIDAssistedArmMovement(armSubsystem, () -> Xbox2.getLeftY(), -60000, 5000),//the arm is capable of 0 to 70,000 range of motion
+      new PIDAssistedArmMovement(armSubsystem, () -> Xbox2.getLeftY(), -66000, 5000),//the arm is capable of 0 to 70,000 range of motion
       new AutoIntakeCone(intakeSubsystem, true, 1000),
       new PIDAssistedArmMovement(armSubsystem, () -> Xbox2.getLeftY(), 0, 5000),//the arm is capable of 0 to 70,000 range of motion
-      new EncoderAutoDrive(driveTrain, -300, navX)
+      new EncoderAutoDrive(driveTrain, -220, navX)
+      // new DriveToBalance(navX, driveTrain, -0.25),
+      // new EncoderAutoDrive(driveTrain, 20, navX)
+      // new AutoBalancing(navX, driveTrain)
+      // new PIDAssistedArmMovement(armSubsystem, ()-> Xbox2.getLeftY()), 0, 0)
     );
     // return new EncoderAutoDrive(driveTrain, 20000, navX);
     //auto turning test

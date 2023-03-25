@@ -27,7 +27,6 @@ public class XboxArm extends CommandBase {
   public void initialize() {
     armSubsystem.armMove(0);
     armSubsystem.setBrake(true);
-    // armSubsystem.rese tArmEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

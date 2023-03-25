@@ -48,11 +48,11 @@ public class navXSubsystem extends SubsystemBase{
     }
 
     public float getPitch() {
-        return navX.getPitch();
+        return navX.getRoll();
     }
 
     public float getRoll() {
-        return navX.getRoll();
+        return navX.getPitch();
     }
 
     public double getYawRate() { //Return the rate of rotation of the yaw (Z-axis) gyro, in degrees per second.

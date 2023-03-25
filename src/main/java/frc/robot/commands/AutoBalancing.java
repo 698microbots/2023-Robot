@@ -24,8 +24,8 @@ public class AutoBalancing extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    navX.resetYaw();
     driveTrain.resetTurnPID();
+    driveTrain.setTurnTarget(navX.getYaw());
     driveTrain.setLeftSpeed(0);
     driveTrain.setRightSpeed(0);
   }
@@ -44,6 +44,7 @@ public class AutoBalancing extends CommandBase {
   public void end(boolean interrupted) {
     driveTrain.setLeftSpeed(0);
     driveTrain.setRightSpeed(0);
+    driveTrain.setMotorsLocked();
   }
 
   // Returns true when the command should end.

@@ -26,7 +26,6 @@ public class ResetEncoders extends CommandBase {
   @Override
   public void initialize() {
     driveTrain.resetEncoders();
-    armSubsystem.resetArmEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

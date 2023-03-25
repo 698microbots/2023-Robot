@@ -68,7 +68,7 @@ public final class Constants {
   public static final int extensionMotorID = 0;
   //arm constant
   public static final int armMotorID = 7;
-  public static final double armFrontEncoderLimit = -62000;
+  public static final double armFrontEncoderLimit = -67000;
   public static final double armBackEncoderLimit = 0;
   public static final double kArmP = 0.00005;
   public static final double kArmI = 0.00000001;
@@ -87,7 +87,7 @@ public final class Constants {
   // public static final int BRid = 6;
   //DriveTrain Constants
   public static final double turnAdjustment = 0.5;
-  public static final double powerAdjustment = 0.3;
+  public static final double powerAdjustment = 0.4;
 
   //Controller ID's
   public static final int xBoxControllerid = 0;
@@ -110,7 +110,7 @@ public final class Constants {
   public static final double maximumDriveError = 1000.0;
 
   // balance PID constants
-  public static final double balancekP = 0.001;
+  public static final double balancekP = 0.01;
   public static final double balancekI = 0;
   public static final double balancekD = 0;
   public static final double levelConstant = 2;
