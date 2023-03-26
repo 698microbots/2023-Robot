@@ -94,6 +94,7 @@ public class navXSubsystem extends SubsystemBase{
     public void resetDisplacement(){
         navX.resetDisplacement();
     }
+
     //PID
     // public double autoBalancingPIDCalculation(){//pitch is negative for down and pitch is positve for up
     //     balError = getRoll();

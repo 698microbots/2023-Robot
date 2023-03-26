@@ -36,8 +36,14 @@ public class XboxDrive extends CommandBase {
     double R = x_Supplier.get();
     // driveTrain.setRightSpeed(Math.pow(Constants.powerAdjustment*(L+R*Constants.turnAdjustment), 3.0));
     // driveTrain.setLeftSpeed(Math.pow(Constants.powerAdjustment*(L-R*Constants.turnAdjustment), 3.0));
-    driveTrain.setRightSpeed(Constants.powerAdjustment*(L-0.5*tSupplier.get()+R*Constants.turnAdjustment));
-    driveTrain.setLeftSpeed(Constants.powerAdjustment*(L-0.5*tSupplier.get()-R*Constants.turnAdjustment));
+    if(tSupplier.get() >0.4){
+      driveTrain.setRightSpeed(Constants.powerAdjustment*(L*0.5+R*Constants.turnAdjustment));
+      driveTrain.setLeftSpeed(Constants.powerAdjustment*(L*0.5-R*Constants.turnAdjustment));  
+    }else{
+      driveTrain.setRightSpeed(Constants.powerAdjustment*(L+R*Constants.turnAdjustment));
+      driveTrain.setLeftSpeed(Constants.powerAdjustment*(L-R*Constants.turnAdjustment));  
+    }  
+  
   }
 
   // Called once the command ends or is interrupted.
